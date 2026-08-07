@@ -84,7 +84,7 @@
             };
 
             const saveSettings = () => {
-                localStorage.setItem('googleScriptUrl', scriptUrl);
+                localStorage.setItem('googleScriptUrl', scriptUrl.trim());
                 setShowSettings(false);
                 setStatus({ type: 'success', message: 'Bağlantı ayarları kaydedildi.' });
                 setTimeout(() => setStatus({ type: '', message: '' }), 3000);
@@ -92,7 +92,8 @@
 
             const handleSubmit = async (e) => {
                 e.preventDefault();
-                if (!scriptUrl) {
+                const currentUrl = scriptUrl.trim();
+                if (!currentUrl) {
                     setStatus({ type: 'error', message: 'Lütfen önce Ayarlar kısmından Google Script URL\'sini girin.' });
                     setShowSettings(true);
                     return;
@@ -113,7 +114,7 @@
                 };
 
                 try {
-                    const response = await fetch(scriptUrl, {
+                    const response = await fetch(currentUrl, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'text/plain;charset=utf-8',
@@ -121,7 +122,13 @@
                         body: JSON.stringify(payload)
                     });
 
-                    const result = await response.json();
+                    const responseText = await response.text();
+                    let result;
+                    try {
+                        result = JSON.parse(responseText);
+                    } catch (e) {
+                        throw new Error("Google'dan ret yedi. Apps Script 'Uygulamayı çalıştıran kişi: Ben' ayarını kontrol edin.");
+                    }
 
                     if (result.result === 'success') {
                         setStatus({ type: 'success', message: 'Ziyaret başarıyla Excel\'e eklendi!' });
@@ -138,10 +145,10 @@
                     }
                 } catch (error) {
                     console.error(error);
-                    setStatus({ type: 'error', message: 'Hata: Google Sheets\'e bağlanılamadı. Linki kontrol edin.' });
+                    setStatus({ type: 'error', message: 'Bağlantı Hatası: ' + error.message });
                 } finally {
                     setIsLoading(false);
-                    setTimeout(() => setStatus({ type: '', message: '' }), 5000);
+                    setTimeout(() => setStatus({ type: '', message: '' }), 7000);
                 }
             };
 
