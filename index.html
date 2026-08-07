@@ -114,12 +114,12 @@
                 };
 
                 try {
-                    const response = await fetch(currentUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'text/plain;charset=utf-8',
-                        },
-                        body: JSON.stringify(payload)
+                    // CORS (Failed to fetch) hatasını aşmak için POST yerine GET kullanıyoruz
+                    const queryParams = new URLSearchParams(payload).toString();
+                    const finalUrl = `${currentUrl}?${queryParams}`;
+
+                    const response = await fetch(finalUrl, {
+                        method: 'GET'
                     });
 
                     const responseText = await response.text();
