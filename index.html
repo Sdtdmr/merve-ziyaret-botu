@@ -115,10 +115,9 @@
 
                 try {
                     const queryParams = new URLSearchParams(payload).toString();
-                    const finalUrl = `${currentUrl}?${queryParams}`;
+                    // Tarayıcı önbelleğini kırmak için saniye damgası ekliyoruz
+                    const finalUrl = `${currentUrl}?${queryParams}&t=${new Date().getTime()}`;
 
-                    // KESİN ÇÖZÜM: no-cors modu
-                    // Bu mod, tarayıcının güvenlik duvarlarını (CORS) tamamen bypass etmesini sağlar.
                     await fetch(finalUrl, {
                         method: 'GET',
                         mode: 'no-cors'
