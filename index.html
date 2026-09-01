@@ -4,7 +4,6 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
     <title>Ziyaret Asistanı</title>
-    <!-- Uygulama kalması için manifest -->
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -35,12 +34,8 @@
         }
     </script>
     <style>
-        .neomorphic-card {
-            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.05), -4px -4px 8px rgba(255, 255, 255, 0.8);
-        }
-        .neomorphic-button {
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
-        }
+        .neomorphic-card { box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.05), -4px -4px 8px rgba(255, 255, 255, 0.8); }
+        .neomorphic-button { box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5); }
     </style>
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen pb-20">
@@ -113,12 +108,8 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
                                 <span class="material-symbols-outlined text-[20px]">map</span>
                             </div>
-                            <select id="ilce" class="w-full bg-surface-container-low border border-outline-variant rounded-xl py-3 pl-[40px] pr-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-on-surface font-body-md appearance-none">
-                                <option value="">Önce Şehir Seçin</option>
-                            </select>
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-outline">
-                                <span class="material-symbols-outlined text-[20px]">expand_more</span>
-                            </div>
+                            <!-- İlçe artık açılır liste değil, otomatik dolan metin kutusu -->
+                            <input id="ilce" class="w-full bg-surface-container-low border border-outline-variant rounded-xl py-3 pl-[40px] pr-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-on-surface font-body-md" type="text" placeholder="Otomatik dolar"/>
                         </div>
                     </div>
                 </div>
@@ -182,28 +173,26 @@
 
     <!-- Script Logic -->
     <script>
-        // --- İL VE İLÇE VERİLERİ ---
-        const ilIlceVerisi = {
-            "Aksaray": ["Ağaçören", "Eskil", "Gülağaç", "Güzelyurt", "Merkez", "Ortaköy", "Sarıyahşi", "Sultanhanı"],
-            "Ankara": ["Akyurt", "Altındağ", "Ayaş", "Bala", "Beypazarı", "Çamlıdere", "Çankaya", "Çubuk", "Elmadağ", "Etimesgut", "Evren", "Gölbaşı", "Güdül", "Haymana", "Kahramankazan", "Kalecik", "Keçiören", "Kızılcahamam", "Mamak", "Nallıhan", "Polatlı", "Pursaklar", "Sincan", "Şereflikoçhisar", "Yenimahalle"],
-            "Çankırı": ["Atkaracalar", "Bayramören", "Çerkeş", "Eldivan", "Ilgaz", "Kızılırmak", "Korgun", "Kurşunlu", "Merkez", "Orta", "Şabanözü", "Yapraklı"],
-            "İstanbul": ["Adalar", "Arnavutköy", "Ataşehir", "Avcılar", "Bağcılar", "Bahçelievler", "Bakırköy", "Başakşehir", "Bayrampaşa", "Beşiktaş", "Beykoz", "Beylikdüzü", "Beyoğlu", "Büyükçekmece", "Çatalca", "Çekmeköy", "Esenler", "Esenyurt", "Eyüpsultan", "Fatih", "Gaziosmanpaşa", "Güngören", "Kadıköy", "Kağıthane", "Kartal", "Küçükçekmece", "Maltepe", "Pendik", "Sancaktepe", "Sarıyer", "Silivri", "Sultanbeyli", "Sultangazi", "Şile", "Şişli", "Tuzla", "Ümraniye", "Üsküdar", "Zeytinburnu"],
-            "Kayseri": ["Akkışla", "Bünyan", "Develi", "Felahiye", "Hacılar", "İncesu", "Kocasinan", "Melikgazi", "Özvatan", "Pınarbaşı", "Sarıoğlan", "Sarız", "Talas", "Tomarza", "Yahyalı", "Yeşilhisar"],
-            "Kırıkkale": ["Bahşılı", "Balışeyh", "Çelebi", "Delice", "Karakeçili", "Keskin", "Merkez", "Sulakyurt", "Yahşihan"],
-            "Kırşehir": ["Akçakent", "Akpınar", "Boztepe", "Çiçekdağı", "Kaman", "Merkez", "Mucur"],
-            "Nevşehir": ["Acıgöl", "Avanos", "Derinkuyu", "Gülşehir", "Hacıbektaş", "Kozaklı", "Merkez", "Ürgüp"],
-            "Tokat": ["Almus", "Artova", "Başçiftlik", "Erbaa", "Merkez", "Niksar", "Pazar", "Reşadiye", "Sulusaray", "Turhal", "Yeşilyurt", "Zile"],
-            "Yozgat": ["Akdağmadeni", "Aydıncık", "Boğazlıyan", "Çandır", "Çayıralan", "Çekerek", "Kadışehri", "Merkez", "Saraykent", "Sarıkaya", "Sorgun", "Şefaatli", "Yenifakılı", "Yerköy"]
-        };
+        // --- TÜRKİYE'NİN 81 İLİ ---
+        const sehirler = [
+            "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Aksaray", "Amasya", "Ankara", "Antalya", "Artvin", "Aydın",
+            "Balıkesir", "Bartın", "Batman", "Bayburt", "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa",
+            "Çanakkale", "Çankırı", "Çorum", "Denizli", "Diyarbakır", "Düzce", "Edirne", "Elazığ", "Erzincan", "Erzurum",
+            "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari", "Hatay", "Iğdır", "Isparta", "İstanbul", "İzmir",
+            "Kahramanmaraş", "Karabük", "Karaman", "Kars", "Kastamonu", "Kayseri", "Kırıkkale", "Kırklareli", "Kırşehir", "Kilis",
+            "Kocaeli", "Konya", "Kütahya", "Malatya", "Manisa", "Mardin", "Mersin", "Muğla", "Muş", "Nevşehir",
+            "Niğde", "Ordu", "Osmaniye", "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Şanlıurfa",
+            "Şırnak", "Tekirdağ", "Tokat", "Trabzon", "Tunceli", "Uşak", "Van", "Yalova", "Yozgat", "Zonguldak"
+        ];
 
         // --- SAYFA YÜKLENDİĞİNDE YAPILACAKLAR ---
         document.addEventListener("DOMContentLoaded", () => {
             // Tarihi bugüne ayarla
             document.getElementById("tarih").valueAsDate = new Date();
             
-            // Şehirleri dondur
+            // Şehirleri doldur
             const sehirSelect = document.getElementById("sehir");
-            Object.keys(ilIlceVerisi).sort().forEach(sehir => {
+            sehirler.sort((a, b) => a.localeCompare(b, 'tr')).forEach(sehir => {
                 let option = document.createElement("option");
                 option.value = sehir;
                 option.text = sehir;
@@ -211,19 +200,9 @@
             });
         });
 
-        // Şehir seçilince ilçeleri doldur
+        // Şehir seçilince, İlçe kutusuna doğrudan seçilen şehri yaz
         document.getElementById("sehir").addEventListener("change", function() {
-            const ilceSelect = document.getElementById("ilce");
-            ilceSelect.innerHTML = '<option value="">İlçe Seçin</option>';
-            const seciliSehir = this.value;
-            if (seciliSehir && ilIlceVerisi[seciliSehir]) {
-                ilIlceVerisi[seciliSehir].forEach(ilce => {
-                    let option = document.createElement("option");
-                    option.value = ilce;
-                    option.text = ilce;
-                    ilceSelect.appendChild(option);
-                });
-            }
+            document.getElementById("ilce").value = this.value;
         });
 
         // --- AYARLAR MODAL MANTIĞI ---
@@ -269,10 +248,7 @@
                 toastIcon.textContent = "error";
             }
             
-            // Animasyonla göster
             setTimeout(() => { toast.classList.remove('opacity-0', '-translate-y-full'); }, 10);
-            
-            // 3 saniye sonra gizle
             setTimeout(() => { toast.classList.add('opacity-0', '-translate-y-full'); }, 3000);
         }
 
@@ -289,17 +265,16 @@
                 return;
             }
 
-            // Verileri Topla
-            const rawDate = document.getElementById("tarih").value; // Format: YYYY-MM-DD
+            const rawDate = document.getElementById("tarih").value;
             if(!rawDate) { showToast("Lütfen tarih seçin.", "error"); return; }
             
-            // Tarihi DD.MM.YYYY formatına çevir ve günü bul
             const d = new Date(rawDate);
             const formattedDate = ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
             const gunler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
             const secilenGun = gunler[d.getDay()];
 
-            const ziyaretNo = document.getElementById("ziyaretNo").value;
+            const ziyaretNoInput = document.getElementById("ziyaretNo");
+            const ziyaretNo = ziyaretNoInput.value;
             if(!ziyaretNo) { showToast("Lütfen Ziyaret No girin.", "error"); return; }
 
             const payload = {
@@ -313,14 +288,12 @@
                 not: document.getElementById("not").value
             };
 
-            // Loading state
             icon.classList.add('hidden');
             spinner.classList.remove('hidden');
             text.textContent = 'Kaydediliyor...';
             btn.classList.add('opacity-90', 'pointer-events-none');
 
             try {
-                // Tarayıcı güvenlik duvarlarını aşmak için no-cors
                 const cacheBuster = "?t=" + new Date().getTime();
                 await fetch(scriptUrl + cacheBuster, {
                     method: 'POST',
@@ -331,8 +304,15 @@
 
                 showToast("Ziyaret başarıyla Excel'e işlendi!", "success");
                 
-                // Formu temizle (Tarih ve Şehir kalsın)
-                document.getElementById("ziyaretNo").value = "";
+                // --- OTOMATİK NUMARA ARTIRMA VE TEMİZLEME ---
+                const guncelNo = parseInt(ziyaretNo, 10);
+                if (!isNaN(guncelNo)) {
+                    ziyaretNoInput.value = guncelNo + 1; // Numarayı 1 artır
+                } else {
+                    ziyaretNoInput.value = "";
+                }
+                
+                // Diğer alanları temizle
                 document.getElementById("hastane").value = "";
                 document.getElementById("doktor").value = "";
                 document.getElementById("not").value = "";
@@ -340,7 +320,6 @@
             } catch (error) {
                 showToast("Bağlantı hatası: İnternetinizi kontrol edin.", "error");
             } finally {
-                // Reset button
                 icon.classList.remove('hidden');
                 spinner.classList.add('hidden');
                 text.textContent = 'Ziyareti Kaydet';
