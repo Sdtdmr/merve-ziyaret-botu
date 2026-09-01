@@ -1,322 +1,352 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <!-- Mobil Uygulama (PWA) Ayarları -->
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>Ziyaret Asistanı</title>
+    <!-- Uygulama kalması için manifest -->
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#1e3a8a">
-    <link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Google_Earth_icon.svg/512px-Google_Earth_icon.svg.png">
     
-    <title>Ziyaret Botu</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- React ve Babel -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-</head>
-<body class="bg-slate-50 antialiased overflow-x-hidden">
-    
-    <div id="root"></div>
-
-    <script type="text/babel">
-        const { useState, useEffect } = React;
-
-        // İkonlar
-        const IconSettings = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>;
-        const IconCheck = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>;
-        const IconAlert = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-red-500"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>;
-        const IconCalendar = () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>;
-        const IconMapPin = () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>;
-        const IconBuilding = () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>;
-        const IconUser = () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>;
-        const IconClipboard = () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M12 11h4"></path><path d="M12 16h4"></path><path d="M8 11h.01"></path><path d="M8 16h.01"></path></svg>;
-        const IconPlus = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>;
-        const IconLoader = () => <svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>;
-
-        const CITIES = ["Adana", "Aksaray", "Ankara", "Antalya", "Çankırı", "Kayseri", "Kırıkkale", "Kırşehir", "Konya", "Malatya", "Nevşehir", "Samsun", "Tokat", "Yozgat"];
-
-        function App() {
-            const [scriptUrl, setScriptUrl] = useState('');
-            const [showSettings, setShowSettings] = useState(false);
-            const [status, setStatus] = useState({ type: '', message: '' });
-            const [isLoading, setIsLoading] = useState(false);
-            
-            const [formData, setFormData] = useState({
-                date: new Date().toISOString().split('T')[0],
-                visitNo: 1,
-                city: 'Ankara',
-                district: '',
-                hospital: '',
-                doctor: '',
-                note: ''
-            });
-
-            useEffect(() => {
-                const savedUrl = localStorage.getItem('googleScriptUrl');
-                if (savedUrl) {
-                    setScriptUrl(savedUrl);
-                } else {
-                    setShowSettings(true);
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6", "inverse-surface": "#2d3133", "on-secondary-container": "#00714d",
+                        "surface-bright": "#f7f9fb", "on-background": "#191c1e", "on-surface-variant": "#434655",
+                        "outline": "#737686", "on-surface": "#191c1e", "on-error-container": "#93000a",
+                        "secondary-container": "#6cf8bb", "primary": "#004ac6", "error": "#ba1a1a",
+                        "surface-container-low": "#f2f4f6", "surface-dim": "#d8dadc", "on-secondary": "#ffffff",
+                        "surface": "#f7f9fb", "surface-container-lowest": "#ffffff", "outline-variant": "#c3c6d7",
+                        "surface-container-high": "#e6e8ea", "surface-variant": "#e0e3e5", "on-primary": "#ffffff",
+                        "secondary": "#006c49"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"], "headline-sm": ["Inter"], "label-md": ["Inter"]
+                    }
                 }
-            }, []);
-
-            const getTurkishDay = (dateString) => {
-                const days = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
-                const d = new Date(dateString);
-                return days[d.getDay()];
-            };
-
-            const formatDate = (dateString) => {
-                const [year, month, day] = dateString.split('-');
-                return `${day}.${month}.${year}`;
-            };
-
-            const handleInputChange = (e) => {
-                const { name, value } = e.target;
-                setFormData(prev => ({ ...prev, [name]: value }));
-            };
-
-            const saveSettings = () => {
-                localStorage.setItem('googleScriptUrl', scriptUrl.trim());
-                setShowSettings(false);
-                setStatus({ type: 'success', message: 'Bağlantı ayarları kaydedildi.' });
-                setTimeout(() => setStatus({ type: '', message: '' }), 3000);
-            };
-
-            const handleSubmit = async (e) => {
-                e.preventDefault();
-                const currentUrl = scriptUrl.trim();
-                if (!currentUrl) {
-                    setStatus({ type: 'error', message: 'Lütfen önce Ayarlar kısmından Google Script URL\'sini girin.' });
-                    setShowSettings(true);
-                    return;
-                }
-
-                setIsLoading(true);
-                setStatus({ type: '', message: '' });
-
-                const payload = {
-                    tarih: formatDate(formData.date),
-                    gun: getTurkishDay(formData.date),
-                    ziyaretNo: formData.visitNo,
-                    sehir: formData.city,
-                    ilce: formData.district,
-                    hastane: formData.hospital,
-                    doktor: formData.doctor,
-                    not: formData.note
-                };
-
-                try {
-                    const queryParams = new URLSearchParams(payload).toString();
-                    // Tarayıcı önbelleğini kırmak için saniye damgası ekliyoruz
-                    const finalUrl = `${currentUrl}?${queryParams}&t=${new Date().getTime()}`;
-
-                    await fetch(finalUrl, {
-                        method: 'GET',
-                        mode: 'no-cors'
-                    });
-
-                    // no-cors modunda Google'dan gelen cevabı okuyamayız ama hata vermediyse veri tabloya düşmüş demektir.
-                    setStatus({ type: 'success', message: 'Ziyaret başarıyla Excel\'e eklendi!' });
-                    setFormData(prev => ({
-                        ...prev,
-                        visitNo: parseInt(prev.visitNo) + 1,
-                        district: '',
-                        hospital: '',
-                        doctor: '',
-                        note: ''
-                    }));
-                } catch (error) {
-                    console.error(error);
-                    setStatus({ type: 'error', message: 'Bağlantı Hatası: Lütfen internetinizi kontrol edin.' });
-                } finally {
-                    setIsLoading(false);
-                    setTimeout(() => setStatus({ type: '', message: '' }), 7000);
-                }
-            };
-
-            return (
-                <div className="min-h-screen bg-slate-50 font-sans text-slate-800 pb-20 safe-area-pt">
-                    <header className="bg-blue-900 text-white p-4 shadow-md sticky top-0 z-10 w-full pt-safe">
-                        <div className="max-w-2xl mx-auto flex justify-between items-center w-full">
-                            <div>
-                                <h1 className="text-xl font-bold tracking-tight">Canlı Ziyaret Girişi</h1>
-                                <p className="text-blue-200 text-sm">Doğrudan Google Sheets'e Yazar</p>
-                            </div>
-                            <button 
-                                onClick={() => setShowSettings(!showSettings)}
-                                className="p-2 hover:bg-blue-800 rounded-lg transition-colors cursor-pointer touch-manipulation"
-                                aria-label="Ayarlar"
-                            >
-                                <IconSettings />
-                            </button>
-                        </div>
-                    </header>
-
-                    <main className="max-w-2xl mx-auto p-4 space-y-4 w-full">
-                        {showSettings && (
-                            <div className="bg-blue-50 p-4 rounded-xl border border-blue-200 shadow-sm w-full">
-                                <h3 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
-                                    <IconSettings /> Bağlantı Ayarları
-                                </h3>
-                                <p className="text-xs text-blue-800 mb-3">
-                                    Google Apps Script'ten aldığınız "Web Uygulaması URL'sini" buraya yapıştırın.
-                                </p>
-                                <input 
-                                    type="text" 
-                                    value={scriptUrl}
-                                    onChange={(e) => setScriptUrl(e.target.value)}
-                                    placeholder="https://script.google.com/macros/s/.../exec"
-                                    className="w-full p-3 border border-blue-300 rounded-lg text-sm mb-3 outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                                />
-                                <button 
-                                    onClick={saveSettings}
-                                    className="w-full sm:w-auto bg-blue-700 hover:bg-blue-800 text-white text-sm px-6 py-3 rounded-lg font-medium cursor-pointer touch-manipulation"
-                                >
-                                    Kaydet ve Kapat
-                                </button>
-                            </div>
-                        )}
-
-                        {status.message && (
-                            <div className={`p-4 rounded-xl flex items-center gap-3 text-sm font-medium w-full ${
-                                status.type === 'success' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
-                            }`}>
-                                {status.type === 'success' ? <IconCheck /> : <IconAlert />}
-                                {status.message}
-                            </div>
-                        )}
-
-                        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden w-full">
-                            <div className="bg-slate-100 px-4 py-3 border-b border-slate-200">
-                                <h2 className="font-semibold text-slate-700">Ziyaret Bilgileri</h2>
-                            </div>
-                            
-                            <form onSubmit={handleSubmit} className="p-4 space-y-4 w-full">
-                                <div className="grid grid-cols-2 gap-4 w-full">
-                                    <div className="space-y-1">
-                                        <label className="text-xs font-medium text-slate-500 flex items-center gap-1"><IconCalendar /> Tarih</label>
-                                        <input 
-                                            type="date" 
-                                            name="date"
-                                            value={formData.date}
-                                            onChange={handleInputChange}
-                                            className="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500"
-                                            required
-                                        />
-                                    </div>
-                                    <div className="space-y-1">
-                                        <label className="text-xs font-medium text-slate-500 flex items-center gap-1">Ziyaret No</label>
-                                        <input 
-                                            type="number" 
-                                            name="visitNo"
-                                            value={formData.visitNo}
-                                            onChange={handleInputChange}
-                                            className="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500"
-                                            min="1"
-                                            required
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="grid grid-cols-2 gap-4 w-full">
-                                    <div className="space-y-1">
-                                        <label className="text-xs font-medium text-slate-500 flex items-center gap-1"><IconMapPin /> Şehir</label>
-                                        <select 
-                                            name="city"
-                                            value={formData.city}
-                                            onChange={handleInputChange}
-                                            className="w-full p-3 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none bg-white"
-                                        >
-                                            {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
-                                        </select>
-                                    </div>
-                                    <div className="space-y-1">
-                                        <label className="text-xs font-medium text-slate-500 flex items-center gap-1"><IconMapPin /> İlçe</label>
-                                        <input 
-                                            type="text" 
-                                            name="district"
-                                            value={formData.district}
-                                            onChange={handleInputChange}
-                                            placeholder="Örn: Sincan"
-                                            className="w-full p-3 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none bg-white"
-                                            required
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="space-y-1 w-full">
-                                    <label className="text-xs font-medium text-slate-500 flex items-center gap-1"><IconBuilding /> Hastane / Kurum Adı</label>
-                                    <input 
-                                        type="text" 
-                                        name="hospital"
-                                        value={formData.hospital}
-                                        onChange={handleInputChange}
-                                        placeholder="Örn: Era Göz"
-                                        className="w-full p-3 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none bg-white"
-                                        required
-                                    />
-                                </div>
-
-                                <div className="space-y-1 w-full">
-                                    <label className="text-xs font-medium text-slate-500 flex items-center gap-1"><IconUser /> Doktor Adı</label>
-                                    <input 
-                                        type="text" 
-                                        name="doctor"
-                                        value={formData.doctor}
-                                        onChange={handleInputChange}
-                                        placeholder="Örn: Dr. Hatice Nur Çolak"
-                                        className="w-full p-3 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none bg-white"
-                                        required
-                                    />
-                                </div>
-
-                                <div className="space-y-1 w-full">
-                                    <label className="text-xs font-medium text-slate-500 flex items-center gap-1"><IconClipboard /> Notlar (Opsiyonel)</label>
-                                    <textarea 
-                                        name="note"
-                                        value={formData.note}
-                                        onChange={handleInputChange}
-                                        placeholder="Görüşme detayları..."
-                                        rows="3"
-                                        className="w-full p-3 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none resize-none bg-white"
-                                    ></textarea>
-                                </div>
-
-                                <button 
-                                    type="submit" 
-                                    disabled={isLoading}
-                                    className={`w-full text-white font-medium py-4 rounded-lg transition-colors flex justify-center items-center gap-2 cursor-pointer touch-manipulation text-base mt-2 ${
-                                        isLoading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800'
-                                    }`}
-                                >
-                                    {isLoading ? (
-                                        <><IconLoader /> Kaydediliyor...</>
-                                    ) : (
-                                        <><IconPlus /> E-Tabloya İşle</>
-                                    )}
-                                </button>
-                            </form>
-                        </div>
-                    </main>
-                </div>
-            );
+            }
         }
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
     </script>
     <style>
-        /* iOS güvenli alan boşlukları için (Çentik vb.) */
-        .pt-safe { padding-top: env(safe-area-inset-top); }
-        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        .neomorphic-card {
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.05), -4px -4px 8px rgba(255, 255, 255, 0.8);
+        }
+        .neomorphic-button {
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
+        }
     </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-20">
+
+    <!-- Top Navigation Bar -->
+    <header class="fixed top-0 w-full z-40 bg-surface/80 backdrop-blur-xl border-b border-white/20 shadow-sm flex justify-between items-center px-5 py-3">
+        <div class="flex items-center gap-3">
+            <div>
+                <h1 class="font-headline-sm text-xl text-primary font-bold">Ziyaret Asistanı</h1>
+                <p class="font-label-md text-xs text-on-surface-variant font-medium tracking-wide">Sedat Demir</p>
+            </div>
+        </div>
+        <button id="openSettingsBtn" class="text-on-surface-variant hover:bg-surface-container-highest/50 transition-colors p-2 rounded-full active:scale-95 duration-200">
+            <span class="material-symbols-outlined" data-icon="settings">settings</span>
+        </button>
+    </header>
+
+    <!-- Toast Notification -->
+    <div class="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-400 opacity-0 -translate-y-full flex items-center gap-2 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full shadow-lg font-label-md text-sm font-medium whitespace-nowrap" id="toast">
+        <span class="material-symbols-outlined" id="toastIcon">check_circle</span>
+        <span id="toastText">Log Kaydedildi</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pt-[90px] px-5 max-w-2xl mx-auto">
+        <div class="bg-surface-container-lowest rounded-2xl p-6 neomorphic-card">
+            <form class="flex flex-col gap-5" id="visitForm">
+                
+                <!-- Row 1: Date & Visit No -->
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1 flex flex-col gap-1">
+                        <label class="font-label-md text-xs font-semibold text-on-surface-variant ml-1">Tarih</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                                <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                            </div>
+                            <input id="tarih" class="w-full bg-surface-container-low border border-outline-variant rounded-xl py-3 pl-[40px] pr-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-on-surface font-body-md" type="date"/>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col gap-1">
+                        <label class="font-label-md text-xs font-semibold text-on-surface-variant ml-1">Ziyaret No</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                                <span class="material-symbols-outlined text-[20px]">tag</span>
+                            </div>
+                            <input id="ziyaretNo" class="w-full bg-surface-container-low border border-outline-variant rounded-xl py-3 pl-[40px] pr-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-on-surface font-body-md" placeholder="1, 2, 3..." type="number"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: City & District -->
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1 flex flex-col gap-1">
+                        <label class="font-label-md text-xs font-semibold text-on-surface-variant ml-1">Şehir</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                                <span class="material-symbols-outlined text-[20px]">location_on</span>
+                            </div>
+                            <select id="sehir" class="w-full bg-surface-container-low border border-outline-variant rounded-xl py-3 pl-[40px] pr-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-on-surface font-body-md appearance-none">
+                                <option value="">Şehir Seçin</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-outline">
+                                <span class="material-symbols-outlined text-[20px]">expand_more</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col gap-1">
+                        <label class="font-label-md text-xs font-semibold text-on-surface-variant ml-1">İlçe</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                                <span class="material-symbols-outlined text-[20px]">map</span>
+                            </div>
+                            <select id="ilce" class="w-full bg-surface-container-low border border-outline-variant rounded-xl py-3 pl-[40px] pr-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-on-surface font-body-md appearance-none">
+                                <option value="">Önce Şehir Seçin</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-outline">
+                                <span class="material-symbols-outlined text-[20px]">expand_more</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 3: Hospital -->
+                <div class="flex flex-col gap-1">
+                    <label class="font-label-md text-xs font-semibold text-on-surface-variant ml-1">Hastane / Kurum Adı</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                            <span class="material-symbols-outlined text-[20px]">local_hospital</span>
+                        </div>
+                        <input id="hastane" class="w-full bg-surface-container-low border border-outline-variant rounded-xl py-3 pl-[40px] pr-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-on-surface font-body-md uppercase" placeholder="Örn: MEDİKAL PALACE" type="text"/>
+                    </div>
+                </div>
+
+                <!-- Row 4: Doctor -->
+                <div class="flex flex-col gap-1">
+                    <label class="font-label-md text-xs font-semibold text-on-surface-variant ml-1">Doktor Adı</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                            <span class="material-symbols-outlined text-[20px]">person</span>
+                        </div>
+                        <input id="doktor" class="w-full bg-surface-container-low border border-outline-variant rounded-xl py-3 pl-[40px] pr-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-on-surface font-body-md uppercase" placeholder="Örn: DR. AHMET YILMAZ" type="text"/>
+                    </div>
+                </div>
+
+                <!-- Row 5: Notes -->
+                <div class="flex flex-col gap-1">
+                    <label class="font-label-md text-xs font-semibold text-on-surface-variant ml-1">Notlar</label>
+                    <textarea id="not" class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-on-surface font-body-md resize-none" placeholder="Ziyaret detaylarını buraya giriniz..." rows="3"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button class="mt-2 w-full bg-primary text-on-primary font-headline-sm text-lg font-bold rounded-xl py-4 flex items-center justify-center gap-2 neomorphic-button active:scale-95 transition-all duration-200 relative overflow-hidden group" id="submitBtn" type="button">
+                    <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <span class="material-symbols-outlined" id="btnIcon">add</span>
+                    <span id="btnText">Ziyareti Kaydet</span>
+                    <svg class="hidden animate-spin h-6 w-6 text-on-primary" fill="none" id="btnSpinner" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 hidden flex-col items-center justify-center px-4 transition-opacity">
+        <div class="bg-surface-container-lowest rounded-2xl p-6 w-full max-w-sm neomorphic-card" id="settingsCard">
+            <h2 class="text-xl font-bold text-primary mb-2 flex items-center gap-2">
+                <span class="material-symbols-outlined">settings</span> Ayarlar
+            </h2>
+            <p class="text-sm text-on-surface-variant mb-4">Uygulamanın Excel'e veri gönderebilmesi için Google Apps Script bağlantısını buraya yapıştırın.</p>
+            <input type="text" id="scriptUrlInput" class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-primary mb-5 text-sm" placeholder="https://script.google.com/macros/s/.../exec">
+            <div class="flex justify-end gap-3">
+                <button type="button" id="closeSettingsBtn" class="px-5 py-2.5 text-on-surface-variant font-semibold rounded-xl hover:bg-surface-container-low transition-colors">İptal</button>
+                <button type="button" id="saveSettingsBtn" class="px-5 py-2.5 bg-primary text-on-primary rounded-xl font-semibold shadow-md active:scale-95 transition-transform">Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script>
+        // --- İL VE İLÇE VERİLERİ ---
+        const ilIlceVerisi = {
+            "Aksaray": ["Ağaçören", "Eskil", "Gülağaç", "Güzelyurt", "Merkez", "Ortaköy", "Sarıyahşi", "Sultanhanı"],
+            "Ankara": ["Akyurt", "Altındağ", "Ayaş", "Bala", "Beypazarı", "Çamlıdere", "Çankaya", "Çubuk", "Elmadağ", "Etimesgut", "Evren", "Gölbaşı", "Güdül", "Haymana", "Kahramankazan", "Kalecik", "Keçiören", "Kızılcahamam", "Mamak", "Nallıhan", "Polatlı", "Pursaklar", "Sincan", "Şereflikoçhisar", "Yenimahalle"],
+            "Çankırı": ["Atkaracalar", "Bayramören", "Çerkeş", "Eldivan", "Ilgaz", "Kızılırmak", "Korgun", "Kurşunlu", "Merkez", "Orta", "Şabanözü", "Yapraklı"],
+            "İstanbul": ["Adalar", "Arnavutköy", "Ataşehir", "Avcılar", "Bağcılar", "Bahçelievler", "Bakırköy", "Başakşehir", "Bayrampaşa", "Beşiktaş", "Beykoz", "Beylikdüzü", "Beyoğlu", "Büyükçekmece", "Çatalca", "Çekmeköy", "Esenler", "Esenyurt", "Eyüpsultan", "Fatih", "Gaziosmanpaşa", "Güngören", "Kadıköy", "Kağıthane", "Kartal", "Küçükçekmece", "Maltepe", "Pendik", "Sancaktepe", "Sarıyer", "Silivri", "Sultanbeyli", "Sultangazi", "Şile", "Şişli", "Tuzla", "Ümraniye", "Üsküdar", "Zeytinburnu"],
+            "Kayseri": ["Akkışla", "Bünyan", "Develi", "Felahiye", "Hacılar", "İncesu", "Kocasinan", "Melikgazi", "Özvatan", "Pınarbaşı", "Sarıoğlan", "Sarız", "Talas", "Tomarza", "Yahyalı", "Yeşilhisar"],
+            "Kırıkkale": ["Bahşılı", "Balışeyh", "Çelebi", "Delice", "Karakeçili", "Keskin", "Merkez", "Sulakyurt", "Yahşihan"],
+            "Kırşehir": ["Akçakent", "Akpınar", "Boztepe", "Çiçekdağı", "Kaman", "Merkez", "Mucur"],
+            "Nevşehir": ["Acıgöl", "Avanos", "Derinkuyu", "Gülşehir", "Hacıbektaş", "Kozaklı", "Merkez", "Ürgüp"],
+            "Tokat": ["Almus", "Artova", "Başçiftlik", "Erbaa", "Merkez", "Niksar", "Pazar", "Reşadiye", "Sulusaray", "Turhal", "Yeşilyurt", "Zile"],
+            "Yozgat": ["Akdağmadeni", "Aydıncık", "Boğazlıyan", "Çandır", "Çayıralan", "Çekerek", "Kadışehri", "Merkez", "Saraykent", "Sarıkaya", "Sorgun", "Şefaatli", "Yenifakılı", "Yerköy"]
+        };
+
+        // --- SAYFA YÜKLENDİĞİNDE YAPILACAKLAR ---
+        document.addEventListener("DOMContentLoaded", () => {
+            // Tarihi bugüne ayarla
+            document.getElementById("tarih").valueAsDate = new Date();
+            
+            // Şehirleri dondur
+            const sehirSelect = document.getElementById("sehir");
+            Object.keys(ilIlceVerisi).sort().forEach(sehir => {
+                let option = document.createElement("option");
+                option.value = sehir;
+                option.text = sehir;
+                sehirSelect.appendChild(option);
+            });
+        });
+
+        // Şehir seçilince ilçeleri doldur
+        document.getElementById("sehir").addEventListener("change", function() {
+            const ilceSelect = document.getElementById("ilce");
+            ilceSelect.innerHTML = '<option value="">İlçe Seçin</option>';
+            const seciliSehir = this.value;
+            if (seciliSehir && ilIlceVerisi[seciliSehir]) {
+                ilIlceVerisi[seciliSehir].forEach(ilce => {
+                    let option = document.createElement("option");
+                    option.value = ilce;
+                    option.text = ilce;
+                    ilceSelect.appendChild(option);
+                });
+            }
+        });
+
+        // --- AYARLAR MODAL MANTIĞI ---
+        const modal = document.getElementById('settingsModal');
+        const scriptUrlInput = document.getElementById('scriptUrlInput');
+
+        document.getElementById('openSettingsBtn').addEventListener('click', () => {
+            scriptUrlInput.value = localStorage.getItem('scriptUrl') || "";
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        });
+
+        document.getElementById('closeSettingsBtn').addEventListener('click', () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        });
+
+        document.getElementById('saveSettingsBtn').addEventListener('click', () => {
+            const url = scriptUrlInput.value.trim();
+            if (url && url.endsWith("/exec")) {
+                localStorage.setItem('scriptUrl', url);
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                showToast("Bağlantı başarıyla kaydedildi!", "success");
+            } else {
+                showToast("Hata: Link /exec ile bitmelidir!", "error");
+            }
+        });
+
+        // --- BİLDİRİM (TOAST) MANTIĞI ---
+        function showToast(message, type = "success") {
+            const toast = document.getElementById('toast');
+            const toastIcon = document.getElementById('toastIcon');
+            const toastText = document.getElementById('toastText');
+            
+            toastText.textContent = message;
+            
+            if (type === "success") {
+                toast.className = "fixed top-20 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-400 flex items-center gap-2 px-6 py-3 rounded-full shadow-lg font-label-md text-sm font-medium whitespace-nowrap bg-secondary-container text-on-secondary-container";
+                toastIcon.textContent = "check_circle";
+            } else {
+                toast.className = "fixed top-20 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-400 flex items-center gap-2 px-6 py-3 rounded-full shadow-lg font-label-md text-sm font-medium whitespace-nowrap bg-error text-white";
+                toastIcon.textContent = "error";
+            }
+            
+            // Animasyonla göster
+            setTimeout(() => { toast.classList.remove('opacity-0', '-translate-y-full'); }, 10);
+            
+            // 3 saniye sonra gizle
+            setTimeout(() => { toast.classList.add('opacity-0', '-translate-y-full'); }, 3000);
+        }
+
+        // --- GÖNDERME MANTIĞI ---
+        document.getElementById('submitBtn').addEventListener('click', async function() {
+            const btn = this;
+            const icon = document.getElementById('btnIcon');
+            const text = document.getElementById('btnText');
+            const spinner = document.getElementById('btnSpinner');
+
+            const scriptUrl = localStorage.getItem('scriptUrl');
+            if (!scriptUrl) {
+                showToast("Lütfen sağ üstten Ayarlar'a girip bağlantı linkinizi ekleyin.", "error");
+                return;
+            }
+
+            // Verileri Topla
+            const rawDate = document.getElementById("tarih").value; // Format: YYYY-MM-DD
+            if(!rawDate) { showToast("Lütfen tarih seçin.", "error"); return; }
+            
+            // Tarihi DD.MM.YYYY formatına çevir ve günü bul
+            const d = new Date(rawDate);
+            const formattedDate = ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
+            const gunler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
+            const secilenGun = gunler[d.getDay()];
+
+            const ziyaretNo = document.getElementById("ziyaretNo").value;
+            if(!ziyaretNo) { showToast("Lütfen Ziyaret No girin.", "error"); return; }
+
+            const payload = {
+                tarih: formattedDate,
+                gun: secilenGun,
+                ziyaretNo: ziyaretNo,
+                sehir: document.getElementById("sehir").value,
+                ilce: document.getElementById("ilce").value,
+                hastane: document.getElementById("hastane").value.toUpperCase(),
+                doktor: document.getElementById("doktor").value.toUpperCase(),
+                not: document.getElementById("not").value
+            };
+
+            // Loading state
+            icon.classList.add('hidden');
+            spinner.classList.remove('hidden');
+            text.textContent = 'Kaydediliyor...';
+            btn.classList.add('opacity-90', 'pointer-events-none');
+
+            try {
+                // Tarayıcı güvenlik duvarlarını aşmak için no-cors
+                const cacheBuster = "?t=" + new Date().getTime();
+                await fetch(scriptUrl + cacheBuster, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify(payload),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                showToast("Ziyaret başarıyla Excel'e işlendi!", "success");
+                
+                // Formu temizle (Tarih ve Şehir kalsın)
+                document.getElementById("ziyaretNo").value = "";
+                document.getElementById("hastane").value = "";
+                document.getElementById("doktor").value = "";
+                document.getElementById("not").value = "";
+                
+            } catch (error) {
+                showToast("Bağlantı hatası: İnternetinizi kontrol edin.", "error");
+            } finally {
+                // Reset button
+                icon.classList.remove('hidden');
+                spinner.classList.add('hidden');
+                text.textContent = 'Ziyareti Kaydet';
+                btn.classList.remove('opacity-90', 'pointer-events-none');
+            }
+        });
+    </script>
 </body>
 </html>
