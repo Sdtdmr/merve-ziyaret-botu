@@ -23,7 +23,6 @@
     --white: #f5f6f4;
     --muted: #9a9ca2;
     --line: #2b2e31;
-    --error: #e05252;
 }
 
 * {
@@ -41,11 +40,16 @@ body {
     min-height: 100dvh;
     overflow-x: hidden;
     background:
-        radial-gradient(circle at 0 0, rgba(12,112,82,.18), transparent 25rem),
+        radial-gradient(
+            circle at 0 0,
+            rgba(12,112,82,.18),
+            transparent 25rem
+        ),
         var(--bg);
     color: var(--white);
     font-family: Manrope, sans-serif;
-    padding-bottom: calc(28px + env(safe-area-inset-bottom));
+    padding-bottom:
+        calc(28px + env(safe-area-inset-bottom));
 }
 
 button,
@@ -83,7 +87,8 @@ button {
         16px
         12px;
     background: rgba(13,15,16,.9);
-    border-bottom: 1px solid rgba(255,255,255,.05);
+    border-bottom:
+        1px solid rgba(255,255,255,.05);
     backdrop-filter: blur(18px);
 }
 
@@ -107,7 +112,8 @@ button {
     display: grid;
     place-items: center;
     flex-shrink: 0;
-    border: 1px solid rgba(24,201,154,.55);
+    border:
+        1px solid rgba(24,201,154,.55);
     border-radius: 50%;
     background: rgba(24,201,154,.07);
     color: var(--green);
@@ -144,7 +150,8 @@ button {
 .settings:active {
     transform: scale(.94);
     color: var(--green);
-    border-color: rgba(24,201,154,.5);
+    border-color:
+        rgba(24,201,154,.5);
 }
 
 .intro {
@@ -176,20 +183,13 @@ button {
             rgba(25,27,29,.98),
             rgba(20,22,24,.98)
         );
-    box-shadow: 0 18px 42px rgba(0,0,0,.17);
-    animation: cardEnter .45s both;
-}
-
-.card:nth-child(2) {
-    animation-delay: .06s;
-}
-
-.card:nth-child(3) {
-    animation-delay: .12s;
+    box-shadow:
+        0 18px 42px rgba(0,0,0,.17);
 }
 
 .card.accent {
-    border-color: rgba(24,201,154,.5);
+    border-color:
+        rgba(24,201,154,.5);
 }
 
 .card-head {
@@ -211,9 +211,11 @@ button {
     display: grid;
     place-items: center;
     flex-shrink: 0;
-    border: 1px solid rgba(24,201,154,.28);
+    border:
+        1px solid rgba(24,201,154,.28);
     border-radius: 12px;
-    background: rgba(24,201,154,.07);
+    background:
+        rgba(24,201,154,.07);
     color: var(--green);
 }
 
@@ -228,7 +230,8 @@ button {
 
 .step {
     padding: 5px 8px;
-    border: 1px solid rgba(24,201,154,.24);
+    border:
+        1px solid rgba(24,201,154,.24);
     border-radius: 999px;
     color: var(--green);
     font-size: 9px;
@@ -288,13 +291,15 @@ button {
     width: 100%;
     min-height: 52px;
     padding: 13px 14px !important;
-    border: 1px solid #303337 !important;
+    border:
+        1px solid #303337 !important;
     border-radius: 14px !important;
     outline: none !important;
-    background: var(--field) !important;
-    color: var(--white) !important;
+    background:
+        var(--field) !important;
+    color:
+        var(--white) !important;
     box-shadow: none !important;
-    transition: border-color .2s, box-shadow .2s;
 }
 
 .control.icon {
@@ -306,8 +311,11 @@ button {
 }
 
 .control:focus {
-    border-color: var(--green) !important;
-    box-shadow: 0 0 0 4px rgba(24,201,154,.08) !important;
+    border-color:
+        var(--green) !important;
+    box-shadow:
+        0 0 0 4px rgba(24,201,154,.08)
+        !important;
 }
 
 textarea.control {
@@ -316,29 +324,34 @@ textarea.control {
 }
 
 .submit {
-    position: relative;
     width: 100%;
-    height: 56px;
     min-height: 56px;
-    max-height: 56px;
-    margin: 0;
-    padding: 0 18px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 9px;
-    overflow: hidden;
     border: 0;
     border-radius: 16px;
-    background: linear-gradient(110deg,#1ad09d,#10b986);
+    background:
+        linear-gradient(
+            110deg,
+            #1ad09d,
+            #10b986
+        );
     color: #061510;
     font-size: 14px;
     font-weight: 800;
-    box-shadow: 0 14px 32px rgba(11,185,132,.2);
+    box-shadow:
+        0 14px 32px rgba(11,185,132,.2);
 }
 
 .submit:active {
     transform: scale(.985);
+}
+
+.submit:disabled {
+    opacity: .65;
+    cursor: wait;
 }
 
 .footer {
@@ -356,7 +369,6 @@ textarea.control {
     z-index: 80;
     align-items: flex-end;
     justify-content: center;
-    padding: 0;
     background: rgba(2,4,5,.78);
     backdrop-filter: blur(8px);
 }
@@ -364,13 +376,16 @@ textarea.control {
 #settingsCard {
     width: 100%;
     max-width: 480px;
-    padding: 22px 18px calc(22px + env(safe-area-inset-bottom));
-    border: 1px solid rgba(24,201,154,.32);
+    padding:
+        22px
+        18px
+        calc(22px + env(safe-area-inset-bottom));
+    border:
+        1px solid rgba(24,201,154,.32);
     border-bottom: 0;
-    border-radius: 24px 24px 0 0;
+    border-radius:
+        24px 24px 0 0;
     background: #181a1b;
-    color: white;
-    box-shadow: 0 25px 70px rgba(0,0,0,.65);
 }
 
 #settingsCard h2 {
@@ -384,7 +399,8 @@ textarea.control {
 
 .modal-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+        1fr 1fr;
     gap: 10px;
     margin-top: 18px;
 }
@@ -397,7 +413,8 @@ textarea.control {
 }
 
 .cancel {
-    border: 1px solid var(--line);
+    border:
+        1px solid var(--line);
     background: #111314;
     color: #a9abad;
 }
@@ -406,25 +423,6 @@ textarea.control {
     border: 0;
     background: var(--green);
     color: #07140f;
-}
-
-@keyframes cardEnter {
-    from {
-        opacity: 0;
-        transform: translateY(14px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation: none !important;
-        transition: none !important;
-    }
 }
 </style>
 </head>
@@ -435,7 +433,9 @@ textarea.control {
 <header class="topbar">
     <div class="topbar-inner">
         <div class="brand">
-            <div class="brand-mark">SD</div>
+            <div class="brand-mark">
+                SD
+            </div>
 
             <div>
                 <h1>Ziyaret Asistanı</h1>
@@ -458,11 +458,15 @@ textarea.control {
 
 <main>
     <section class="intro">
-        <p class="kicker">YENİ ZİYARET</p>
+        <p class="kicker">
+            YENİ ZİYARET
+        </p>
     </section>
 
-    <form id="visitForm" class="form-stack">
-
+    <form
+        id="visitForm"
+        class="form-stack"
+    >
         <section class="card accent">
             <div class="card-head">
                 <div class="card-title">
@@ -480,7 +484,9 @@ textarea.control {
 
             <div class="fields">
                 <div class="field">
-                    <label for="tarih">Tarih</label>
+                    <label for="tarih">
+                        Tarih
+                    </label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -497,8 +503,13 @@ textarea.control {
 
                 <div class="field">
                     <div class="label-row">
-                        <label for="ziyaretNo">Ziyaret No</label>
-                        <span class="auto">OTOMATİK</span>
+                        <label for="ziyaretNo">
+                            Ziyaret No
+                        </label>
+
+                        <span class="auto">
+                            OTOMATİK
+                        </span>
                     </div>
 
                     <div class="input-wrap">
@@ -536,7 +547,9 @@ textarea.control {
 
             <div class="fields">
                 <div class="field">
-                    <label for="sehir">Şehir</label>
+                    <label for="sehir">
+                        Şehir
+                    </label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -552,11 +565,16 @@ textarea.control {
                         >
                     </div>
 
-                    <ul id="sehirList" class="hidden"></ul>
+                    <ul
+                        id="sehirList"
+                        class="hidden"
+                    ></ul>
                 </div>
 
                 <div class="field">
-                    <label for="ilce">İlçe</label>
+                    <label for="ilce">
+                        İlçe
+                    </label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -573,7 +591,9 @@ textarea.control {
                 </div>
 
                 <div class="field">
-                    <label for="hastane">Hastane / Kurum Adı</label>
+                    <label for="hastane">
+                        Hastane / Kurum Adı
+                    </label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -582,14 +602,17 @@ textarea.control {
 
                         <input
                             id="hastane"
-                            class="control icon uppercase"
+                            class="control icon"
                             type="text"
                             autocomplete="off"
                             placeholder="Kurum adını yazın"
                         >
                     </div>
 
-                    <ul id="hastaneList" class="hidden"></ul>
+                    <ul
+                        id="hastaneList"
+                        class="hidden"
+                    ></ul>
                 </div>
             </div>
         </section>
@@ -611,7 +634,9 @@ textarea.control {
 
             <div class="fields">
                 <div class="field">
-                    <label for="doktor">Doktor Adı</label>
+                    <label for="doktor">
+                        Doktor Adı
+                    </label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -620,18 +645,23 @@ textarea.control {
 
                         <input
                             id="doktor"
-                            class="control icon uppercase"
+                            class="control icon"
                             type="text"
                             autocomplete="off"
                             placeholder="Doktor adını yazın"
                         >
                     </div>
 
-                    <ul id="doktorList" class="hidden"></ul>
+                    <ul
+                        id="doktorList"
+                        class="hidden"
+                    ></ul>
                 </div>
 
                 <div class="field">
-                    <label for="not">Notlar</label>
+                    <label for="not">
+                        Notlar
+                    </label>
 
                     <textarea
                         id="not"
@@ -649,13 +679,15 @@ textarea.control {
             class="submit"
         >
             <span
-                class="material-symbols-outlined"
                 id="btnIcon"
+                class="material-symbols-outlined"
             >
                 add_circle
             </span>
 
-            <span id="btnText">Ziyareti Kaydet</span>
+            <span id="btnText">
+                Ziyareti Kaydet
+            </span>
 
             <svg
                 id="btnSpinner"
@@ -687,18 +719,12 @@ textarea.control {
 </main>
 </div>
 
-<div id="settingsModal" class="hidden flex-col">
+<div
+    id="settingsModal"
+    class="hidden flex-col"
+>
     <div id="settingsCard">
-        <h2>
-            <span
-                class="material-symbols-outlined"
-                style="color:#18c99a"
-            >
-                link
-            </span>
-
-            Ayarlar
-        </h2>
+        <h2>Ayarlar</h2>
 
         <p>
             Google Apps Script bağlantısını buraya yapıştırın.
@@ -735,7 +761,8 @@ textarea.control {
 (() => {
   "use strict";
 
-  const $ = id => document.getElementById(id);
+  const $ = id =>
+    document.getElementById(id);
 
   const fields = [
     "tarih",
@@ -773,7 +800,9 @@ textarea.control {
     "Uşak|Van|Yalova|Yozgat|Zonguldak"
   )
     .split("|")
-    .sort((a, b) => a.localeCompare(b, "tr"));
+    .sort((a, b) =>
+      a.localeCompare(b, "tr")
+    );
 
   const clean = value =>
     String(value == null ? "" : value)
@@ -788,7 +817,8 @@ textarea.control {
       .replace(/[\u0300-\u036f]/g, "");
 
   const upper = value =>
-    clean(value).toLocaleUpperCase("tr-TR");
+    clean(value)
+      .toLocaleUpperCase("tr-TR");
 
   let busy = false;
   let pending = null;
@@ -798,7 +828,9 @@ textarea.control {
 
   const ram = new Map();
 
-  const status = document.createElement("p");
+  const status =
+    document.createElement("p");
+
   status.id = "syncStatus";
   status.setAttribute("role", "status");
   status.style.cssText =
@@ -810,22 +842,32 @@ textarea.control {
 
   $("visitForm").before(status);
 
-  const storageNote = document.createElement("p");
+  const storageNote =
+    document.createElement("p");
+
   storageNote.style.cssText =
     "font-size:12px;color:#f4be7c";
 
   status.after(storageNote);
 
-  function message(text, error = false) {
+  function message(
+    text,
+    error = false
+  ) {
     status.textContent = text;
+
     status.style.color = error
       ? "#ff9e9e"
       : "#a9c5ba";
   }
 
-  function read(name, fallback) {
+  function read(
+    name,
+    fallback
+  ) {
     try {
-      const raw = localStorage.getItem(name);
+      const raw =
+        localStorage.getItem(name);
 
       return raw === null
         ? fallback
@@ -837,7 +879,10 @@ textarea.control {
     }
   }
 
-  function save(name, value) {
+  function save(
+    name,
+    value
+  ) {
     ram.set(name, value);
 
     try {
@@ -847,9 +892,7 @@ textarea.control {
       );
     } catch (_) {
       storageNote.textContent =
-        "Cihaz depolaması kapalı veya dolu. " +
-        "Bu oturum çalışır; uygulamayı kapatınca " +
-        "yerel bilgiler korunamayabilir.";
+        "Cihaz depolaması kullanılamıyor.";
     }
   }
 
@@ -857,22 +900,33 @@ textarea.control {
 
   try {
     endpoint =
-      localStorage.getItem("scriptUrl") || "";
+      localStorage.getItem(
+        "scriptUrl"
+      ) || "";
   } catch (_) {}
 
   const cacheKey = suffix =>
-    "visit3:" + endpoint + ":" + suffix;
+    "visit3:" +
+    endpoint +
+    ":" +
+    suffix;
 
   function unique(names) {
     const seen = new Set();
 
     return names
-      .filter(value => typeof value === "string")
+      .filter(value =>
+        typeof value === "string"
+      )
       .map(upper)
       .filter(value => {
-        const normalized = key(value);
+        const normalized =
+          key(value);
 
-        if (!value || seen.has(normalized)) {
+        if (
+          !value ||
+          seen.has(normalized)
+        ) {
           return false;
         }
 
@@ -883,21 +937,34 @@ textarea.control {
 
   function loadCache() {
     const cachedDoctors =
-      read(cacheKey("doctors"), []);
+      read(
+        cacheKey("doctors"),
+        []
+      );
 
     const cachedInstitutions =
-      read(cacheKey("institutions"), []);
+      read(
+        cacheKey("institutions"),
+        []
+      );
 
-    doctors = Array.isArray(cachedDoctors)
-      ? unique(cachedDoctors)
-      : [];
+    doctors =
+      Array.isArray(cachedDoctors)
+        ? unique(cachedDoctors)
+        : [];
 
-    institutions = Array.isArray(cachedInstitutions)
-      ? unique(cachedInstitutions)
-      : [];
+    institutions =
+      Array.isArray(
+        cachedInstitutions
+      )
+        ? unique(cachedInstitutions)
+        : [];
 
     pending =
-      read(cacheKey("pending"), null);
+      read(
+        cacheKey("pending"),
+        null
+      );
 
     if (
       !pending ||
@@ -924,17 +991,26 @@ textarea.control {
     save(
       "visitAssistantLastLocation",
       {
-        sehir: $("sehir").value,
-        ilce: $("ilce").value,
-        hastane: $("hastane").value
+        sehir:
+          $("sehir").value,
+        ilce:
+          $("ilce").value,
+        hastane:
+          $("hastane").value
       }
     );
   }
 
-  const location =
-    read("visitAssistantLastLocation", {});
+  const location = read(
+    "visitAssistantLastLocation",
+    {}
+  );
 
-  ["sehir", "ilce", "hastane"].forEach(id => {
+  [
+    "sehir",
+    "ilce",
+    "hastane"
+  ].forEach(id => {
     $(id).value =
       location &&
       typeof location[id] === "string"
@@ -952,105 +1028,117 @@ textarea.control {
     );
   });
 
-  Object.keys(required).forEach(id => {
-    $(id).required = true;
-  });
+  Object
+    .keys(required)
+    .forEach(id => {
+      $(id).required = true;
+    });
 
   $("ziyaretNo").min = "1";
   $("ziyaretNo").step = "1";
   $("not").maxLength = 10000;
 
-  ["sehir", "ilce", "hastane", "doktor"]
-    .forEach(id => {
-      $(id).maxLength = 250;
-    });
+  [
+    "sehir",
+    "ilce",
+    "hastane",
+    "doktor"
+  ].forEach(id => {
+    $(id).maxLength = 250;
+  });
 
   $("doktor").value = "";
   $("not").value = "";
 
   function setToday() {
-    const today = new Date();
+    const today =
+      new Date();
 
-    const year = today.getFullYear();
-    const month = String(
-      today.getMonth() + 1
-    ).padStart(2, "0");
+    const year =
+      today.getFullYear();
 
-    const day = String(
-      today.getDate()
-    ).padStart(2, "0");
+    const month =
+      String(
+        today.getMonth() + 1
+      ).padStart(2, "0");
+
+    const day =
+      String(
+        today.getDate()
+      ).padStart(2, "0");
 
     $("tarih").value =
-      year + "-" + month + "-" + day;
+      year +
+      "-" +
+      month +
+      "-" +
+      day;
   }
 
   setToday();
 
-  const style =
+  const dynamicStyle =
     document.createElement("style");
 
-  style.textContent = `
+  dynamicStyle.textContent = `
     #hastaneList,
     #doktorList,
     #sehirList {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      z-index: 55;
-      max-height: 220px;
-      overflow: auto;
-      padding: 5px;
-      margin: 6px 0 0;
-      list-style: none;
-      background: #191c1d;
-      border: 1px solid #337a66;
-      border-radius: 14px;
-      box-shadow: 0 15px 35px #0008;
+      position:absolute;
+      top:100%;
+      left:0;
+      right:0;
+      z-index:55;
+      max-height:220px;
+      overflow:auto;
+      padding:5px;
+      margin:6px 0 0;
+      list-style:none;
+      background:#191c1d;
+      border:1px solid #337a66;
+      border-radius:14px;
+      box-shadow:0 15px 35px #0008;
     }
 
     #hastaneList li,
     #doktorList li,
     #sehirList li {
-      padding: 0 !important;
+      padding:0 !important;
     }
 
     .memory-choice {
-      display: block;
-      width: 100%;
-      padding: 13px;
-      text-align: left;
-      border: 0;
-      border-radius: 9px;
-      background: transparent;
-      color: #eee;
-      font: inherit;
-      font-size: 14px;
+      display:block;
+      width:100%;
+      padding:13px;
+      text-align:left;
+      border:0;
+      border-radius:9px;
+      background:transparent;
+      color:#eee;
+      font:inherit;
+      font-size:14px;
     }
 
     .memory-choice:hover,
     .memory-choice:focus {
-      background: #23483d;
-      outline: 2px solid #18c99a;
-      outline-offset: -2px;
+      background:#23483d;
+      outline:2px solid #18c99a;
+      outline-offset:-2px;
     }
 
     .control:disabled {
-      opacity: .7;
+      opacity:.7;
     }
 
     .card:focus-within {
-      position: relative;
-      z-index: 2;
-    }
-
-    #submitBtn:disabled {
-      opacity: .65;
-      cursor: wait;
+      position:relative;
+      z-index:2;
     }
   `;
 
-  document.head.appendChild(style);
+  document.head.appendChild(
+    dynamicStyle
+  );
 
   const dropdowns = [];
 
@@ -1065,7 +1153,9 @@ textarea.control {
     let list = $(listId);
 
     if (!list) {
-      list = document.createElement("ul");
+      list =
+        document.createElement("ul");
+
       list.id = listId;
 
       input
@@ -1076,34 +1166,21 @@ textarea.control {
     list.classList.add("hidden");
     input.autocomplete = "off";
 
-    input.setAttribute(
-      "aria-controls",
-      listId
-    );
-
-    input.setAttribute(
-      "aria-expanded",
-      "false"
-    );
-
     const close = () => {
       list.classList.add("hidden");
-
-      input.setAttribute(
-        "aria-expanded",
-        "false"
-      );
     };
 
     function render() {
       list.replaceChildren();
 
-      const query = key(input.value);
+      const query =
+        key(input.value);
 
       if (
         busy ||
         pending ||
-        query.length < minimumLength
+        query.length <
+          minimumLength
       ) {
         close();
         return;
@@ -1112,10 +1189,12 @@ textarea.control {
       const matches = source()
         .filter(value => {
           if (id === "sehir") {
-            return key(value).includes(query);
+            return key(value)
+              .includes(query);
           }
 
-          return key(value).startsWith(query);
+          return key(value)
+            .startsWith(query);
         })
         .slice(0, 30);
 
@@ -1127,12 +1206,14 @@ textarea.control {
           document.createElement("button");
 
         button.type = "button";
-        button.className = "memory-choice";
+        button.className =
+          "memory-choice";
         button.textContent = value;
 
         button.addEventListener(
           "mousedown",
-          event => event.preventDefault()
+          event =>
+            event.preventDefault()
         );
 
         button.addEventListener(
@@ -1153,11 +1234,6 @@ textarea.control {
         "hidden",
         !matches.length
       );
-
-      input.setAttribute(
-        "aria-expanded",
-        String(Boolean(matches.length))
-      );
     }
 
     input.addEventListener(
@@ -1168,26 +1244,6 @@ textarea.control {
     input.addEventListener(
       "focus",
       render
-    );
-
-    input.addEventListener(
-      "keydown",
-      event => {
-        if (
-          event.key === "ArrowDown" &&
-          !list.classList.contains("hidden")
-        ) {
-          event.preventDefault();
-
-          list
-            .querySelector("button")
-            ?.focus();
-        }
-
-        if (event.key === "Escape") {
-          close();
-        }
-      }
     );
 
     document.addEventListener(
@@ -1239,16 +1295,15 @@ textarea.control {
   function lockForm() {
     fields.forEach(id => {
       $(id).disabled =
-        busy || Boolean(pending);
+        busy ||
+        Boolean(pending);
     });
 
-    $("submitBtn").disabled = busy;
+    $("submitBtn").disabled =
+      busy;
 
-    /*
-     * Bekleyen ziyaret bulunsa bile
-     * bağlantı değiştirilebilsin.
-     */
-    $("saveSettingsBtn").disabled = busy;
+    $("saveSettingsBtn").disabled =
+      busy;
 
     $("btnText").textContent =
       busy
@@ -1257,17 +1312,24 @@ textarea.control {
           ? "Kaydı kontrol et / yeniden dene"
           : "Ziyareti Kaydet";
 
-    $("btnSpinner").classList.toggle(
-      "hidden",
-      !busy
-    );
+    $("btnSpinner")
+      .classList
+      .toggle(
+        "hidden",
+        !busy
+      );
 
-    $("btnIcon").classList.toggle(
-      "hidden",
-      busy
-    );
+    $("btnIcon")
+      .classList
+      .toggle(
+        "hidden",
+        busy
+      );
 
-    if (busy || pending) {
+    if (
+      busy ||
+      pending
+    ) {
       dropdowns.forEach(item =>
         item.close()
       );
@@ -1302,21 +1364,25 @@ textarea.control {
         new URLSearchParams(
           Object.assign(
             {
-              action,
-              t: String(Date.now())
+              action: action,
+              t: String(
+                Date.now()
+              )
             },
             params
           )
         );
 
-      const response = await fetch(
-        url + "?" + query,
-        {
-          signal: controller.signal,
-          redirect: "follow",
-          cache: "no-store"
-        }
-      );
+      const response =
+        await fetch(
+          url + "?" + query,
+          {
+            signal:
+              controller.signal,
+            redirect: "follow",
+            cache: "no-store"
+          }
+        );
 
       const raw =
         await response.text();
@@ -1324,10 +1390,11 @@ textarea.control {
       let data;
 
       try {
-        data = JSON.parse(raw);
+        data =
+          JSON.parse(raw);
       } catch (_) {
         throw new Error(
-          "Sunucu JSON döndürmedi. /exec adresini ve Apps Script dağıtımını kontrol edin."
+          "Sunucu JSON döndürmedi. Apps Script bağlantısını kontrol edin."
         );
       }
 
@@ -1336,28 +1403,38 @@ textarea.control {
         !data ||
         data.result === "error"
       ) {
-        const error = new Error(
-          data?.error || "Sunucu hatası."
-        );
+        const error =
+          new Error(
+            data &&
+            data.error
+              ? data.error
+              : "Sunucu hatası."
+          );
 
         error.terminalReceipt =
           action === "getReceipt" &&
-          data?.result === "error";
+          data &&
+          data.result === "error";
 
         throw error;
       }
 
       return data;
     } catch (error) {
-      if (error.name === "AbortError") {
+      if (
+        error.name ===
+        "AbortError"
+      ) {
         throw new Error(
           "Sunucu zaman aşımı. Bağlantıyı kontrol edin."
         );
       }
 
-      if (error instanceof TypeError) {
+      if (
+        error instanceof TypeError
+      ) {
         throw new Error(
-          "Sunucuya erişilemiyor. İnternet, Apps Script adresi veya erişim izni sorunu."
+          "Sunucuya erişilemiyor. İnternet veya Apps Script bağlantısını kontrol edin."
         );
       }
 
@@ -1369,7 +1446,8 @@ textarea.control {
 
   function version(data) {
     if (
-      data.version !== "visit-memory-3"
+      data.version !==
+      "visit-memory-3"
     ) {
       throw new Error(
         "Apps Script eski sürümde. Yeni sürümü dağıtıp tekrar deneyin."
@@ -1379,10 +1457,16 @@ textarea.control {
 
   function formattedDate() {
     const parts =
-      $("tarih").value.split("-");
+      $("tarih")
+        .value
+        .split("-");
 
-    if (parts.length !== 3) {
-      throw new Error("Tarih seçin.");
+    if (
+      parts.length !== 3
+    ) {
+      throw new Error(
+        "Tarih seçin."
+      );
     }
 
     return (
@@ -1420,35 +1504,45 @@ textarea.control {
     );
 
     try {
-      const data = await api(
-        "getLastZiyaretNo",
-        {
-          tarih: formattedDate()
-        },
-        endpoint,
-        15000
-      );
+      const data =
+        await api(
+          "getLastZiyaretNo",
+          {
+            tarih:
+              formattedDate()
+          },
+          endpoint,
+          15000
+        );
 
       version(data);
 
       if (
-        currentSequence === sequence &&
+        currentSequence ===
+          sequence &&
         url === endpoint &&
-        selectedDate === $("tarih").value &&
+        selectedDate ===
+          $("tarih").value &&
         !busy &&
         !pending &&
-        $("ziyaretNo").value === previousNumber
+        $("ziyaretNo").value ===
+          previousNumber
       ) {
         $("ziyaretNo").value =
           Number(data.lastNo) + 1;
 
         message(
           "Ziyaret no hazır: " +
-          (Number(data.lastNo) + 1)
+          (
+            Number(data.lastNo) + 1
+          )
         );
       }
     } catch (error) {
-      message(error.message, true);
+      message(
+        error.message,
+        true
+      );
     }
   }
 
@@ -1465,24 +1559,18 @@ textarea.control {
     const url = endpoint;
 
     try {
-      const data = await api(
-        "getHistory",
-        {},
-        endpoint,
-        30000
-      );
+      const data =
+        await api(
+          "getHistory",
+          {},
+          endpoint,
+          30000
+        );
 
       version(data);
 
-      if (url !== endpoint) return;
-
-      if (
-        !Array.isArray(data.doctors) ||
-        !Array.isArray(data.institutions)
-      ) {
-        throw new Error(
-          "Geçersiz geçmiş yanıtı."
-        );
+      if (url !== endpoint) {
+        return;
       }
 
       doctors = unique([
@@ -1497,16 +1585,10 @@ textarea.control {
 
       saveCache();
 
-      dropdowns.forEach(item => {
-        if (
-          item.input ===
-          document.activeElement
-        ) {
-          item.render();
-        }
-      });
-
-      if (!busy && !pending) {
+      if (
+        !busy &&
+        !pending
+      ) {
         message(
           doctors.length +
           " doktor · " +
@@ -1517,13 +1599,11 @@ textarea.control {
     } catch (error) {
       if (
         !busy &&
-        !pending &&
-        url === endpoint
+        !pending
       ) {
         message(
           "Geçmiş yüklenemedi: " +
-          error.message +
-          " Cihazdaki öneriler kullanılabilir.",
+          error.message,
           true
         );
       }
@@ -1581,21 +1661,52 @@ textarea.control {
     return api(
       "getReceipt",
       {
-        requestId: pending.requestId
+        requestId:
+          pending.requestId
       },
       endpoint,
       8000
     );
   }
 
+  /*
+   * Aynı gün aynı doktor sorgusu
+   */
+  async function checkDoctor() {
+    const data =
+      await api(
+        "checkDoctor",
+        {
+          tarih:
+            formattedDate(),
+          doktor:
+            upper(
+              $("doktor").value
+            )
+        },
+        endpoint,
+        15000
+      );
+
+    version(data);
+
+    return data;
+  }
+
   async function submit() {
     if (busy) return;
 
     if (!pending) {
-      for (const id of Object.keys(required)) {
-        if (!clean($(id).value)) {
+      for (
+        const id of
+        Object.keys(required)
+      ) {
+        if (
+          !clean($(id).value)
+        ) {
           message(
-            required[id] + " zorunludur.",
+            required[id] +
+            " zorunludur.",
             true
           );
 
@@ -1604,14 +1715,18 @@ textarea.control {
         }
       }
 
-      if (!$("visitForm").reportValidity()) {
+      if (
+        !$("visitForm")
+          .reportValidity()
+      ) {
         return;
       }
 
       if (
-        !/^[1-9]\d*$/.test(
-          $("ziyaretNo").value
-        )
+        !/^[1-9]\d*$/
+          .test(
+            $("ziyaretNo").value
+          )
       ) {
         message(
           "Ziyaret no pozitif tam sayı olmalı.",
@@ -1628,15 +1743,72 @@ textarea.control {
 
     try {
       if (!pending) {
+        message(
+          "Aynı doktorun bugünkü kayıtları kontrol ediliyor…"
+        );
+
+        const duplicate =
+          await checkDoctor();
+
+        if (duplicate.exists) {
+          const detail =
+            (
+              duplicate.ziyaretNo
+                ? duplicate.ziyaretNo +
+                  ". ziyaret"
+                : "Daha önceki ziyaret"
+            ) +
+            (
+              duplicate.institution
+                ? " · " +
+                  duplicate.institution
+                : ""
+            );
+
+          const continueSaving =
+            window.confirm(
+              "Bu doktor bugün daha önce kaydedilmiş:\n\n" +
+              detail +
+              "\n\nYine de yeni ziyaret kaydedilsin mi?"
+            );
+
+          if (!continueSaving) {
+            message(
+              "Kayıt yapılmadı: Bu doktor bugün daha önce kaydedilmiş.",
+              true
+            );
+
+            return;
+          }
+        }
+
         pending = {
-          requestId: crypto.randomUUID(),
-          tarih: formattedDate(),
-          ziyaretNo: $("ziyaretNo").value,
-          sehir: clean($("sehir").value),
-          ilce: clean($("ilce").value),
-          hastane: upper($("hastane").value),
-          doktor: upper($("doktor").value),
-          not: $("not").value.trim()
+          requestId:
+            crypto.randomUUID(),
+          tarih:
+            formattedDate(),
+          ziyaretNo:
+            $("ziyaretNo").value,
+          sehir:
+            clean(
+              $("sehir").value
+            ),
+          ilce:
+            clean(
+              $("ilce").value
+            ),
+          hastane:
+            upper(
+              $("hastane").value
+            ),
+          doktor:
+            upper(
+              $("doktor").value
+            ),
+          not:
+            $("not")
+              .value
+              .trim()
         };
 
         save(
@@ -1653,13 +1825,16 @@ textarea.control {
             await receipt();
 
           if (
-            previous.result === "success"
+            previous.result ===
+            "success"
           ) {
             finish(previous);
             return;
           }
         } catch (error) {
-          if (error.terminalReceipt) {
+          if (
+            error.terminalReceipt
+          ) {
             throw error;
           }
         }
@@ -1673,7 +1848,8 @@ textarea.control {
         new AbortController();
 
       const timer = setTimeout(
-        () => controller.abort(),
+        () =>
+          controller.abort(),
         15000
       );
 
@@ -1686,21 +1862,35 @@ textarea.control {
             "Content-Type":
               "text/plain;charset=utf-8"
           },
-          body: JSON.stringify(pending),
-          signal: controller.signal
+          body:
+            JSON.stringify(
+              pending
+            ),
+          signal:
+            controller.signal
         }
       )
         .catch(() => {})
-        .finally(() => clearTimeout(timer));
+        .finally(() =>
+          clearTimeout(timer)
+        );
 
-      let lastReceiptError = null;
+      let lastReceiptError =
+        null;
 
-      for (let i = 0; i < 12; i++) {
-        await new Promise(resolve =>
-          setTimeout(
-            resolve,
-            i < 4 ? 600 : 1200
-          )
+      for (
+        let index = 0;
+        index < 12;
+        index++
+      ) {
+        await new Promise(
+          resolve =>
+            setTimeout(
+              resolve,
+              index < 4
+                ? 600
+                : 1200
+            )
         );
 
         try {
@@ -1708,30 +1898,35 @@ textarea.control {
             await receipt();
 
           if (
-            result.result === "success"
+            result.result ===
+            "success"
           ) {
             finish(result);
             return;
           }
 
-          lastReceiptError = null;
+          lastReceiptError =
+            null;
         } catch (error) {
-          if (error.terminalReceipt) {
+          if (
+            error.terminalReceipt
+          ) {
             throw error;
           }
 
-          lastReceiptError = error;
+          lastReceiptError =
+            error;
         }
       }
 
       message(
         (
           lastReceiptError
-            ? lastReceiptError.message + " "
+            ? lastReceiptError
+                .message + " "
             : ""
         ) +
-        "Kayıt henüz doğrulanamadı. " +
-        "Form korundu. Aynı düğmeyle tekrar kontrol edin.",
+        "Kayıt henüz doğrulanamadı. Form korundu. Aynı düğmeyle tekrar kontrol edin.",
         true
       );
     } catch (error) {
@@ -1762,115 +1957,132 @@ textarea.control {
     }
   }
 
-  $("visitForm").addEventListener(
-    "submit",
-    event => {
-      event.preventDefault();
-      submit();
-    }
-  );
+  $("visitForm")
+    .addEventListener(
+      "submit",
+      event => {
+        event.preventDefault();
+        submit();
+      }
+    );
 
-  $("submitBtn").addEventListener(
-    "click",
-    submit
-  );
+  $("submitBtn")
+    .addEventListener(
+      "click",
+      submit
+    );
 
-  $("tarih").addEventListener(
-    "change",
-    () => {
-      $("ziyaretNo").value = "";
-      lastNumber();
-    }
-  );
+  $("tarih")
+    .addEventListener(
+      "change",
+      () => {
+        $("ziyaretNo").value =
+          "";
 
-  $("openSettingsBtn").addEventListener(
-    "click",
-    () => {
-      $("scriptUrlInput").value =
-        endpoint;
+        lastNumber();
+      }
+    );
 
-      $("settingsModal")
-        .classList
-        .remove("hidden");
+  $("openSettingsBtn")
+    .addEventListener(
+      "click",
+      () => {
+        $("scriptUrlInput").value =
+          endpoint;
 
-      $("settingsModal")
-        .classList
-        .add("flex");
-    }
-  );
+        $("settingsModal")
+          .classList
+          .remove("hidden");
 
-  $("closeSettingsBtn").addEventListener(
-    "click",
-    () => {
-      $("settingsModal")
-        .classList
-        .add("hidden");
+        $("settingsModal")
+          .classList
+          .add("flex");
+      }
+    );
 
-      $("settingsModal")
-        .classList
-        .remove("flex");
-    }
-  );
+  $("closeSettingsBtn")
+    .addEventListener(
+      "click",
+      () => {
+        $("settingsModal")
+          .classList
+          .add("hidden");
 
-  $("saveSettingsBtn").addEventListener(
-    "click",
-    async () => {
-      if (busy) return;
+        $("settingsModal")
+          .classList
+          .remove("flex");
+      }
+    );
 
-      const url =
-        $("scriptUrlInput")
-          .value
-          .trim();
+  $("saveSettingsBtn")
+    .addEventListener(
+      "click",
+      async () => {
+        if (busy) return;
 
-      $("saveSettingsBtn").disabled = true;
+        const url =
+          $("scriptUrlInput")
+            .value
+            .trim();
 
-      try {
-        const data = await api(
-          "ping",
-          {},
-          url,
-          30000
-        );
-
-        version(data);
-
-        endpoint = url;
+        $("saveSettingsBtn")
+          .disabled = true;
 
         try {
-          localStorage.setItem(
-            "scriptUrl",
-            url
+          const data =
+            await api(
+              "ping",
+              {},
+              url,
+              30000
+            );
+
+          version(data);
+
+          endpoint = url;
+
+          try {
+            localStorage.setItem(
+              "scriptUrl",
+              url
+            );
+          } catch (_) {
+            storageNote.textContent =
+              "Bağlantı yalnızca bu oturumda saklanabildi.";
+          }
+
+          loadCache();
+          restorePending();
+
+          $("closeSettingsBtn")
+            .click();
+
+          message(
+            "Bağlantı doğrulandı: " +
+            data.spreadsheet
           );
-        } catch (_) {
-          storageNote.textContent =
-            "Bağlantı yalnızca bu oturumda saklanabildi.";
+
+          if (!pending) {
+            $("ziyaretNo").value =
+              "";
+
+            await lastNumber();
+          }
+
+          await sync();
+        } catch (error) {
+          alert(error.message);
+
+          message(
+            error.message,
+            true
+          );
+        } finally {
+          busy = false;
+          lockForm();
         }
-
-        loadCache();
-        restorePending();
-
-        $("closeSettingsBtn").click();
-
-        message(
-          "Bağlantı doğrulandı: " +
-          data.spreadsheet
-        );
-
-        if (!pending) {
-          $("ziyaretNo").value = "";
-          await lastNumber();
-        }
-
-        await sync();
-      } catch (error) {
-        alert(error.message);
-        message(error.message, true);
-      } finally {
-        busy = false;
-        lockForm();
       }
-    }
-  );
+    );
 
   function restorePending() {
     if (pending) {
