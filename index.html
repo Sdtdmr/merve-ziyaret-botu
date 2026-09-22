@@ -2,36 +2,17 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8">
-<meta
-    name="viewport"
-    content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no"
->
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#0d0f10">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
->
-<meta
-    name="apple-mobile-web-app-title"
-    content="Ziyaret"
->
-
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ziyaret">
 <title>Ziyaret Asistanı</title>
 
 <link rel="manifest" href="manifest.json">
-
 <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-    rel="stylesheet"
->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 
 <style>
 :root {
@@ -60,16 +41,11 @@ body {
     min-height: 100dvh;
     overflow-x: hidden;
     background:
-        radial-gradient(
-            circle at 0 0,
-            rgba(12,112,82,.18),
-            transparent 25rem
-        ),
+        radial-gradient(circle at 0 0, rgba(12,112,82,.18), transparent 25rem),
         var(--bg);
     color: var(--white);
     font-family: Manrope, sans-serif;
-    padding-bottom:
-        calc(28px + env(safe-area-inset-bottom));
+    padding-bottom: calc(28px + env(safe-area-inset-bottom));
 }
 
 button,
@@ -107,8 +83,7 @@ button {
         16px
         12px;
     background: rgba(13,15,16,.9);
-    border-bottom:
-        1px solid rgba(255,255,255,.05);
+    border-bottom: 1px solid rgba(255,255,255,.05);
     backdrop-filter: blur(18px);
 }
 
@@ -132,8 +107,7 @@ button {
     display: grid;
     place-items: center;
     flex-shrink: 0;
-    border:
-        1px solid rgba(24,201,154,.55);
+    border: 1px solid rgba(24,201,154,.55);
     border-radius: 50%;
     background: rgba(24,201,154,.07);
     color: var(--green);
@@ -170,8 +144,7 @@ button {
 .settings:active {
     transform: scale(.94);
     color: var(--green);
-    border-color:
-        rgba(24,201,154,.5);
+    border-color: rgba(24,201,154,.5);
 }
 
 .intro {
@@ -203,8 +176,7 @@ button {
             rgba(25,27,29,.98),
             rgba(20,22,24,.98)
         );
-    box-shadow:
-        0 18px 42px rgba(0,0,0,.17);
+    box-shadow: 0 18px 42px rgba(0,0,0,.17);
     animation: cardEnter .45s both;
 }
 
@@ -217,8 +189,7 @@ button {
 }
 
 .card.accent {
-    border-color:
-        rgba(24,201,154,.5);
+    border-color: rgba(24,201,154,.5);
 }
 
 .card-head {
@@ -240,8 +211,7 @@ button {
     display: grid;
     place-items: center;
     flex-shrink: 0;
-    border:
-        1px solid rgba(24,201,154,.28);
+    border: 1px solid rgba(24,201,154,.28);
     border-radius: 12px;
     background: rgba(24,201,154,.07);
     color: var(--green);
@@ -258,8 +228,7 @@ button {
 
 .step {
     padding: 5px 8px;
-    border:
-        1px solid rgba(24,201,154,.24);
+    border: 1px solid rgba(24,201,154,.24);
     border-radius: 999px;
     color: var(--green);
     font-size: 9px;
@@ -319,18 +288,13 @@ button {
     width: 100%;
     min-height: 52px;
     padding: 13px 14px !important;
-    border:
-        1px solid #303337 !important;
+    border: 1px solid #303337 !important;
     border-radius: 14px !important;
     outline: none !important;
-    background:
-        var(--field) !important;
-    color:
-        var(--white) !important;
+    background: var(--field) !important;
+    color: var(--white) !important;
     box-shadow: none !important;
-    transition:
-        border-color .2s,
-        box-shadow .2s;
+    transition: border-color .2s, box-shadow .2s;
 }
 
 .control.icon {
@@ -342,11 +306,8 @@ button {
 }
 
 .control:focus {
-    border-color:
-        var(--green) !important;
-    box-shadow:
-        0 0 0 4px rgba(24,201,154,.08)
-        !important;
+    border-color: var(--green) !important;
+    box-shadow: 0 0 0 4px rgba(24,201,154,.08) !important;
 }
 
 textarea.control {
@@ -359,6 +320,7 @@ textarea.control {
     width: 100%;
     height: 56px;
     min-height: 56px;
+    max-height: 56px;
     margin: 0;
     padding: 0 18px;
     display: flex;
@@ -368,17 +330,11 @@ textarea.control {
     overflow: hidden;
     border: 0;
     border-radius: 16px;
-    background:
-        linear-gradient(
-            110deg,
-            #1ad09d,
-            #10b986
-        );
+    background: linear-gradient(110deg,#1ad09d,#10b986);
     color: #061510;
     font-size: 14px;
     font-weight: 800;
-    box-shadow:
-        0 14px 32px rgba(11,185,132,.2);
+    box-shadow: 0 14px 32px rgba(11,185,132,.2);
 }
 
 .submit:active {
@@ -408,18 +364,13 @@ textarea.control {
 #settingsCard {
     width: 100%;
     max-width: 480px;
-    padding:
-        22px
-        18px
-        calc(22px + env(safe-area-inset-bottom));
-    border:
-        1px solid rgba(24,201,154,.32);
+    padding: 22px 18px calc(22px + env(safe-area-inset-bottom));
+    border: 1px solid rgba(24,201,154,.32);
     border-bottom: 0;
     border-radius: 24px 24px 0 0;
     background: #181a1b;
     color: white;
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.65);
+    box-shadow: 0 25px 70px rgba(0,0,0,.65);
 }
 
 #settingsCard h2 {
@@ -510,10 +461,8 @@ textarea.control {
         <p class="kicker">YENİ ZİYARET</p>
     </section>
 
-    <form
-        id="visitForm"
-        class="form-stack"
-    >
+    <form id="visitForm" class="form-stack">
+
         <section class="card accent">
             <div class="card-head">
                 <div class="card-title">
@@ -531,9 +480,7 @@ textarea.control {
 
             <div class="fields">
                 <div class="field">
-                    <label for="tarih">
-                        Tarih
-                    </label>
+                    <label for="tarih">Tarih</label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -550,13 +497,8 @@ textarea.control {
 
                 <div class="field">
                     <div class="label-row">
-                        <label for="ziyaretNo">
-                            Ziyaret No
-                        </label>
-
-                        <span class="auto">
-                            OTOMATİK
-                        </span>
+                        <label for="ziyaretNo">Ziyaret No</label>
+                        <span class="auto">OTOMATİK</span>
                     </div>
 
                     <div class="input-wrap">
@@ -568,6 +510,8 @@ textarea.control {
                             id="ziyaretNo"
                             class="control icon"
                             type="number"
+                            min="1"
+                            step="1"
                             placeholder="..."
                         >
                     </div>
@@ -592,9 +536,7 @@ textarea.control {
 
             <div class="fields">
                 <div class="field">
-                    <label for="sehir">
-                        Şehir
-                    </label>
+                    <label for="sehir">Şehir</label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -610,16 +552,11 @@ textarea.control {
                         >
                     </div>
 
-                    <ul
-                        id="sehirList"
-                        class="hidden"
-                    ></ul>
+                    <ul id="sehirList" class="hidden"></ul>
                 </div>
 
                 <div class="field">
-                    <label for="ilce">
-                        İlçe
-                    </label>
+                    <label for="ilce">İlçe</label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -636,9 +573,7 @@ textarea.control {
                 </div>
 
                 <div class="field">
-                    <label for="hastane">
-                        Hastane / Kurum Adı
-                    </label>
+                    <label for="hastane">Hastane / Kurum Adı</label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -653,6 +588,8 @@ textarea.control {
                             placeholder="Kurum adını yazın"
                         >
                     </div>
+
+                    <ul id="hastaneList" class="hidden"></ul>
                 </div>
             </div>
         </section>
@@ -674,9 +611,7 @@ textarea.control {
 
             <div class="fields">
                 <div class="field">
-                    <label for="doktor">
-                        Doktor Adı
-                    </label>
+                    <label for="doktor">Doktor Adı</label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -692,16 +627,11 @@ textarea.control {
                         >
                     </div>
 
-                    <ul
-                        id="doktorList"
-                        class="hidden"
-                    ></ul>
+                    <ul id="doktorList" class="hidden"></ul>
                 </div>
 
                 <div class="field">
-                    <label for="not">
-                        Notlar
-                    </label>
+                    <label for="not">Notlar</label>
 
                     <textarea
                         id="not"
@@ -719,15 +649,13 @@ textarea.control {
             class="submit"
         >
             <span
-                id="btnIcon"
                 class="material-symbols-outlined"
+                id="btnIcon"
             >
                 add_circle
             </span>
 
-            <span id="btnText">
-                Ziyareti Kaydet
-            </span>
+            <span id="btnText">Ziyareti Kaydet</span>
 
             <svg
                 id="btnSpinner"
@@ -759,10 +687,7 @@ textarea.control {
 </main>
 </div>
 
-<div
-    id="settingsModal"
-    class="hidden flex-col"
->
+<div id="settingsModal" class="hidden flex-col">
     <div id="settingsCard">
         <h2>
             <span
@@ -810,8 +735,7 @@ textarea.control {
 (() => {
   "use strict";
 
-  const $ = id =>
-    document.getElementById(id);
+  const $ = id => document.getElementById(id);
 
   const fields = [
     "tarih",
@@ -849,9 +773,7 @@ textarea.control {
     "Uşak|Van|Yalova|Yozgat|Zonguldak"
   )
     .split("|")
-    .sort((a, b) =>
-      a.localeCompare(b, "tr")
-    );
+    .sort((a, b) => a.localeCompare(b, "tr"));
 
   const clean = value =>
     String(value == null ? "" : value)
@@ -866,8 +788,7 @@ textarea.control {
       .replace(/[\u0300-\u036f]/g, "");
 
   const upper = value =>
-    clean(value)
-      .toLocaleUpperCase("tr-TR");
+    clean(value).toLocaleUpperCase("tr-TR");
 
   let busy = false;
   let pending = null;
@@ -877,12 +798,9 @@ textarea.control {
 
   const ram = new Map();
 
-  const status =
-    document.createElement("p");
-
+  const status = document.createElement("p");
   status.id = "syncStatus";
   status.setAttribute("role", "status");
-
   status.style.cssText =
     "font-size:12px;" +
     "line-height:1.6;" +
@@ -892,9 +810,7 @@ textarea.control {
 
   $("visitForm").before(status);
 
-  const storageNote =
-    document.createElement("p");
-
+  const storageNote = document.createElement("p");
   storageNote.style.cssText =
     "font-size:12px;color:#f4be7c";
 
@@ -902,7 +818,6 @@ textarea.control {
 
   function message(text, error = false) {
     status.textContent = text;
-
     status.style.color = error
       ? "#ff9e9e"
       : "#a9c5ba";
@@ -910,8 +825,7 @@ textarea.control {
 
   function read(name, fallback) {
     try {
-      const raw =
-        localStorage.getItem(name);
+      const raw = localStorage.getItem(name);
 
       return raw === null
         ? fallback
@@ -953,17 +867,12 @@ textarea.control {
     const seen = new Set();
 
     return names
-      .filter(value =>
-        typeof value === "string"
-      )
+      .filter(value => typeof value === "string")
       .map(upper)
       .filter(value => {
         const normalized = key(value);
 
-        if (
-          !value ||
-          seen.has(normalized)
-        ) {
+        if (!value || seen.has(normalized)) {
           return false;
         }
 
@@ -979,15 +888,13 @@ textarea.control {
     const cachedInstitutions =
       read(cacheKey("institutions"), []);
 
-    doctors =
-      Array.isArray(cachedDoctors)
-        ? unique(cachedDoctors)
-        : [];
+    doctors = Array.isArray(cachedDoctors)
+      ? unique(cachedDoctors)
+      : [];
 
-    institutions =
-      Array.isArray(cachedInstitutions)
-        ? unique(cachedInstitutions)
-        : [];
+    institutions = Array.isArray(cachedInstitutions)
+      ? unique(cachedInstitutions)
+      : [];
 
     pending =
       read(cacheKey("pending"), null);
@@ -1027,11 +934,7 @@ textarea.control {
   const location =
     read("visitAssistantLastLocation", {});
 
-  [
-    "sehir",
-    "ilce",
-    "hastane"
-  ].forEach(id => {
+  ["sehir", "ilce", "hastane"].forEach(id => {
     $(id).value =
       location &&
       typeof location[id] === "string"
@@ -1049,38 +952,39 @@ textarea.control {
     );
   });
 
-  Object
-    .keys(required)
-    .forEach(id => {
-      $(id).required = true;
-    });
+  Object.keys(required).forEach(id => {
+    $(id).required = true;
+  });
 
   $("ziyaretNo").min = "1";
   $("ziyaretNo").step = "1";
   $("not").maxLength = 10000;
 
-  [
-    "sehir",
-    "ilce",
-    "hastane",
-    "doktor"
-  ].forEach(id => {
-    $(id).maxLength = 250;
-  });
+  ["sehir", "ilce", "hastane", "doktor"]
+    .forEach(id => {
+      $(id).maxLength = 250;
+    });
 
   $("doktor").value = "";
   $("not").value = "";
 
-  const today = new Date();
+  function setToday() {
+    const today = new Date();
 
-  $("tarih").value =
-    today.getFullYear() +
-    "-" +
-    String(today.getMonth() + 1)
-      .padStart(2, "0") +
-    "-" +
-    String(today.getDate())
-      .padStart(2, "0");
+    const year = today.getFullYear();
+    const month = String(
+      today.getMonth() + 1
+    ).padStart(2, "0");
+
+    const day = String(
+      today.getDate()
+    ).padStart(2, "0");
+
+    $("tarih").value =
+      year + "-" + month + "-" + day;
+  }
+
+  setToday();
 
   const style =
     document.createElement("style");
@@ -1161,9 +1065,7 @@ textarea.control {
     let list = $(listId);
 
     if (!list) {
-      list =
-        document.createElement("ul");
-
+      list = document.createElement("ul");
       list.id = listId;
 
       input
@@ -1225,9 +1127,7 @@ textarea.control {
           document.createElement("button");
 
         button.type = "button";
-        button.className =
-          "memory-choice";
-
+        button.className = "memory-choice";
         button.textContent = value;
 
         button.addEventListener(
@@ -1242,7 +1142,6 @@ textarea.control {
             selected(value);
             close();
             input.focus();
-            close();
           }
         );
 
@@ -1345,8 +1244,11 @@ textarea.control {
 
     $("submitBtn").disabled = busy;
 
-    $("saveSettingsBtn").disabled =
-      busy || Boolean(pending);
+    /*
+     * Bekleyen ziyaret bulunsa bile
+     * bağlantı değiştirilebilsin.
+     */
+    $("saveSettingsBtn").disabled = busy;
 
     $("btnText").textContent =
       busy
@@ -1411,7 +1313,8 @@ textarea.control {
         url + "?" + query,
         {
           signal: controller.signal,
-          redirect: "follow"
+          redirect: "follow",
+          cache: "no-store"
         }
       );
 
@@ -1424,7 +1327,7 @@ textarea.control {
         data = JSON.parse(raw);
       } catch (_) {
         throw new Error(
-          "Sunucu JSON döndürmedi. /exec adresini, yeni dağıtımı ve erişim izinlerini kontrol edin."
+          "Sunucu JSON döndürmedi. /exec adresini ve Apps Script dağıtımını kontrol edin."
         );
       }
 
@@ -1512,12 +1415,18 @@ textarea.control {
 
     const url = endpoint;
 
+    message(
+      "Ziyaret numarası kontrol ediliyor…"
+    );
+
     try {
       const data = await api(
         "getLastZiyaretNo",
         {
           tarih: formattedDate()
-        }
+        },
+        endpoint,
+        15000
       );
 
       version(data);
@@ -1532,6 +1441,11 @@ textarea.control {
       ) {
         $("ziyaretNo").value =
           Number(data.lastNo) + 1;
+
+        message(
+          "Ziyaret no hazır: " +
+          (Number(data.lastNo) + 1)
+        );
       }
     } catch (error) {
       message(error.message, true);
@@ -1551,8 +1465,12 @@ textarea.control {
     const url = endpoint;
 
     try {
-      const data =
-        await api("getHistory");
+      const data = await api(
+        "getHistory",
+        {},
+        endpoint,
+        30000
+      );
 
       version(data);
 
@@ -1660,188 +1578,174 @@ textarea.control {
   }
 
   async function receipt() {
-  return api(
-    "getReceipt",
-    {
-      requestId: pending.requestId
-    },
-    endpoint,
-    8000
-  );
-}
+    return api(
+      "getReceipt",
+      {
+        requestId: pending.requestId
+      },
+      endpoint,
+      8000
+    );
+  }
 
-async function submit() {
-  if (busy) return;
+  async function submit() {
+    if (busy) return;
 
-  if (!pending) {
-    for (const id of Object.keys(required)) {
-      if (!clean($(id).value)) {
+    if (!pending) {
+      for (const id of Object.keys(required)) {
+        if (!clean($(id).value)) {
+          message(
+            required[id] + " zorunludur.",
+            true
+          );
+
+          $(id).focus();
+          return;
+        }
+      }
+
+      if (!$("visitForm").reportValidity()) {
+        return;
+      }
+
+      if (
+        !/^[1-9]\d*$/.test(
+          $("ziyaretNo").value
+        )
+      ) {
         message(
-          required[id] + " zorunludur.",
+          "Ziyaret no pozitif tam sayı olmalı.",
           true
         );
 
-        $(id).focus();
         return;
       }
     }
 
-    if (!$("visitForm").reportValidity()) {
-      return;
-    }
+    busy = true;
+    ++sequence;
+    lockForm();
 
-    if (
-      !/^[1-9]\d*$/.test(
-        $("ziyaretNo").value
-      )
-    ) {
+    try {
+      if (!pending) {
+        pending = {
+          requestId: crypto.randomUUID(),
+          tarih: formattedDate(),
+          ziyaretNo: $("ziyaretNo").value,
+          sehir: clean($("sehir").value),
+          ilce: clean($("ilce").value),
+          hastane: upper($("hastane").value),
+          doktor: upper($("doktor").value),
+          not: $("not").value.trim()
+        };
+
+        save(
+          cacheKey("pending"),
+          pending
+        );
+      } else {
+        message(
+          "Korunan kaydın sonucu kontrol ediliyor…"
+        );
+
+        try {
+          const previous =
+            await receipt();
+
+          if (
+            previous.result === "success"
+          ) {
+            finish(previous);
+            return;
+          }
+        } catch (error) {
+          if (error.terminalReceipt) {
+            throw error;
+          }
+        }
+      }
+
       message(
-        "Ziyaret no pozitif tam sayı olmalı.",
+        "Gönderiliyor; Google Sheets doğrulaması bekleniyor…"
+      );
+
+      const controller =
+        new AbortController();
+
+      const timer = setTimeout(
+        () => controller.abort(),
+        15000
+      );
+
+      fetch(
+        endpoint,
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(pending),
+          signal: controller.signal
+        }
+      )
+        .catch(() => {})
+        .finally(() => clearTimeout(timer));
+
+      let lastReceiptError = null;
+
+      for (let i = 0; i < 12; i++) {
+        await new Promise(resolve =>
+          setTimeout(
+            resolve,
+            i < 4 ? 600 : 1200
+          )
+        );
+
+        try {
+          const result =
+            await receipt();
+
+          if (
+            result.result === "success"
+          ) {
+            finish(result);
+            return;
+          }
+
+          lastReceiptError = null;
+        } catch (error) {
+          if (error.terminalReceipt) {
+            throw error;
+          }
+
+          lastReceiptError = error;
+        }
+      }
+
+      message(
+        (
+          lastReceiptError
+            ? lastReceiptError.message + " "
+            : ""
+        ) +
+        "Kayıt henüz doğrulanamadı. " +
+        "Form korundu. Aynı düğmeyle tekrar kontrol edin.",
         true
       );
+    } catch (error) {
+      if (
+        pending &&
+        error.terminalReceipt
+      ) {
+        pending = null;
 
-      return;
-    }
-  }
-
-  busy = true;
-  ++sequence;
-  lockForm();
-
-  try {
-    if (!pending) {
-      pending = {
-        requestId: crypto.randomUUID(),
-        tarih: formattedDate(),
-        ziyaretNo: $("ziyaretNo").value,
-        sehir: clean($("sehir").value),
-        ilce: clean($("ilce").value),
-        hastane: upper($("hastane").value),
-        doktor: upper($("doktor").value),
-        not: $("not").value.trim()
-      };
-
-      save(
-        cacheKey("pending"),
-        pending
-      );
-    } else {
-      message(
-        "Korunan kaydın sonucu kontrol ediliyor…"
-      );
-
-      try {
-        const previous = await receipt();
-
-        if (previous.result === "success") {
-          finish(previous);
-          return;
-        }
-      } catch (error) {
-        if (error.terminalReceipt) {
-          throw error;
-        }
+        save(
+          cacheKey("pending"),
+          null
+        );
       }
-    }
-
-    message(
-      "Gönderiliyor; Google Sheets doğrulaması bekleniyor…"
-    );
-
-    const controller =
-      new AbortController();
-
-    const timer = setTimeout(
-      () => controller.abort(),
-      15000
-    );
-
-    /*
-     * POST isteği başlatılır fakat yanıtı beklenmez.
-     * Kayıt sonucu aşağıdaki makbuz sorgusuyla
-     * doğrudan kontrol edilir.
-     */
-    fetch(
-      endpoint,
-      {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type":
-            "text/plain;charset=utf-8"
-        },
-        body: JSON.stringify(pending),
-        signal: controller.signal
-      }
-    )
-      .catch(() => {})
-      .finally(() => clearTimeout(timer));
-
-    let lastReceiptError = null;
-
-    for (let i = 0; i < 12; i++) {
-      await new Promise(resolve =>
-        setTimeout(
-          resolve,
-          i < 4 ? 600 : 1200
-        )
-      );
-
-      try {
-        const result = await receipt();
-
-        if (result.result === "success") {
-          finish(result);
-          return;
-        }
-
-        lastReceiptError = null;
-      } catch (error) {
-        if (error.terminalReceipt) {
-          throw error;
-        }
-
-        lastReceiptError = error;
-      }
-    }
-
-    message(
-      (
-        lastReceiptError
-          ? lastReceiptError.message + " "
-          : ""
-      ) +
-      "Kayıt henüz doğrulanamadı. " +
-      "Form korundu. Aynı düğmeyle tekrar kontrol edin.",
-      true
-    );
-  } catch (error) {
-    if (
-      pending &&
-      error.terminalReceipt
-    ) {
-      pending = null;
-
-      save(
-        cacheKey("pending"),
-        null
-      );
-    }
-
-    message(
-      error.message +
-      (
-        pending
-          ? " Form korundu; aynı düğmeyle kaydı kontrol edin."
-          : " Kayıt onaylanmadı; alanlar silinmedi."
-      ),
-      true
-    );
-  } finally {
-    busy = false;
-    lockForm();
-  }
-}
 
       message(
         error.message +
@@ -1873,7 +1777,10 @@ async function submit() {
 
   $("tarih").addEventListener(
     "change",
-    lastNumber
+    () => {
+      $("ziyaretNo").value = "";
+      lastNumber();
+    }
   );
 
   $("openSettingsBtn").addEventListener(
@@ -1908,7 +1815,7 @@ async function submit() {
   $("saveSettingsBtn").addEventListener(
     "click",
     async () => {
-      if (busy || pending) return;
+      if (busy) return;
 
       const url =
         $("scriptUrlInput")
@@ -1921,10 +1828,12 @@ async function submit() {
         const data = await api(
           "ping",
           {},
-          url
+          url,
+          30000
         );
 
         version(data);
+
         endpoint = url;
 
         try {
@@ -1947,12 +1856,17 @@ async function submit() {
           data.spreadsheet
         );
 
-        await lastNumber();
+        if (!pending) {
+          $("ziyaretNo").value = "";
+          await lastNumber();
+        }
+
         await sync();
       } catch (error) {
         alert(error.message);
         message(error.message, true);
       } finally {
+        busy = false;
         lockForm();
       }
     }
@@ -1974,7 +1888,7 @@ async function submit() {
           .join("-");
 
       message(
-        "Önceki kaydın sonucu belirsiz. Düğmeyle kontrol edin; henüz yeni kayıt oluşturulmadı.",
+        "Önceki kaydın sonucu belirsiz. Düğmeyle kontrol edin.",
         true
       );
     }
@@ -1984,12 +1898,22 @@ async function submit() {
 
   window.addEventListener(
     "online",
-    sync
+    () => {
+      if (!pending) {
+        lastNumber();
+      }
+
+      sync();
+    }
   );
 
   loadCache();
   restorePending();
-  lastNumber();
+
+  if (!pending) {
+    lastNumber();
+  }
+
   sync();
 })();
 </script>
