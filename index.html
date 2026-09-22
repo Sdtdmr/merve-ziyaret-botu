@@ -1660,200 +1660,188 @@ textarea.control {
   }
 
   async function receipt() {
-    return api(
-      "getReceipt",
-      {
-        requestId: pending.requestId
-      }
-    );
-  }
+  return api(
+    "getReceipt",
+    {
+      requestId: pending.requestId
+    },
+    endpoint,
+    8000
+  );
+}
 
-  async function submit() {
-    if (busy) return;
+async function submit() {
+  if (busy) return;
 
-    if (!pending) {
-      for (
-        const id of Object.keys(required)
-      ) {
-        if (!clean($(id).value)) {
-          message(
-            required[id] + " zorunludur.",
-            true
-          );
-
-          $(id).focus();
-          return;
-        }
-      }
-
-      if (
-        !$("visitForm").reportValidity()
-      ) {
-        return;
-      }
-
-      if (
-        !/^[1-9]\d*$/.test(
-          $("ziyaretNo").value
-        )
-      ) {
+  if (!pending) {
+    for (const id of Object.keys(required)) {
+      if (!clean($(id).value)) {
         message(
-          "Ziyaret no pozitif tam sayı olmalı.",
+          required[id] + " zorunludur.",
           true
         );
 
+        $(id).focus();
         return;
       }
     }
 
-    busy = true;
-    ++sequence;
-    lockForm();
+    if (!$("visitForm").reportValidity()) {
+      return;
+    }
 
-    try {
-      if (!pending) {
-        const health =
-          await api("ping");
-
-        version(health);
-
-        pending = {
-          requestId:
-            crypto.randomUUID(),
-          tarih:
-            formattedDate(),
-          ziyaretNo:
-            $("ziyaretNo").value,
-          sehir:
-            clean($("sehir").value),
-          ilce:
-            clean($("ilce").value),
-          hastane:
-            upper($("hastane").value),
-          doktor:
-            upper($("doktor").value),
-          not:
-            $("not").value.trim()
-        };
-
-        save(
-          cacheKey("pending"),
-          pending
-        );
-      } else {
-        message(
-          "Korunan kaydın sonucu kontrol ediliyor…"
-        );
-
-        try {
-          const previous =
-            await receipt();
-
-          if (
-            previous.result === "success"
-          ) {
-            finish(previous);
-            return;
-          }
-        } catch (error) {
-          if (error.terminalReceipt) {
-            throw error;
-          }
-
-          /*
-           * Geçici bağlantı hatasında aynı
-           * kayıt kimliğiyle devam edilir.
-           */
-        }
-      }
-
+    if (
+      !/^[1-9]\d*$/.test(
+        $("ziyaretNo").value
+      )
+    ) {
       message(
-        "Gönderiliyor; Google Sheets doğrulaması bekleniyor…"
+        "Ziyaret no pozitif tam sayı olmalı.",
+        true
       );
 
-      const controller =
-        new AbortController();
+      return;
+    }
+  }
 
-      const timer = setTimeout(
-        () => controller.abort(),
-        30000
+  busy = true;
+  ++sequence;
+  lockForm();
+
+  try {
+    if (!pending) {
+      pending = {
+        requestId: crypto.randomUUID(),
+        tarih: formattedDate(),
+        ziyaretNo: $("ziyaretNo").value,
+        sehir: clean($("sehir").value),
+        ilce: clean($("ilce").value),
+        hastane: upper($("hastane").value),
+        doktor: upper($("doktor").value),
+        not: $("not").value.trim()
+      };
+
+      save(
+        cacheKey("pending"),
+        pending
+      );
+    } else {
+      message(
+        "Korunan kaydın sonucu kontrol ediliyor…"
       );
 
       try {
-        await fetch(
-          endpoint,
-          {
-            method: "POST",
-            mode: "no-cors",
-            headers: {
-              "Content-Type":
-                "text/plain;charset=utf-8"
-            },
-            body:
-              JSON.stringify(pending),
-            signal:
-              controller.signal
-          }
-        );
-      } catch (_) {
-        /*
-         * POST yanıtı kaybolsa bile aşağıda
-         * kayıt sonucu ayrıca sorgulanır.
-         */
-      } finally {
-        clearTimeout(timer);
+        const previous = await receipt();
+
+        if (previous.result === "success") {
+          finish(previous);
+          return;
+        }
+      } catch (error) {
+        if (error.terminalReceipt) {
+          throw error;
+        }
       }
+    }
 
-      let lastReceiptError = null;
+    message(
+      "Gönderiliyor; Google Sheets doğrulaması bekleniyor…"
+    );
 
-      for (let i = 0; i < 8; i++) {
-        try {
-          const result =
-            await receipt();
+    const controller =
+      new AbortController();
 
-          if (
-            result.result === "success"
-          ) {
-            finish(result);
-            return;
-          }
+    const timer = setTimeout(
+      () => controller.abort(),
+      15000
+    );
 
-          lastReceiptError = null;
-        } catch (error) {
-          if (error.terminalReceipt) {
-            throw error;
-          }
+    /*
+     * POST isteği başlatılır fakat yanıtı beklenmez.
+     * Kayıt sonucu aşağıdaki makbuz sorgusuyla
+     * doğrudan kontrol edilir.
+     */
+    fetch(
+      endpoint,
+      {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type":
+            "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(pending),
+        signal: controller.signal
+      }
+    )
+      .catch(() => {})
+      .finally(() => clearTimeout(timer));
 
-          lastReceiptError = error;
+    let lastReceiptError = null;
+
+    for (let i = 0; i < 12; i++) {
+      await new Promise(resolve =>
+        setTimeout(
+          resolve,
+          i < 4 ? 600 : 1200
+        )
+      );
+
+      try {
+        const result = await receipt();
+
+        if (result.result === "success") {
+          finish(result);
+          return;
         }
 
-        await new Promise(resolve =>
-          setTimeout(resolve, 2000)
-        );
-      }
+        lastReceiptError = null;
+      } catch (error) {
+        if (error.terminalReceipt) {
+          throw error;
+        }
 
-      message(
-        (
-          lastReceiptError
-            ? lastReceiptError.message + " "
-            : ""
-        ) +
-        "Kayıt henüz doğrulanamadı. " +
-        "Form korundu. Aynı düğmeyle tekrar kontrol edin.",
-        true
+        lastReceiptError = error;
+      }
+    }
+
+    message(
+      (
+        lastReceiptError
+          ? lastReceiptError.message + " "
+          : ""
+      ) +
+      "Kayıt henüz doğrulanamadı. " +
+      "Form korundu. Aynı düğmeyle tekrar kontrol edin.",
+      true
+    );
+  } catch (error) {
+    if (
+      pending &&
+      error.terminalReceipt
+    ) {
+      pending = null;
+
+      save(
+        cacheKey("pending"),
+        null
       );
-    } catch (error) {
-      if (
-        pending &&
-        error.terminalReceipt
-      ) {
-        pending = null;
+    }
 
-        save(
-          cacheKey("pending"),
-          null
-        );
-      }
+    message(
+      error.message +
+      (
+        pending
+          ? " Form korundu; aynı düğmeyle kaydı kontrol edin."
+          : " Kayıt onaylanmadı; alanlar silinmedi."
+      ),
+      true
+    );
+  } finally {
+    busy = false;
+    lockForm();
+  }
+}
 
       message(
         error.message +
