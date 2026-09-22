@@ -2,20 +2,16 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8">
-
 <meta
     name="viewport"
     content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no"
 >
-
 <meta name="theme-color" content="#0d0f10">
 <meta name="apple-mobile-web-app-capable" content="yes">
-
 <meta
     name="apple-mobile-web-app-status-bar-style"
     content="black-translucent"
 >
-
 <meta
     name="apple-mobile-web-app-title"
     content="Ziyaret"
@@ -63,18 +59,15 @@ body {
     margin: 0;
     min-height: 100dvh;
     overflow-x: hidden;
-
     background:
         radial-gradient(
             circle at 0 0,
-            rgba(12, 112, 82, .18),
+            rgba(12,112,82,.18),
             transparent 25rem
         ),
         var(--bg);
-
     color: var(--white);
     font-family: Manrope, sans-serif;
-
     padding-bottom:
         calc(28px + env(safe-area-inset-bottom));
 }
@@ -108,19 +101,14 @@ button {
     position: sticky;
     top: 0;
     z-index: 40;
-
     margin: 0 -16px;
-
     padding:
         calc(12px + env(safe-area-inset-top))
         16px
         12px;
-
-    background: rgba(13, 15, 16, .9);
-
+    background: rgba(13,15,16,.9);
     border-bottom:
-        1px solid rgba(255, 255, 255, .05);
-
+        1px solid rgba(255,255,255,.05);
     backdrop-filter: blur(18px);
 }
 
@@ -128,7 +116,6 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     max-width: 448px;
     margin: 0 auto;
 }
@@ -142,38 +129,27 @@ button {
 .brand-mark {
     width: 40px;
     height: 40px;
-
     display: grid;
     place-items: center;
-
     flex-shrink: 0;
-
     border:
-        1px solid rgba(24, 201, 154, .55);
-
+        1px solid rgba(24,201,154,.55);
     border-radius: 50%;
-
-    background:
-        rgba(24, 201, 154, .07);
-
+    background: rgba(24,201,154,.07);
     color: var(--green);
-
     font-size: 13px;
     font-weight: 800;
 }
 
 .brand h1 {
     margin: 0;
-
     font-size: 16px;
     line-height: 1.2;
 }
 
 .brand p {
     margin: 3px 0 0;
-
     color: var(--muted);
-
     font-size: 9px;
     font-weight: 600;
     letter-spacing: .14em;
@@ -182,15 +158,11 @@ button {
 .settings {
     width: 40px;
     height: 40px;
-
     display: grid;
     place-items: center;
-
     flex-shrink: 0;
-
     border: 1px solid var(--line);
     border-radius: 50%;
-
     background: var(--card);
     color: #c8c9cc;
 }
@@ -198,9 +170,8 @@ button {
 .settings:active {
     transform: scale(.94);
     color: var(--green);
-
     border-color:
-        rgba(24, 201, 154, .5);
+        rgba(24,201,154,.5);
 }
 
 .intro {
@@ -209,9 +180,7 @@ button {
 
 .kicker {
     margin: 0 0 8px;
-
     color: var(--green);
-
     font-size: 10px;
     font-weight: 800;
     letter-spacing: .18em;
@@ -226,20 +195,16 @@ button {
 .card {
     width: 100%;
     padding: 19px 16px;
-
     border: 1px solid var(--line);
     border-radius: 20px;
-
     background:
         linear-gradient(
             145deg,
-            rgba(25, 27, 29, .98),
-            rgba(20, 22, 24, .98)
+            rgba(25,27,29,.98),
+            rgba(20,22,24,.98)
         );
-
     box-shadow:
-        0 18px 42px rgba(0, 0, 0, .17);
-
+        0 18px 42px rgba(0,0,0,.17);
     animation: cardEnter .45s both;
 }
 
@@ -253,14 +218,13 @@ button {
 
 .card.accent {
     border-color:
-        rgba(24, 201, 154, .5);
+        rgba(24,201,154,.5);
 }
 
 .card-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     margin-bottom: 17px;
 }
 
@@ -273,20 +237,13 @@ button {
 .card-icon {
     width: 34px;
     height: 34px;
-
     display: grid;
     place-items: center;
-
     flex-shrink: 0;
-
     border:
-        1px solid rgba(24, 201, 154, .28);
-
+        1px solid rgba(24,201,154,.28);
     border-radius: 12px;
-
-    background:
-        rgba(24, 201, 154, .07);
-
+    background: rgba(24,201,154,.07);
     color: var(--green);
 }
 
@@ -301,14 +258,10 @@ button {
 
 .step {
     padding: 5px 8px;
-
     border:
-        1px solid rgba(24, 201, 154, .24);
-
+        1px solid rgba(24,201,154,.24);
     border-radius: 999px;
-
     color: var(--green);
-
     font-size: 9px;
     font-weight: 800;
     letter-spacing: .12em;
@@ -322,7 +275,6 @@ button {
 
 .field {
     position: relative;
-
     display: flex;
     flex-direction: column;
     gap: 7px;
@@ -332,20 +284,17 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 0 2px;
 }
 
 .field label {
     color: #aaaeb2;
-
     font-size: 12px;
     font-weight: 650;
 }
 
 .auto {
     color: var(--green);
-
     font-size: 8px;
     font-weight: 800;
     letter-spacing: .12em;
@@ -360,49 +309,32 @@ button {
     top: 50%;
     left: 14px;
     z-index: 2;
-
     color: #668078;
     font-size: 19px;
-
     pointer-events: none;
-
-    transform:
-        translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .control {
     width: 100%;
     min-height: 52px;
-
-    padding:
-        13px 14px !important;
-
+    padding: 13px 14px !important;
     border:
         1px solid #303337 !important;
-
-    border-radius:
-        14px !important;
-
-    outline:
-        none !important;
-
+    border-radius: 14px !important;
+    outline: none !important;
     background:
         var(--field) !important;
-
     color:
         var(--white) !important;
-
-    box-shadow:
-        none !important;
-
+    box-shadow: none !important;
     transition:
         border-color .2s,
         box-shadow .2s;
 }
 
 .control.icon {
-    padding-left:
-        43px !important;
+    padding-left: 43px !important;
 }
 
 .control::placeholder {
@@ -412,10 +344,8 @@ button {
 .control:focus {
     border-color:
         var(--green) !important;
-
     box-shadow:
-        0 0 0 4px
-        rgba(24, 201, 154, .08)
+        0 0 0 4px rgba(24,201,154,.08)
         !important;
 }
 
@@ -424,116 +354,31 @@ textarea.control {
     resize: none;
 }
 
-#sehirList,
-#doktorList {
-    position: absolute;
-
-    top: 100%;
-    right: 0;
-    left: 0;
-
-    z-index: 50;
-
-    max-height: 210px;
-
-    margin-top: 6px;
-    padding: 5px;
-
-    overflow-y: auto;
-
-    border:
-        1px solid rgba(24, 201, 154, .3);
-
-    border-radius: 14px;
-
-    background: #191c1d;
-
-    box-shadow:
-        0 20px 45px rgba(0, 0, 0, .55);
-}
-
-#sehirList li,
-#doktorList li {
-    padding: 11px !important;
-
-    border: 0 !important;
-    border-radius: 9px !important;
-
-    color: #c6c8ca !important;
-
-    font-size: 13px;
-    cursor: pointer;
-}
-
-#sehirList li:active,
-#doktorList li:active {
-    background:
-        rgba(24, 201, 154, .1)
-        !important;
-}
-
 .submit {
     position: relative;
-
     width: 100%;
     height: 56px;
     min-height: 56px;
-    max-height: 56px;
-
     margin: 0;
     padding: 0 18px;
-
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 9px;
-
     overflow: hidden;
-
     border: 0;
     border-radius: 16px;
-
     background:
         linear-gradient(
             110deg,
             #1ad09d,
             #10b986
         );
-
     color: #061510;
-
     font-size: 14px;
     font-weight: 800;
-
     box-shadow:
-        0 14px 32px
-        rgba(11, 185, 132, .2);
-}
-
-.submit::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            100deg,
-            transparent 20%,
-            rgba(255, 255, 255, .42),
-            transparent 55%
-        );
-
-    transform:
-        translateX(-110%);
-
-    animation:
-        buttonShine 3.5s infinite;
-}
-
-.submit > * {
-    position: relative;
-    z-index: 1;
+        0 14px 32px rgba(11,185,132,.2);
 }
 
 .submit:active {
@@ -542,93 +387,43 @@ textarea.control {
 
 .footer {
     margin: 19px 0 0;
-
     color: #55585c;
-
     font-size: 9px;
     font-weight: 700;
-
     text-align: center;
     letter-spacing: .14em;
-}
-
-#toast {
-    position: fixed;
-
-    top:
-        calc(
-            16px +
-            env(safe-area-inset-top)
-        );
-
-    left: 50%;
-    z-index: 60;
-
-    width: max-content;
-    max-width:
-        calc(100vw - 32px);
-
-    padding: 12px 16px;
-
-    border-radius: 999px;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    white-space: normal;
-
-    transform:
-        translateX(-50%);
 }
 
 #settingsModal {
     position: fixed;
     inset: 0;
-    z-index: 50;
-
+    z-index: 80;
     align-items: flex-end;
     justify-content: center;
-
     padding: 0;
-
-    background:
-        rgba(2, 4, 5, .78);
-
-    backdrop-filter:
-        blur(8px);
+    background: rgba(2,4,5,.78);
+    backdrop-filter: blur(8px);
 }
 
 #settingsCard {
     width: 100%;
     max-width: 480px;
-
     padding:
         22px
         18px
-        calc(
-            22px +
-            env(safe-area-inset-bottom)
-        );
-
+        calc(22px + env(safe-area-inset-bottom));
     border:
-        1px solid rgba(24, 201, 154, .32);
-
+        1px solid rgba(24,201,154,.32);
     border-bottom: 0;
-
-    border-radius:
-        24px 24px 0 0;
-
+    border-radius: 24px 24px 0 0;
     background: #181a1b;
     color: white;
-
     box-shadow:
-        0 25px 70px
-        rgba(0, 0, 0, .65);
+        0 25px 70px rgba(0,0,0,.65);
 }
 
 #settingsCard h2 {
     margin: 0 0 8px;
-    color: white;
 }
 
 #settingsCard p {
@@ -638,10 +433,7 @@ textarea.control {
 
 .modal-actions {
     display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin-top: 18px;
 }
@@ -649,16 +441,12 @@ textarea.control {
 .cancel,
 .save {
     min-height: 47px;
-
     border-radius: 14px;
-
     font-weight: 700;
 }
 
 .cancel {
-    border:
-        1px solid var(--line);
-
+    border: 1px solid var(--line);
     background: #111314;
     color: #a9abad;
 }
@@ -672,40 +460,19 @@ textarea.control {
 @keyframes cardEnter {
     from {
         opacity: 0;
-
-        transform:
-            translateY(14px);
+        transform: translateY(14px);
     }
 
     to {
         opacity: 1;
-
-        transform:
-            translateY(0);
-    }
-}
-
-@keyframes buttonShine {
-    0%,
-    55% {
-        transform:
-            translateX(-110%);
-    }
-
-    85%,
-    100% {
-        transform:
-            translateX(110%);
+        transform: translateY(0);
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
     * {
-        animation:
-            none !important;
-
-        transition:
-            none !important;
+        animation: none !important;
+        transition: none !important;
     }
 }
 </style>
@@ -716,20 +483,12 @@ textarea.control {
 
 <header class="topbar">
     <div class="topbar-inner">
-
         <div class="brand">
-            <div class="brand-mark">
-                SD
-            </div>
+            <div class="brand-mark">SD</div>
 
             <div>
-                <h1>
-                    Ziyaret Asistanı
-                </h1>
-
-                <p>
-                    KİŞİSEL ÇALIŞMA ALANI
-                </p>
+                <h1>Ziyaret Asistanı</h1>
+                <p>KİŞİSEL ÇALIŞMA ALANI</p>
             </div>
         </div>
 
@@ -743,72 +502,40 @@ textarea.control {
                 tune
             </span>
         </button>
-
     </div>
 </header>
 
-<div
-    id="toast"
-    class="opacity-0 -translate-y-full flex items-center gap-2 bg-[#d7fff2] text-[#075b45]"
->
-    <span
-        class="material-symbols-outlined"
-        id="toastIcon"
-    >
-        check_circle
-    </span>
-
-    <span id="toastText">
-        Kaydedildi
-    </span>
-</div>
-
 <main>
-
     <section class="intro">
-        <p class="kicker">
-            YENİ ZİYARET
-        </p>
+        <p class="kicker">YENİ ZİYARET</p>
     </section>
 
     <form
         id="visitForm"
         class="form-stack"
     >
-
         <section class="card accent">
-
             <div class="card-head">
-
                 <div class="card-title">
-
                     <div class="card-icon">
                         <span class="material-symbols-outlined">
                             calendar_month
                         </span>
                     </div>
 
-                    <h3>
-                        Ziyaret bilgileri
-                    </h3>
-
+                    <h3>Ziyaret bilgileri</h3>
                 </div>
 
-                <span class="step">
-                    01
-                </span>
-
+                <span class="step">01</span>
             </div>
 
             <div class="fields">
-
                 <div class="field">
                     <label for="tarih">
                         Tarih
                     </label>
 
                     <div class="input-wrap">
-
                         <span class="material-symbols-outlined input-icon">
                             calendar_month
                         </span>
@@ -818,12 +545,10 @@ textarea.control {
                             class="control icon"
                             type="date"
                         >
-
                     </div>
                 </div>
 
                 <div class="field">
-
                     <div class="label-row">
                         <label for="ziyaretNo">
                             Ziyaret No
@@ -835,7 +560,6 @@ textarea.control {
                     </div>
 
                     <div class="input-wrap">
-
                         <span class="material-symbols-outlined input-icon">
                             tag
                         </span>
@@ -846,47 +570,33 @@ textarea.control {
                             type="number"
                             placeholder="..."
                         >
-
                     </div>
                 </div>
-
             </div>
         </section>
 
         <section class="card">
-
             <div class="card-head">
-
                 <div class="card-title">
-
                     <div class="card-icon">
                         <span class="material-symbols-outlined">
                             location_on
                         </span>
                     </div>
 
-                    <h3>
-                        Konum ve kurum
-                    </h3>
-
+                    <h3>Konum ve kurum</h3>
                 </div>
 
-                <span class="step">
-                    02
-                </span>
-
+                <span class="step">02</span>
             </div>
 
             <div class="fields">
-
                 <div class="field">
-
                     <label for="sehir">
                         Şehir
                     </label>
 
                     <div class="input-wrap">
-
                         <span class="material-symbols-outlined input-icon">
                             search
                         </span>
@@ -898,24 +608,20 @@ textarea.control {
                             autocomplete="off"
                             placeholder="Şehir ara..."
                         >
-
                     </div>
 
                     <ul
                         id="sehirList"
-                        class="hidden flex-col"
+                        class="hidden"
                     ></ul>
-
                 </div>
 
                 <div class="field">
-
                     <label for="ilce">
                         İlçe
                     </label>
 
                     <div class="input-wrap">
-
                         <span class="material-symbols-outlined input-icon">
                             map
                         </span>
@@ -924,20 +630,17 @@ textarea.control {
                             id="ilce"
                             class="control icon"
                             type="text"
-                            placeholder="Otomatik dolar"
+                            placeholder="İlçe adını yazın"
                         >
-
                     </div>
                 </div>
 
                 <div class="field">
-
                     <label for="hastane">
                         Hastane / Kurum Adı
                     </label>
 
                     <div class="input-wrap">
-
                         <span class="material-symbols-outlined input-icon">
                             domain
                         </span>
@@ -946,49 +649,36 @@ textarea.control {
                             id="hastane"
                             class="control icon uppercase"
                             type="text"
+                            autocomplete="off"
                             placeholder="Kurum adını yazın"
                         >
-
                     </div>
                 </div>
-
             </div>
         </section>
 
         <section class="card">
-
             <div class="card-head">
-
                 <div class="card-title">
-
                     <div class="card-icon">
                         <span class="material-symbols-outlined">
                             person
                         </span>
                     </div>
 
-                    <h3>
-                        Görüşme
-                    </h3>
-
+                    <h3>Görüşme</h3>
                 </div>
 
-                <span class="step">
-                    03
-                </span>
-
+                <span class="step">03</span>
             </div>
 
             <div class="fields">
-
                 <div class="field">
-
                     <label for="doktor">
                         Doktor Adı
                     </label>
 
                     <div class="input-wrap">
-
                         <span class="material-symbols-outlined input-icon">
                             person
                         </span>
@@ -1000,18 +690,15 @@ textarea.control {
                             autocomplete="off"
                             placeholder="Doktor adını yazın"
                         >
-
                     </div>
 
                     <ul
                         id="doktorList"
-                        class="hidden flex-col"
+                        class="hidden"
                     ></ul>
-
                 </div>
 
                 <div class="field">
-
                     <label for="not">
                         Notlar
                     </label>
@@ -1022,9 +709,7 @@ textarea.control {
                         rows="3"
                         placeholder="Ziyaret detaylarını buraya girin..."
                     ></textarea>
-
                 </div>
-
             </div>
         </section>
 
@@ -1033,10 +718,9 @@ textarea.control {
             type="button"
             class="submit"
         >
-
             <span
-                class="material-symbols-outlined"
                 id="btnIcon"
+                class="material-symbols-outlined"
             >
                 add_circle
             </span>
@@ -1066,15 +750,12 @@ textarea.control {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 ></path>
             </svg>
-
         </button>
-
     </form>
 
     <p class="footer">
         SEDAT DEMİR · ZİYARET YÖNETİMİ
     </p>
-
 </main>
 </div>
 
@@ -1083,7 +764,6 @@ textarea.control {
     class="hidden flex-col"
 >
     <div id="settingsCard">
-
         <h2>
             <span
                 class="material-symbols-outlined"
@@ -1107,7 +787,6 @@ textarea.control {
         >
 
         <div class="modal-actions">
-
             <button
                 type="button"
                 id="closeSettingsBtn"
@@ -1123,7 +802,6 @@ textarea.control {
             >
                 Kaydet
             </button>
-
         </div>
     </div>
 </div>
@@ -1132,11 +810,17 @@ textarea.control {
 (() => {
   "use strict";
 
-  const $ = id => document.getElementById(id);
+  const $ = id =>
+    document.getElementById(id);
 
   const fields = [
-    "tarih", "ziyaretNo", "sehir", "ilce",
-    "hastane", "doktor", "not"
+    "tarih",
+    "ziyaretNo",
+    "sehir",
+    "ilce",
+    "hastane",
+    "doktor",
+    "not"
   ];
 
   const required = {
@@ -1148,35 +832,32 @@ textarea.control {
     doktor: "Doktor"
   };
 
-  const cities = [
-    "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı",
-    "Aksaray", "Amasya", "Ankara", "Antalya",
-    "Artvin", "Aydın", "Balıkesir", "Bartın",
-    "Batman", "Bayburt", "Bilecik", "Bingöl",
-    "Bitlis", "Bolu", "Burdur", "Bursa",
-    "Çanakkale", "Çankırı", "Çorum", "Denizli",
-    "Diyarbakır", "Düzce", "Edirne", "Elazığ",
-    "Erzincan", "Erzurum", "Eskişehir", "Gaziantep",
-    "Giresun", "Gümüşhane", "Hakkari", "Hatay",
-    "Iğdır", "Isparta", "İstanbul", "İzmir",
-    "Kahramanmaraş", "Karabük", "Karaman", "Kars",
-    "Kastamonu", "Kayseri", "Kırıkkale", "Kırklareli",
-    "Kırşehir", "Kilis", "Kocaeli", "Konya",
-    "Kütahya", "Malatya", "Manisa", "Mardin",
-    "Mersin", "Muğla", "Muş", "Nevşehir",
-    "Niğde", "Ordu", "Osmaniye", "Rize",
-    "Sakarya", "Samsun", "Siirt", "Sinop",
-    "Sivas", "Şanlıurfa", "Şırnak", "Tekirdağ",
-    "Tokat", "Trabzon", "Tunceli", "Uşak",
-    "Van", "Yalova", "Yozgat", "Zonguldak"
-  ].sort((a, b) => a.localeCompare(b, "tr"));
+  const cities = (
+    "Adana|Adıyaman|Afyonkarahisar|Ağrı|Aksaray|" +
+    "Amasya|Ankara|Antalya|Artvin|Aydın|Balıkesir|" +
+    "Bartın|Batman|Bayburt|Bilecik|Bingöl|Bitlis|" +
+    "Bolu|Burdur|Bursa|Çanakkale|Çankırı|Çorum|" +
+    "Denizli|Diyarbakır|Düzce|Edirne|Elazığ|" +
+    "Erzincan|Erzurum|Eskişehir|Gaziantep|Giresun|" +
+    "Gümüşhane|Hakkari|Hatay|Iğdır|Isparta|İstanbul|" +
+    "İzmir|Kahramanmaraş|Karabük|Karaman|Kars|" +
+    "Kastamonu|Kayseri|Kırıkkale|Kırklareli|Kırşehir|" +
+    "Kilis|Kocaeli|Konya|Kütahya|Malatya|Manisa|" +
+    "Mardin|Mersin|Muğla|Muş|Nevşehir|Niğde|Ordu|" +
+    "Osmaniye|Rize|Sakarya|Samsun|Siirt|Sinop|Sivas|" +
+    "Şanlıurfa|Şırnak|Tekirdağ|Tokat|Trabzon|Tunceli|" +
+    "Uşak|Van|Yalova|Yozgat|Zonguldak"
+  )
+    .split("|")
+    .sort((a, b) =>
+      a.localeCompare(b, "tr")
+    );
 
   const clean = value =>
     String(value == null ? "" : value)
       .trim()
       .replace(/\s+/g, " ");
 
-  // Önceden BILAL olarak kaydedilmiş isimler de "bil" ile bulunur.
   const key = value =>
     clean(value)
       .toLocaleLowerCase("tr-TR")
@@ -1185,7 +866,8 @@ textarea.control {
       .replace(/[\u0300-\u036f]/g, "");
 
   const upper = value =>
-    clean(value).toLocaleUpperCase("tr-TR");
+    clean(value)
+      .toLocaleUpperCase("tr-TR");
 
   let busy = false;
   let pending = null;
@@ -1195,16 +877,24 @@ textarea.control {
 
   const ram = new Map();
 
-  const status = document.createElement("p");
+  const status =
+    document.createElement("p");
+
   status.id = "syncStatus";
   status.setAttribute("role", "status");
+
   status.style.cssText =
-    "font-size:12px;line-height:1.6;margin:10px 0;" +
-    "color:#a9c5ba;overflow-wrap:anywhere";
+    "font-size:12px;" +
+    "line-height:1.6;" +
+    "margin:10px 0;" +
+    "color:#a9c5ba;" +
+    "overflow-wrap:anywhere";
 
   $("visitForm").before(status);
 
-  const storageNote = document.createElement("p");
+  const storageNote =
+    document.createElement("p");
+
   storageNote.style.cssText =
     "font-size:12px;color:#f4be7c";
 
@@ -1212,15 +902,24 @@ textarea.control {
 
   function message(text, error = false) {
     status.textContent = text;
-    status.style.color = error ? "#ff9e9e" : "#a9c5ba";
+
+    status.style.color = error
+      ? "#ff9e9e"
+      : "#a9c5ba";
   }
 
   function read(name, fallback) {
     try {
-      const raw = localStorage.getItem(name);
-      return raw === null ? fallback : JSON.parse(raw);
+      const raw =
+        localStorage.getItem(name);
+
+      return raw === null
+        ? fallback
+        : JSON.parse(raw);
     } catch (_) {
-      return ram.has(name) ? ram.get(name) : fallback;
+      return ram.has(name)
+        ? ram.get(name)
+        : fallback;
     }
   }
 
@@ -1228,18 +927,23 @@ textarea.control {
     ram.set(name, value);
 
     try {
-      localStorage.setItem(name, JSON.stringify(value));
+      localStorage.setItem(
+        name,
+        JSON.stringify(value)
+      );
     } catch (_) {
       storageNote.textContent =
-        "Cihaz depolaması kapalı/dolu. Bu oturum çalışır; " +
-        "kapatınca yerel bilgiler korunamayabilir.";
+        "Cihaz depolaması kapalı veya dolu. " +
+        "Bu oturum çalışır; uygulamayı kapatınca " +
+        "yerel bilgiler korunamayabilir.";
     }
   }
 
   let endpoint = "";
 
   try {
-    endpoint = localStorage.getItem("scriptUrl") || "";
+    endpoint =
+      localStorage.getItem("scriptUrl") || "";
   } catch (_) {}
 
   const cacheKey = suffix =>
@@ -1249,31 +953,60 @@ textarea.control {
     const seen = new Set();
 
     return names
-      .filter(v => typeof v === "string")
+      .filter(value =>
+        typeof value === "string"
+      )
       .map(upper)
-      .filter(v => {
-        if (!v || seen.has(key(v))) return false;
-        seen.add(key(v));
+      .filter(value => {
+        const normalized = key(value);
+
+        if (
+          !value ||
+          seen.has(normalized)
+        ) {
+          return false;
+        }
+
+        seen.add(normalized);
         return true;
       });
   }
 
   function loadCache() {
-    const d = read(cacheKey("doctors"), []);
-    const h = read(cacheKey("institutions"), []);
+    const cachedDoctors =
+      read(cacheKey("doctors"), []);
 
-    doctors = Array.isArray(d) ? unique(d) : [];
-    institutions = Array.isArray(h) ? unique(h) : [];
+    const cachedInstitutions =
+      read(cacheKey("institutions"), []);
 
-    pending = read(cacheKey("pending"), null);
+    doctors =
+      Array.isArray(cachedDoctors)
+        ? unique(cachedDoctors)
+        : [];
 
-    if (!pending || !pending.requestId || !pending.tarih) {
+    institutions =
+      Array.isArray(cachedInstitutions)
+        ? unique(cachedInstitutions)
+        : [];
+
+    pending =
+      read(cacheKey("pending"), null);
+
+    if (
+      !pending ||
+      !pending.requestId ||
+      !pending.tarih
+    ) {
       pending = null;
     }
   }
 
   function saveCache() {
-    save(cacheKey("doctors"), doctors.slice(0, 1000));
+    save(
+      cacheKey("doctors"),
+      doctors.slice(0, 1000)
+    );
+
     save(
       cacheKey("institutions"),
       institutions.slice(0, 1000)
@@ -1281,36 +1014,59 @@ textarea.control {
   }
 
   function locationSave() {
-    save("visitAssistantLastLocation", {
-      sehir: $("sehir").value,
-      ilce: $("ilce").value,
-      hastane: $("hastane").value
-    });
+    save(
+      "visitAssistantLastLocation",
+      {
+        sehir: $("sehir").value,
+        ilce: $("ilce").value,
+        hastane: $("hastane").value
+      }
+    );
   }
 
-  const location = read("visitAssistantLastLocation", {});
+  const location =
+    read("visitAssistantLastLocation", {});
 
-  for (const id of ["sehir", "ilce", "hastane"]) {
+  [
+    "sehir",
+    "ilce",
+    "hastane"
+  ].forEach(id => {
     $(id).value =
-      location && typeof location[id] === "string"
+      location &&
+      typeof location[id] === "string"
         ? location[id]
         : "";
 
-    $(id).addEventListener("input", locationSave);
-    $(id).addEventListener("change", locationSave);
-  }
+    $(id).addEventListener(
+      "input",
+      locationSave
+    );
 
-  for (const id of Object.keys(required)) {
-    $(id).required = true;
-  }
+    $(id).addEventListener(
+      "change",
+      locationSave
+    );
+  });
+
+  Object
+    .keys(required)
+    .forEach(id => {
+      $(id).required = true;
+    });
 
   $("ziyaretNo").min = "1";
   $("ziyaretNo").step = "1";
   $("not").maxLength = 10000;
 
-  for (const id of ["sehir", "ilce", "hastane", "doktor"]) {
+  [
+    "sehir",
+    "ilce",
+    "hastane",
+    "doktor"
+  ].forEach(id => {
     $(id).maxLength = 250;
-  }
+  });
 
   $("doktor").value = "";
   $("not").value = "";
@@ -1318,13 +1074,16 @@ textarea.control {
   const today = new Date();
 
   $("tarih").value =
-    today.getFullYear() + "-" +
-    String(today.getMonth() + 1).padStart(2, "0") + "-" +
-    String(today.getDate()).padStart(2, "0");
+    today.getFullYear() +
+    "-" +
+    String(today.getMonth() + 1)
+      .padStart(2, "0") +
+    "-" +
+    String(today.getDate())
+      .padStart(2, "0");
 
-  $("toast").classList.add("hidden");
-
-  const style = document.createElement("style");
+  const style =
+    document.createElement("style");
 
   style.textContent = `
     #hastaneList,
@@ -1385,34 +1144,53 @@ textarea.control {
       opacity: .65;
       cursor: wait;
     }
-
-    #settingsModal {
-      z-index: 80;
-    }
   `;
 
   document.head.appendChild(style);
 
   const dropdowns = [];
 
-  function autocomplete(id, listId, source, min, selected) {
+  function autocomplete(
+    id,
+    listId,
+    source,
+    minimumLength,
+    selected
+  ) {
     const input = $(id);
     let list = $(listId);
 
     if (!list) {
-      list = document.createElement("ul");
+      list =
+        document.createElement("ul");
+
       list.id = listId;
-      input.closest(".field").appendChild(list);
+
+      input
+        .closest(".field")
+        .appendChild(list);
     }
 
     list.classList.add("hidden");
     input.autocomplete = "off";
-    input.setAttribute("aria-controls", listId);
-    input.setAttribute("aria-expanded", "false");
+
+    input.setAttribute(
+      "aria-controls",
+      listId
+    );
+
+    input.setAttribute(
+      "aria-expanded",
+      "false"
+    );
 
     const close = () => {
       list.classList.add("hidden");
-      input.setAttribute("aria-expanded", "false");
+
+      input.setAttribute(
+        "aria-expanded",
+        "false"
+      );
     };
 
     function render() {
@@ -1420,106 +1198,116 @@ textarea.control {
 
       const query = key(input.value);
 
-      if (busy || pending || query.length < min) {
+      if (
+        busy ||
+        pending ||
+        query.length < minimumLength
+      ) {
         close();
         return;
       }
 
       const matches = source()
-        .filter(v =>
-          id === "sehir"
-            ? key(v).includes(query)
-            : key(v).startsWith(query)
-        )
+        .filter(value => {
+          if (id === "sehir") {
+            return key(value).includes(query);
+          }
+
+          return key(value).startsWith(query);
+        })
         .slice(0, 30);
 
-      for (const value of matches) {
-        const li = document.createElement("li");
-        const button = document.createElement("button");
+      matches.forEach(value => {
+        const item =
+          document.createElement("li");
+
+        const button =
+          document.createElement("button");
 
         button.type = "button";
-        button.className = "memory-choice";
+        button.className =
+          "memory-choice";
+
         button.textContent = value;
 
         button.addEventListener(
           "mousedown",
-          e => e.preventDefault()
+          event => event.preventDefault()
         );
 
-        button.addEventListener("click", () => {
-          input.value = value;
-          selected(value);
-          close();
-          input.focus();
-          close();
-        });
-
-        button.addEventListener("keydown", e => {
-          if (e.key === "ArrowDown") {
-            e.preventDefault();
-            li.nextElementSibling?.firstElementChild.focus();
-          }
-
-          if (e.key === "ArrowUp") {
-            e.preventDefault();
-            (
-              li.previousElementSibling?.firstElementChild ||
-              input
-            ).focus();
-          }
-
-          if (e.key === "Escape") {
+        button.addEventListener(
+          "click",
+          () => {
+            input.value = value;
+            selected(value);
+            close();
             input.focus();
             close();
           }
-        });
+        );
 
-        li.appendChild(button);
-        list.appendChild(li);
-      }
+        item.appendChild(button);
+        list.appendChild(item);
+      });
 
-      list.classList.toggle("hidden", !matches.length);
+      list.classList.toggle(
+        "hidden",
+        !matches.length
+      );
 
       input.setAttribute(
         "aria-expanded",
-        String(!!matches.length)
+        String(Boolean(matches.length))
       );
     }
 
-    input.addEventListener("input", render);
-    input.addEventListener("focus", render);
+    input.addEventListener(
+      "input",
+      render
+    );
 
-    input.addEventListener("keydown", e => {
-      if (
-        e.key === "ArrowDown" &&
-        !list.classList.contains("hidden")
-      ) {
-        e.preventDefault();
-        list.querySelector("button")?.focus();
-      }
+    input.addEventListener(
+      "focus",
+      render
+    );
 
-      if (e.key === "Escape") close();
-    });
-
-    document.addEventListener("pointerdown", e => {
-      if (e.target !== input && !list.contains(e.target)) {
-        close();
-      }
-    });
-
-    input.closest(".field").addEventListener(
-      "focusout",
-      () => setTimeout(() => {
+    input.addEventListener(
+      "keydown",
+      event => {
         if (
-          document.activeElement !== input &&
-          !list.contains(document.activeElement)
+          event.key === "ArrowDown" &&
+          !list.classList.contains("hidden")
+        ) {
+          event.preventDefault();
+
+          list
+            .querySelector("button")
+            ?.focus();
+        }
+
+        if (event.key === "Escape") {
+          close();
+        }
+      }
+    );
+
+    document.addEventListener(
+      "pointerdown",
+      event => {
+        if (
+          event.target !== input &&
+          !list.contains(event.target)
         ) {
           close();
         }
-      }, 180)
+      }
     );
 
-    dropdowns.push({ input, render, close });
+    dropdowns.push({
+      input,
+      render,
+      close
+    });
   }
 
   autocomplete(
@@ -1551,27 +1339,45 @@ textarea.control {
 
   function lockForm() {
     fields.forEach(id => {
-      $(id).disabled = busy || !!pending;
+      $(id).disabled =
+        busy || Boolean(pending);
     });
 
     $("submitBtn").disabled = busy;
-    $("saveSettingsBtn").disabled = busy || !!pending;
 
-    $("btnText").textContent = busy
-      ? "Kontrol ediliyor…"
-      : pending
-        ? "Kaydı kontrol et / yeniden dene"
-        : "Ziyareti Kaydet";
+    $("saveSettingsBtn").disabled =
+      busy || Boolean(pending);
 
-    $("btnSpinner").classList.toggle("hidden", !busy);
-    $("btnIcon").classList.toggle("hidden", busy);
+    $("btnText").textContent =
+      busy
+        ? "Kontrol ediliyor…"
+        : pending
+          ? "Kaydı kontrol et / yeniden dene"
+          : "Ziyareti Kaydet";
+
+    $("btnSpinner").classList.toggle(
+      "hidden",
+      !busy
+    );
+
+    $("btnIcon").classList.toggle(
+      "hidden",
+      busy
+    );
 
     if (busy || pending) {
-      dropdowns.forEach(d => d.close());
+      dropdowns.forEach(item =>
+        item.close()
+      );
     }
   }
 
-  async function api(action, params = {}, url = endpoint) {
+  async function api(
+    action,
+    params = {},
+    url = endpoint,
+    timeoutMs = 30000
+  ) {
     if (
       !/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/
         .test(url)
@@ -1581,20 +1387,25 @@ textarea.control {
       );
     }
 
-    const controller = new AbortController();
+    const controller =
+      new AbortController();
 
     const timer = setTimeout(
       () => controller.abort(),
-      12000
+      timeoutMs
     );
 
     try {
-      const query = new URLSearchParams(
-        Object.assign(
-          { action, t: String(Date.now()) },
-          params
-        )
-      );
+      const query =
+        new URLSearchParams(
+          Object.assign(
+            {
+              action,
+              t: String(Date.now())
+            },
+            params
+          )
+        );
 
       const response = await fetch(
         url + "?" + query,
@@ -1604,19 +1415,24 @@ textarea.control {
         }
       );
 
-      const raw = await response.text();
+      const raw =
+        await response.text();
+
       let data;
 
       try {
         data = JSON.parse(raw);
       } catch (_) {
         throw new Error(
-          "Sunucu JSON döndürmedi. /exec adresini, " +
-          "yeni dağıtımı ve erişim izinlerini kontrol edin."
+          "Sunucu JSON döndürmedi. /exec adresini, yeni dağıtımı ve erişim izinlerini kontrol edin."
         );
       }
 
-      if (!response.ok || !data || data.result === "error") {
+      if (
+        !response.ok ||
+        !data ||
+        data.result === "error"
+      ) {
         const error = new Error(
           data?.error || "Sunucu hatası."
         );
@@ -1638,8 +1454,7 @@ textarea.control {
 
       if (error instanceof TypeError) {
         throw new Error(
-          "Sunucuya erişilemiyor. İnternet, Apps Script " +
-          "adresi veya erişim izni sorunu."
+          "Sunucuya erişilemiyor. İnternet, Apps Script adresi veya erişim izni sorunu."
         );
       }
 
@@ -1650,7 +1465,9 @@ textarea.control {
   }
 
   function version(data) {
-    if (data.version !== "visit-memory-3") {
+    if (
+      data.version !== "visit-memory-3"
+    ) {
       throw new Error(
         "Apps Script eski sürümde. Yeni sürümü dağıtıp tekrar deneyin."
       );
@@ -1658,13 +1475,20 @@ textarea.control {
   }
 
   function formattedDate() {
-    const parts = $("tarih").value.split("-");
+    const parts =
+      $("tarih").value.split("-");
 
     if (parts.length !== 3) {
       throw new Error("Tarih seçin.");
     }
 
-    return parts[2] + "." + parts[1] + "." + parts[0];
+    return (
+      parts[2] +
+      "." +
+      parts[1] +
+      "." +
+      parts[0]
+    );
   }
 
   async function lastNumber() {
@@ -1677,28 +1501,37 @@ textarea.control {
       return;
     }
 
-    const seq = ++sequence;
-    const date = $("tarih").value;
-    const before = $("ziyaretNo").value;
+    const currentSequence =
+      ++sequence;
+
+    const selectedDate =
+      $("tarih").value;
+
+    const previousNumber =
+      $("ziyaretNo").value;
+
     const url = endpoint;
 
     try {
       const data = await api(
         "getLastZiyaretNo",
-        { tarih: formattedDate() }
+        {
+          tarih: formattedDate()
+        }
       );
 
       version(data);
 
       if (
-        seq === sequence &&
+        currentSequence === sequence &&
         url === endpoint &&
-        date === $("tarih").value &&
+        selectedDate === $("tarih").value &&
         !busy &&
         !pending &&
-        $("ziyaretNo").value === before
+        $("ziyaretNo").value === previousNumber
       ) {
-        $("ziyaretNo").value = Number(data.lastNo) + 1;
+        $("ziyaretNo").value =
+          Number(data.lastNo) + 1;
       }
     } catch (error) {
       message(error.message, true);
@@ -1711,13 +1544,16 @@ textarea.control {
         "Önce Ayarlar'dan Apps Script bağlantısını ekleyin.",
         true
       );
+
       return;
     }
 
     const url = endpoint;
 
     try {
-      const data = await api("getHistory");
+      const data =
+        await api("getHistory");
+
       version(data);
 
       if (url !== endpoint) return;
@@ -1726,10 +1562,15 @@ textarea.control {
         !Array.isArray(data.doctors) ||
         !Array.isArray(data.institutions)
       ) {
-        throw new Error("Geçersiz geçmiş yanıtı.");
+        throw new Error(
+          "Geçersiz geçmiş yanıtı."
+        );
       }
 
-      doctors = unique([...data.doctors, ...doctors]);
+      doctors = unique([
+        ...data.doctors,
+        ...doctors
+      ]);
 
       institutions = unique([
         ...data.institutions,
@@ -1738,22 +1579,32 @@ textarea.control {
 
       saveCache();
 
-      dropdowns.forEach(d => {
-        if (d.input === document.activeElement) {
-          d.render();
+      dropdowns.forEach(item => {
+        if (
+          item.input ===
+          document.activeElement
+        ) {
+          item.render();
         }
       });
 
       if (!busy && !pending) {
         message(
-          doctors.length + " doktor · " +
-          institutions.length + " kurum yüklendi."
+          doctors.length +
+          " doktor · " +
+          institutions.length +
+          " kurum yüklendi."
         );
       }
     } catch (error) {
-      if (!busy && !pending && url === endpoint) {
+      if (
+        !busy &&
+        !pending &&
+        url === endpoint
+      ) {
         message(
-          "Geçmiş yüklenemedi: " + error.message +
+          "Geçmiş yüklenemedi: " +
+          error.message +
           " Cihazdaki öneriler kullanılabilir.",
           true
         );
@@ -1767,10 +1618,15 @@ textarea.control {
       !data.sheet ||
       !Number.isInteger(data.row)
     ) {
-      throw new Error("Geçersiz kayıt doğrulaması.");
+      throw new Error(
+        "Geçersiz kayıt doğrulaması."
+      );
     }
 
-    doctors = unique([pending.doktor, ...doctors]);
+    doctors = unique([
+      pending.doktor,
+      ...doctors
+    ]);
 
     institutions = unique([
       pending.hastane,
@@ -1781,7 +1637,11 @@ textarea.control {
     locationSave();
 
     pending = null;
-    save(cacheKey("pending"), null);
+
+    save(
+      cacheKey("pending"),
+      null
+    );
 
     $("doktor").value = "";
     $("not").value = "";
@@ -1790,16 +1650,21 @@ textarea.control {
       Number(data.ziyaretNo) + 1;
 
     message(
-      "Doğrulandı: " + data.spreadsheet +
-      " → " + data.sheet +
-      " · Satır " + data.row
+      "Doğrulandı: " +
+      data.spreadsheet +
+      " → " +
+      data.sheet +
+      " · Satır " +
+      data.row
     );
   }
 
   async function receipt() {
     return api(
       "getReceipt",
-      { requestId: pending.requestId }
+      {
+        requestId: pending.requestId
+      }
     );
   }
 
@@ -1807,21 +1672,36 @@ textarea.control {
     if (busy) return;
 
     if (!pending) {
-      for (const id of Object.keys(required)) {
+      for (
+        const id of Object.keys(required)
+      ) {
         if (!clean($(id).value)) {
-          message(required[id] + " zorunludur.", true);
+          message(
+            required[id] + " zorunludur.",
+            true
+          );
+
           $(id).focus();
           return;
         }
       }
 
-      if (!$("visitForm").reportValidity()) return;
+      if (
+        !$("visitForm").reportValidity()
+      ) {
+        return;
+      }
 
-      if (!/^[1-9]\d*$/.test($("ziyaretNo").value)) {
+      if (
+        !/^[1-9]\d*$/.test(
+          $("ziyaretNo").value
+        )
+      ) {
         message(
           "Ziyaret no pozitif tam sayı olmalı.",
           true
         );
+
         return;
       }
     }
@@ -1831,28 +1711,59 @@ textarea.control {
     lockForm();
 
     try {
-      const health = await api("ping");
-      version(health);
-
       if (!pending) {
+        const health =
+          await api("ping");
+
+        version(health);
+
         pending = {
-          requestId: crypto.randomUUID(),
-          tarih: formattedDate(),
-          ziyaretNo: $("ziyaretNo").value,
-          sehir: clean($("sehir").value),
-          ilce: clean($("ilce").value),
-          hastane: upper($("hastane").value),
-          doktor: upper($("doktor").value),
-          not: $("not").value.trim()
+          requestId:
+            crypto.randomUUID(),
+          tarih:
+            formattedDate(),
+          ziyaretNo:
+            $("ziyaretNo").value,
+          sehir:
+            clean($("sehir").value),
+          ilce:
+            clean($("ilce").value),
+          hastane:
+            upper($("hastane").value),
+          doktor:
+            upper($("doktor").value),
+          not:
+            $("not").value.trim()
         };
 
-        save(cacheKey("pending"), pending);
+        save(
+          cacheKey("pending"),
+          pending
+        );
       } else {
-        const previous = await receipt();
+        message(
+          "Korunan kaydın sonucu kontrol ediliyor…"
+        );
 
-        if (previous.result === "success") {
-          finish(previous);
-          return;
+        try {
+          const previous =
+            await receipt();
+
+          if (
+            previous.result === "success"
+          ) {
+            finish(previous);
+            return;
+          }
+        } catch (error) {
+          if (error.terminalReceipt) {
+            throw error;
+          }
+
+          /*
+           * Geçici bağlantı hatasında aynı
+           * kayıt kimliğiyle devam edilir.
+           */
         }
       }
 
@@ -1860,55 +1771,88 @@ textarea.control {
         "Gönderiliyor; Google Sheets doğrulaması bekleniyor…"
       );
 
-      const controller = new AbortController();
+      const controller =
+        new AbortController();
 
       const timer = setTimeout(
         () => controller.abort(),
-        15000
+        30000
       );
 
       try {
-        await fetch(endpoint, {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-          },
-          body: JSON.stringify(pending),
-          signal: controller.signal
-        });
+        await fetch(
+          endpoint,
+          {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              "Content-Type":
+                "text/plain;charset=utf-8"
+            },
+            body:
+              JSON.stringify(pending),
+            signal:
+              controller.signal
+          }
+        );
       } catch (_) {
-        // POST yanıtı kaybolsa bile işlem sonucu ayrıca sorgulanır.
+        /*
+         * POST yanıtı kaybolsa bile aşağıda
+         * kayıt sonucu ayrıca sorgulanır.
+         */
       } finally {
         clearTimeout(timer);
       }
 
-      // POST tamamlandı diye başarı sayılmaz.
-      // Sunucudaki yazılmış ve doğrulanmış işlem makbuzu beklenir.
-      for (let i = 0; i < 6; i++) {
-        const result = await receipt();
+      let lastReceiptError = null;
 
-        if (result.result === "success") {
-          finish(result);
-          return;
+      for (let i = 0; i < 8; i++) {
+        try {
+          const result =
+            await receipt();
+
+          if (
+            result.result === "success"
+          ) {
+            finish(result);
+            return;
+          }
+
+          lastReceiptError = null;
+        } catch (error) {
+          if (error.terminalReceipt) {
+            throw error;
+          }
+
+          lastReceiptError = error;
         }
 
-        await new Promise(
-          resolve => setTimeout(resolve, 1500)
+        await new Promise(resolve =>
+          setTimeout(resolve, 2000)
         );
       }
 
       message(
-        "Kayıt henüz doğrulanamadı. Form korundu. " +
-        "Aynı düğmeyle kontrol edin; tabloyu görmeden yeni kayıt açmayın.",
+        (
+          lastReceiptError
+            ? lastReceiptError.message + " "
+            : ""
+        ) +
+        "Kayıt henüz doğrulanamadı. " +
+        "Form korundu. Aynı düğmeyle tekrar kontrol edin.",
         true
       );
     } catch (error) {
-      // Kesin sunucu reddinde form düzeltilebilir.
-      // Ağ belirsizliğinde bekleyen kayıt korunur.
-      if (pending && error.terminalReceipt) {
+      if (
+        pending &&
+        error.terminalReceipt
+      ) {
         pending = null;
-        save(cacheKey("pending"), null);
+
+        save(
+          cacheKey("pending"),
+          null
+        );
       }
 
       message(
@@ -1926,41 +1870,80 @@ textarea.control {
     }
   }
 
-  $("visitForm").addEventListener("submit", e => {
-    e.preventDefault();
-    submit();
-  });
+  $("visitForm").addEventListener(
+    "submit",
+    event => {
+      event.preventDefault();
+      submit();
+    }
+  );
 
-  $("submitBtn").addEventListener("click", submit);
-  $("tarih").addEventListener("change", lastNumber);
+  $("submitBtn").addEventListener(
+    "click",
+    submit
+  );
 
-  $("openSettingsBtn").addEventListener("click", () => {
-    $("scriptUrlInput").value = endpoint;
-    $("settingsModal").classList.remove("hidden");
-    $("settingsModal").classList.add("flex");
-  });
+  $("tarih").addEventListener(
+    "change",
+    lastNumber
+  );
 
-  $("closeSettingsBtn").addEventListener("click", () => {
-    $("settingsModal").classList.add("hidden");
-    $("settingsModal").classList.remove("flex");
-  });
+  $("openSettingsBtn").addEventListener(
+    "click",
+    () => {
+      $("scriptUrlInput").value =
+        endpoint;
+
+      $("settingsModal")
+        .classList
+        .remove("hidden");
+
+      $("settingsModal")
+        .classList
+        .add("flex");
+    }
+  );
+
+  $("closeSettingsBtn").addEventListener(
+    "click",
+    () => {
+      $("settingsModal")
+        .classList
+        .add("hidden");
+
+      $("settingsModal")
+        .classList
+        .remove("flex");
+    }
+  );
 
   $("saveSettingsBtn").addEventListener(
     "click",
     async () => {
       if (busy || pending) return;
 
-      const url = $("scriptUrlInput").value.trim();
+      const url =
+        $("scriptUrlInput")
+          .value
+          .trim();
+
       $("saveSettingsBtn").disabled = true;
 
       try {
-        const data = await api("ping", {}, url);
-        version(data);
+        const data = await api(
+          "ping",
+          {},
+          url
+        );
 
+        version(data);
         endpoint = url;
 
         try {
-          localStorage.setItem("scriptUrl", url);
+          localStorage.setItem(
+            "scriptUrl",
+            url
+          );
         } catch (_) {
           storageNote.textContent =
             "Bağlantı yalnızca bu oturumda saklanabildi.";
@@ -1972,7 +1955,8 @@ textarea.control {
         $("closeSettingsBtn").click();
 
         message(
-          "Bağlantı doğrulandı: " + data.spreadsheet
+          "Bağlantı doğrulandı: " +
+          data.spreadsheet
         );
 
         await lastNumber();
@@ -1990,16 +1974,19 @@ textarea.control {
     if (pending) {
       fields.forEach(id => {
         if (id !== "tarih") {
-          $(id).value = pending[id] || "";
+          $(id).value =
+            pending[id] || "";
         }
       });
 
       $("tarih").value =
-        pending.tarih.split(".").reverse().join("-");
+        pending.tarih
+          .split(".")
+          .reverse()
+          .join("-");
 
       message(
-        "Önceki kaydın sonucu belirsiz. Düğmeyle kontrol edin; " +
-        "henüz yeni kayıt oluşturulmadı.",
+        "Önceki kaydın sonucu belirsiz. Düğmeyle kontrol edin; henüz yeni kayıt oluşturulmadı.",
         true
       );
     }
@@ -2007,7 +1994,10 @@ textarea.control {
     lockForm();
   }
 
-  window.addEventListener("online", sync);
+  window.addEventListener(
+    "online",
+    sync
+  );
 
   loadCache();
   restorePending();
@@ -2015,6 +2005,5 @@ textarea.control {
   sync();
 })();
 </script>
-
 </body>
 </html>
