@@ -1129,915 +1129,891 @@ textarea.control {
 </div>
 
 <script>
-const sehirler = [
-    "Adana",
-    "Adıyaman",
-    "Afyonkarahisar",
-    "Ağrı",
-    "Aksaray",
-    "Amasya",
-    "Ankara",
-    "Antalya",
-    "Artvin",
-    "Aydın",
-    "Balıkesir",
-    "Bartın",
-    "Batman",
-    "Bayburt",
-    "Bilecik",
-    "Bingöl",
-    "Bitlis",
-    "Bolu",
-    "Burdur",
-    "Bursa",
-    "Çanakkale",
-    "Çankırı",
-    "Çorum",
-    "Denizli",
-    "Diyarbakır",
-    "Düzce",
-    "Edirne",
-    "Elazığ",
-    "Erzincan",
-    "Erzurum",
-    "Eskişehir",
-    "Gaziantep",
-    "Giresun",
-    "Gümüşhane",
-    "Hakkari",
-    "Hatay",
-    "Iğdır",
-    "Isparta",
-    "İstanbul",
-    "İzmir",
-    "Kahramanmaraş",
-    "Karabük",
-    "Karaman",
-    "Kars",
-    "Kastamonu",
-    "Kayseri",
-    "Kırıkkale",
-    "Kırklareli",
-    "Kırşehir",
-    "Kilis",
-    "Kocaeli",
-    "Konya",
-    "Kütahya",
-    "Malatya",
-    "Manisa",
-    "Mardin",
-    "Mersin",
-    "Muğla",
-    "Muş",
-    "Nevşehir",
-    "Niğde",
-    "Ordu",
-    "Osmaniye",
-    "Rize",
-    "Sakarya",
-    "Samsun",
-    "Siirt",
-    "Sinop",
-    "Sivas",
-    "Şanlıurfa",
-    "Şırnak",
-    "Tekirdağ",
-    "Tokat",
-    "Trabzon",
-    "Tunceli",
-    "Uşak",
-    "Van",
-    "Yalova",
-    "Yozgat",
-    "Zonguldak"
-].sort((a, b) =>
-    a.localeCompare(b, "tr")
-);
+(() => {
+  "use strict";
 
-const sehirInput =
-    document.getElementById("sehir");
+  const $ = id => document.getElementById(id);
 
-const sehirList =
-    document.getElementById("sehirList");
+  const fields = [
+    "tarih", "ziyaretNo", "sehir", "ilce",
+    "hastane", "doktor", "not"
+  ];
 
-const ilceInput =
-    document.getElementById("ilce");
+  const required = {
+    tarih: "Tarih",
+    ziyaretNo: "Ziyaret no",
+    sehir: "İl",
+    ilce: "İlçe",
+    hastane: "Kurum",
+    doktor: "Doktor"
+  };
 
-const hastaneInput =
-    document.getElementById("hastane");
+  const cities = [
+    "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı",
+    "Aksaray", "Amasya", "Ankara", "Antalya",
+    "Artvin", "Aydın", "Balıkesir", "Bartın",
+    "Batman", "Bayburt", "Bilecik", "Bingöl",
+    "Bitlis", "Bolu", "Burdur", "Bursa",
+    "Çanakkale", "Çankırı", "Çorum", "Denizli",
+    "Diyarbakır", "Düzce", "Edirne", "Elazığ",
+    "Erzincan", "Erzurum", "Eskişehir", "Gaziantep",
+    "Giresun", "Gümüşhane", "Hakkari", "Hatay",
+    "Iğdır", "Isparta", "İstanbul", "İzmir",
+    "Kahramanmaraş", "Karabük", "Karaman", "Kars",
+    "Kastamonu", "Kayseri", "Kırıkkale", "Kırklareli",
+    "Kırşehir", "Kilis", "Kocaeli", "Konya",
+    "Kütahya", "Malatya", "Manisa", "Mardin",
+    "Mersin", "Muğla", "Muş", "Nevşehir",
+    "Niğde", "Ordu", "Osmaniye", "Rize",
+    "Sakarya", "Samsun", "Siirt", "Sinop",
+    "Sivas", "Şanlıurfa", "Şırnak", "Tekirdağ",
+    "Tokat", "Trabzon", "Tunceli", "Uşak",
+    "Van", "Yalova", "Yozgat", "Zonguldak"
+  ].sort((a, b) => a.localeCompare(b, "tr"));
 
-const doktorInput =
-    document.getElementById("doktor");
+  const clean = value =>
+    String(value == null ? "" : value)
+      .trim()
+      .replace(/\s+/g, " ");
 
-const doktorList =
-    document.getElementById("doktorList");
+  // Önceden BILAL olarak kaydedilmiş isimler de "bil" ile bulunur.
+  const key = value =>
+    clean(value)
+      .toLocaleLowerCase("tr-TR")
+      .replace(/ı/g, "i")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
 
-const STORAGE_KEYS = {
-    lastLocation:
-        "visitAssistantLastLocation",
+  const upper = value =>
+    clean(value).toLocaleUpperCase("tr-TR");
 
-    doctors:
-        "visitAssistantDoctors"
-};
+  let busy = false;
+  let pending = null;
+  let doctors = [];
+  let institutions = [];
+  let sequence = 0;
 
-function normalizeDoctorName(value = "") {
-    return value
-        .trim()
-        .replace(/\s+/g, " ")
-        .toLocaleUpperCase("tr-TR");
-}
+  const ram = new Map();
 
-function getStoredDoctors() {
+  const status = document.createElement("p");
+  status.id = "syncStatus";
+  status.setAttribute("role", "status");
+  status.style.cssText =
+    "font-size:12px;line-height:1.6;margin:10px 0;" +
+    "color:#a9c5ba;overflow-wrap:anywhere";
+
+  $("visitForm").before(status);
+
+  const storageNote = document.createElement("p");
+  storageNote.style.cssText =
+    "font-size:12px;color:#f4be7c";
+
+  status.after(storageNote);
+
+  function message(text, error = false) {
+    status.textContent = text;
+    status.style.color = error ? "#ff9e9e" : "#a9c5ba";
+  }
+
+  function read(name, fallback) {
     try {
-        const parsed = JSON.parse(
-            localStorage.getItem(
-                STORAGE_KEYS.doctors
-            ) || "[]"
-        );
-
-        return Array.isArray(parsed)
-            ? parsed
-                .map(normalizeDoctorName)
-                .filter(Boolean)
-            : [];
-    } catch (error) {
-        return [];
+      const raw = localStorage.getItem(name);
+      return raw === null ? fallback : JSON.parse(raw);
+    } catch (_) {
+      return ram.has(name) ? ram.get(name) : fallback;
     }
-}
+  }
 
-function storeDoctors(names) {
-    const uniqueNames = [
-        ...new Set(
-            names
-                .map(normalizeDoctorName)
-                .filter(
-                    name =>
-                        name.length >= 3
-                )
+  function save(name, value) {
+    ram.set(name, value);
+
+    try {
+      localStorage.setItem(name, JSON.stringify(value));
+    } catch (_) {
+      storageNote.textContent =
+        "Cihaz depolaması kapalı/dolu. Bu oturum çalışır; " +
+        "kapatınca yerel bilgiler korunamayabilir.";
+    }
+  }
+
+  let endpoint = "";
+
+  try {
+    endpoint = localStorage.getItem("scriptUrl") || "";
+  } catch (_) {}
+
+  const cacheKey = suffix =>
+    "visit3:" + endpoint + ":" + suffix;
+
+  function unique(names) {
+    const seen = new Set();
+
+    return names
+      .filter(v => typeof v === "string")
+      .map(upper)
+      .filter(v => {
+        if (!v || seen.has(key(v))) return false;
+        seen.add(key(v));
+        return true;
+      });
+  }
+
+  function loadCache() {
+    const d = read(cacheKey("doctors"), []);
+    const h = read(cacheKey("institutions"), []);
+
+    doctors = Array.isArray(d) ? unique(d) : [];
+    institutions = Array.isArray(h) ? unique(h) : [];
+
+    pending = read(cacheKey("pending"), null);
+
+    if (!pending || !pending.requestId || !pending.tarih) {
+      pending = null;
+    }
+  }
+
+  function saveCache() {
+    save(cacheKey("doctors"), doctors.slice(0, 1000));
+    save(
+      cacheKey("institutions"),
+      institutions.slice(0, 1000)
+    );
+  }
+
+  function locationSave() {
+    save("visitAssistantLastLocation", {
+      sehir: $("sehir").value,
+      ilce: $("ilce").value,
+      hastane: $("hastane").value
+    });
+  }
+
+  const location = read("visitAssistantLastLocation", {});
+
+  for (const id of ["sehir", "ilce", "hastane"]) {
+    $(id).value =
+      location && typeof location[id] === "string"
+        ? location[id]
+        : "";
+
+    $(id).addEventListener("input", locationSave);
+    $(id).addEventListener("change", locationSave);
+  }
+
+  for (const id of Object.keys(required)) {
+    $(id).required = true;
+  }
+
+  $("ziyaretNo").min = "1";
+  $("ziyaretNo").step = "1";
+  $("not").maxLength = 10000;
+
+  for (const id of ["sehir", "ilce", "hastane", "doktor"]) {
+    $(id).maxLength = 250;
+  }
+
+  $("doktor").value = "";
+  $("not").value = "";
+
+  const today = new Date();
+
+  $("tarih").value =
+    today.getFullYear() + "-" +
+    String(today.getMonth() + 1).padStart(2, "0") + "-" +
+    String(today.getDate()).padStart(2, "0");
+
+  $("toast").classList.add("hidden");
+
+  const style = document.createElement("style");
+
+  style.textContent = `
+    #hastaneList,
+    #doktorList,
+    #sehirList {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 55;
+      max-height: 220px;
+      overflow: auto;
+      padding: 5px;
+      margin: 6px 0 0;
+      list-style: none;
+      background: #191c1d;
+      border: 1px solid #337a66;
+      border-radius: 14px;
+      box-shadow: 0 15px 35px #0008;
+    }
+
+    #hastaneList li,
+    #doktorList li,
+    #sehirList li {
+      padding: 0 !important;
+    }
+
+    .memory-choice {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      text-align: left;
+      border: 0;
+      border-radius: 9px;
+      background: transparent;
+      color: #eee;
+      font: inherit;
+      font-size: 14px;
+    }
+
+    .memory-choice:hover,
+    .memory-choice:focus {
+      background: #23483d;
+      outline: 2px solid #18c99a;
+      outline-offset: -2px;
+    }
+
+    .control:disabled {
+      opacity: .7;
+    }
+
+    .card:focus-within {
+      position: relative;
+      z-index: 2;
+    }
+
+    #submitBtn:disabled {
+      opacity: .65;
+      cursor: wait;
+    }
+
+    #settingsModal {
+      z-index: 80;
+    }
+  `;
+
+  document.head.appendChild(style);
+
+  const dropdowns = [];
+
+  function autocomplete(id, listId, source, min, selected) {
+    const input = $(id);
+    let list = $(listId);
+
+    if (!list) {
+      list = document.createElement("ul");
+      list.id = listId;
+      input.closest(".field").appendChild(list);
+    }
+
+    list.classList.add("hidden");
+    input.autocomplete = "off";
+    input.setAttribute("aria-controls", listId);
+    input.setAttribute("aria-expanded", "false");
+
+    const close = () => {
+      list.classList.add("hidden");
+      input.setAttribute("aria-expanded", "false");
+    };
+
+    function render() {
+      list.replaceChildren();
+
+      const query = key(input.value);
+
+      if (busy || pending || query.length < min) {
+        close();
+        return;
+      }
+
+      const matches = source()
+        .filter(v =>
+          id === "sehir"
+            ? key(v).includes(query)
+            : key(v).startsWith(query)
         )
-    ].slice(0, 1000);
+        .slice(0, 30);
 
-    localStorage.setItem(
-        STORAGE_KEYS.doctors,
-        JSON.stringify(uniqueNames)
-    );
+      for (const value of matches) {
+        const li = document.createElement("li");
+        const button = document.createElement("button");
 
-    return uniqueNames;
-}
+        button.type = "button";
+        button.className = "memory-choice";
+        button.textContent = value;
 
-function rememberDoctor(name) {
-    const normalizedName =
-        normalizeDoctorName(name);
-
-    if (
-        normalizedName.length < 3
-    ) {
-        return;
-    }
-
-    const currentDoctors =
-        getStoredDoctors().filter(
-            doctor =>
-                doctor !== normalizedName
+        button.addEventListener(
+          "mousedown",
+          e => e.preventDefault()
         );
 
-    storeDoctors([
-        normalizedName,
-        ...currentDoctors
+        button.addEventListener("click", () => {
+          input.value = value;
+          selected(value);
+          close();
+          input.focus();
+          close();
+        });
+
+        button.addEventListener("keydown", e => {
+          if (e.key === "ArrowDown") {
+            e.preventDefault();
+            li.nextElementSibling?.firstElementChild.focus();
+          }
+
+          if (e.key === "ArrowUp") {
+            e.preventDefault();
+            (
+              li.previousElementSibling?.firstElementChild ||
+              input
+            ).focus();
+          }
+
+          if (e.key === "Escape") {
+            input.focus();
+            close();
+          }
+        });
+
+        li.appendChild(button);
+        list.appendChild(li);
+      }
+
+      list.classList.toggle("hidden", !matches.length);
+
+      input.setAttribute(
+        "aria-expanded",
+        String(!!matches.length)
+      );
+    }
+
+    input.addEventListener("input", render);
+    input.addEventListener("focus", render);
+
+    input.addEventListener("keydown", e => {
+      if (
+        e.key === "ArrowDown" &&
+        !list.classList.contains("hidden")
+      ) {
+        e.preventDefault();
+        list.querySelector("button")?.focus();
+      }
+
+      if (e.key === "Escape") close();
+    });
+
+    document.addEventListener("pointerdown", e => {
+      if (e.target !== input && !list.contains(e.target)) {
+        close();
+      }
+    });
+
+    input.closest(".field").addEventListener(
+      "focusout",
+      () => setTimeout(() => {
+        if (
+          document.activeElement !== input &&
+          !list.contains(document.activeElement)
+        ) {
+          close();
+        }
+      }, 180)
+    );
+
+    dropdowns.push({ input, render, close });
+  }
+
+  autocomplete(
+    "sehir",
+    "sehirList",
+    () => cities,
+    0,
+    value => {
+      $("ilce").value = value;
+      locationSave();
+    }
+  );
+
+  autocomplete(
+    "doktor",
+    "doktorList",
+    () => doctors,
+    2,
+    () => {}
+  );
+
+  autocomplete(
+    "hastane",
+    "hastaneList",
+    () => institutions,
+    2,
+    locationSave
+  );
+
+  function lockForm() {
+    fields.forEach(id => {
+      $(id).disabled = busy || !!pending;
+    });
+
+    $("submitBtn").disabled = busy;
+    $("saveSettingsBtn").disabled = busy || !!pending;
+
+    $("btnText").textContent = busy
+      ? "Kontrol ediliyor…"
+      : pending
+        ? "Kaydı kontrol et / yeniden dene"
+        : "Ziyareti Kaydet";
+
+    $("btnSpinner").classList.toggle("hidden", !busy);
+    $("btnIcon").classList.toggle("hidden", busy);
+
+    if (busy || pending) {
+      dropdowns.forEach(d => d.close());
+    }
+  }
+
+  async function api(action, params = {}, url = endpoint) {
+    if (
+      !/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/
+        .test(url)
+    ) {
+      throw new Error(
+        "Ayarlar'a geçerli Apps Script /exec bağlantısını girin."
+      );
+    }
+
+    const controller = new AbortController();
+
+    const timer = setTimeout(
+      () => controller.abort(),
+      12000
+    );
+
+    try {
+      const query = new URLSearchParams(
+        Object.assign(
+          { action, t: String(Date.now()) },
+          params
+        )
+      );
+
+      const response = await fetch(
+        url + "?" + query,
+        {
+          signal: controller.signal,
+          redirect: "follow"
+        }
+      );
+
+      const raw = await response.text();
+      let data;
+
+      try {
+        data = JSON.parse(raw);
+      } catch (_) {
+        throw new Error(
+          "Sunucu JSON döndürmedi. /exec adresini, " +
+          "yeni dağıtımı ve erişim izinlerini kontrol edin."
+        );
+      }
+
+      if (!response.ok || !data || data.result === "error") {
+        const error = new Error(
+          data?.error || "Sunucu hatası."
+        );
+
+        error.terminalReceipt =
+          action === "getReceipt" &&
+          data?.result === "error";
+
+        throw error;
+      }
+
+      return data;
+    } catch (error) {
+      if (error.name === "AbortError") {
+        throw new Error(
+          "Sunucu zaman aşımı. Bağlantıyı kontrol edin."
+        );
+      }
+
+      if (error instanceof TypeError) {
+        throw new Error(
+          "Sunucuya erişilemiyor. İnternet, Apps Script " +
+          "adresi veya erişim izni sorunu."
+        );
+      }
+
+      throw error;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  function version(data) {
+    if (data.version !== "visit-memory-3") {
+      throw new Error(
+        "Apps Script eski sürümde. Yeni sürümü dağıtıp tekrar deneyin."
+      );
+    }
+  }
+
+  function formattedDate() {
+    const parts = $("tarih").value.split("-");
+
+    if (parts.length !== 3) {
+      throw new Error("Tarih seçin.");
+    }
+
+    return parts[2] + "." + parts[1] + "." + parts[0];
+  }
+
+  async function lastNumber() {
+    if (
+      !endpoint ||
+      busy ||
+      pending ||
+      !$("tarih").value
+    ) {
+      return;
+    }
+
+    const seq = ++sequence;
+    const date = $("tarih").value;
+    const before = $("ziyaretNo").value;
+    const url = endpoint;
+
+    try {
+      const data = await api(
+        "getLastZiyaretNo",
+        { tarih: formattedDate() }
+      );
+
+      version(data);
+
+      if (
+        seq === sequence &&
+        url === endpoint &&
+        date === $("tarih").value &&
+        !busy &&
+        !pending &&
+        $("ziyaretNo").value === before
+      ) {
+        $("ziyaretNo").value = Number(data.lastNo) + 1;
+      }
+    } catch (error) {
+      message(error.message, true);
+    }
+  }
+
+  async function sync() {
+    if (!endpoint) {
+      message(
+        "Önce Ayarlar'dan Apps Script bağlantısını ekleyin.",
+        true
+      );
+      return;
+    }
+
+    const url = endpoint;
+
+    try {
+      const data = await api("getHistory");
+      version(data);
+
+      if (url !== endpoint) return;
+
+      if (
+        !Array.isArray(data.doctors) ||
+        !Array.isArray(data.institutions)
+      ) {
+        throw new Error("Geçersiz geçmiş yanıtı.");
+      }
+
+      doctors = unique([...data.doctors, ...doctors]);
+
+      institutions = unique([
+        ...data.institutions,
+        ...institutions
+      ]);
+
+      saveCache();
+
+      dropdowns.forEach(d => {
+        if (d.input === document.activeElement) {
+          d.render();
+        }
+      });
+
+      if (!busy && !pending) {
+        message(
+          doctors.length + " doktor · " +
+          institutions.length + " kurum yüklendi."
+        );
+      }
+    } catch (error) {
+      if (!busy && !pending && url === endpoint) {
+        message(
+          "Geçmiş yüklenemedi: " + error.message +
+          " Cihazdaki öneriler kullanılabilir.",
+          true
+        );
+      }
+    }
+  }
+
+  function finish(data) {
+    if (
+      data.result !== "success" ||
+      !data.sheet ||
+      !Number.isInteger(data.row)
+    ) {
+      throw new Error("Geçersiz kayıt doğrulaması.");
+    }
+
+    doctors = unique([pending.doktor, ...doctors]);
+
+    institutions = unique([
+      pending.hastane,
+      ...institutions
     ]);
-}
 
-function renderDoktorList(
-    filterText = ""
-) {
-    doktorList.innerHTML = "";
+    saveCache();
+    locationSave();
 
-    const query =
-        normalizeDoctorName(filterText);
+    pending = null;
+    save(cacheKey("pending"), null);
 
-    if (query.length < 2) {
-        doktorList
-            .classList
-            .add("hidden");
+    $("doktor").value = "";
+    $("not").value = "";
 
-        return;
-    }
+    $("ziyaretNo").value =
+      Number(data.ziyaretNo) + 1;
 
-    const matches =
-        getStoredDoctors()
-            .filter(name =>
-                name.startsWith(query)
-            )
-            .slice(0, 8);
-
-    if (matches.length === 0) {
-        doktorList
-            .classList
-            .add("hidden");
-
-        return;
-    }
-
-    matches.forEach(name => {
-        const li =
-            document.createElement("li");
-
-        li.textContent = name;
-
-        li.addEventListener(
-            "mousedown",
-            event => {
-                event.preventDefault();
-
-                doktorInput.value =
-                    name;
-
-                doktorList
-                    .classList
-                    .add("hidden");
-            }
-        );
-
-        doktorList.appendChild(li);
-    });
-
-    doktorList
-        .classList
-        .remove("hidden");
-}
-
-function saveLastLocation() {
-    localStorage.setItem(
-        STORAGE_KEYS.lastLocation,
-
-        JSON.stringify({
-            sehir:
-                sehirInput.value.trim(),
-
-            ilce:
-                ilceInput.value.trim(),
-
-            hastane:
-                hastaneInput.value.trim()
-        })
+    message(
+      "Doğrulandı: " + data.spreadsheet +
+      " → " + data.sheet +
+      " · Satır " + data.row
     );
-}
+  }
 
-function restoreLastLocation() {
-    try {
-        const saved = JSON.parse(
-            localStorage.getItem(
-                STORAGE_KEYS.lastLocation
-            ) || "{}"
+  async function receipt() {
+    return api(
+      "getReceipt",
+      { requestId: pending.requestId }
+    );
+  }
+
+  async function submit() {
+    if (busy) return;
+
+    if (!pending) {
+      for (const id of Object.keys(required)) {
+        if (!clean($(id).value)) {
+          message(required[id] + " zorunludur.", true);
+          $(id).focus();
+          return;
+        }
+      }
+
+      if (!$("visitForm").reportValidity()) return;
+
+      if (!/^[1-9]\d*$/.test($("ziyaretNo").value)) {
+        message(
+          "Ziyaret no pozitif tam sayı olmalı.",
+          true
         );
-
-        sehirInput.value =
-            saved.sehir || "";
-
-        ilceInput.value =
-            saved.ilce || "";
-
-        hastaneInput.value =
-            saved.hastane || "";
-    } catch (error) {
-        localStorage.removeItem(
-            STORAGE_KEYS.lastLocation
-        );
+        return;
+      }
     }
-}
 
-async function syncDoctorHistory() {
-    const scriptUrl =
-        localStorage.getItem(
-            "scriptUrl"
-        );
-
-    if (!scriptUrl) return;
+    busy = true;
+    ++sequence;
+    lockForm();
 
     try {
-        const response = await fetch(
-            scriptUrl +
-            "?action=getDoctors&t=" +
-            Date.now(),
+      const health = await api("ping");
+      version(health);
 
-            {
-                method: "GET"
-            }
-        );
+      if (!pending) {
+        pending = {
+          requestId: crypto.randomUUID(),
+          tarih: formattedDate(),
+          ziyaretNo: $("ziyaretNo").value,
+          sehir: clean($("sehir").value),
+          ilce: clean($("ilce").value),
+          hastane: upper($("hastane").value),
+          doktor: upper($("doktor").value),
+          not: $("not").value.trim()
+        };
 
-        const data =
-            await response.json();
+        save(cacheKey("pending"), pending);
+      } else {
+        const previous = await receipt();
 
-        if (
-            data &&
-            data.result === "success" &&
-            Array.isArray(data.doctors)
-        ) {
-            storeDoctors([
-                ...getStoredDoctors(),
-                ...data.doctors
-            ]);
+        if (previous.result === "success") {
+          finish(previous);
+          return;
         }
+      }
+
+      message(
+        "Gönderiliyor; Google Sheets doğrulaması bekleniyor…"
+      );
+
+      const controller = new AbortController();
+
+      const timer = setTimeout(
+        () => controller.abort(),
+        15000
+      );
+
+      try {
+        await fetch(endpoint, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(pending),
+          signal: controller.signal
+        });
+      } catch (_) {
+        // POST yanıtı kaybolsa bile işlem sonucu ayrıca sorgulanır.
+      } finally {
+        clearTimeout(timer);
+      }
+
+      // POST tamamlandı diye başarı sayılmaz.
+      // Sunucudaki yazılmış ve doğrulanmış işlem makbuzu beklenir.
+      for (let i = 0; i < 6; i++) {
+        const result = await receipt();
+
+        if (result.result === "success") {
+          finish(result);
+          return;
+        }
+
+        await new Promise(
+          resolve => setTimeout(resolve, 1500)
+        );
+      }
+
+      message(
+        "Kayıt henüz doğrulanamadı. Form korundu. " +
+        "Aynı düğmeyle kontrol edin; tabloyu görmeden yeni kayıt açmayın.",
+        true
+      );
     } catch (error) {
-        // İnternet olmasa da cihazdaki doktor geçmişi çalışır.
+      // Kesin sunucu reddinde form düzeltilebilir.
+      // Ağ belirsizliğinde bekleyen kayıt korunur.
+      if (pending && error.terminalReceipt) {
+        pending = null;
+        save(cacheKey("pending"), null);
+      }
+
+      message(
+        error.message +
+        (
+          pending
+            ? " Form korundu; aynı düğmeyle kaydı kontrol edin."
+            : " Kayıt onaylanmadı; alanlar silinmedi."
+        ),
+        true
+      );
+    } finally {
+      busy = false;
+      lockForm();
     }
-}
+  }
 
-doktorInput.addEventListener(
-    "input",
-    event => {
-        renderDoktorList(
-            event.target.value
-        );
-    }
-);
+  $("visitForm").addEventListener("submit", e => {
+    e.preventDefault();
+    submit();
+  });
 
-doktorInput.addEventListener(
-    "focus",
-    event => {
-        renderDoktorList(
-            event.target.value
-        );
-    }
-);
+  $("submitBtn").addEventListener("click", submit);
+  $("tarih").addEventListener("change", lastNumber);
 
-doktorInput.addEventListener(
-    "blur",
-    () => {
-        setTimeout(() => {
-            doktorList
-                .classList
-                .add("hidden");
-        }, 150);
-    }
-);
+  $("openSettingsBtn").addEventListener("click", () => {
+    $("scriptUrlInput").value = endpoint;
+    $("settingsModal").classList.remove("hidden");
+    $("settingsModal").classList.add("flex");
+  });
 
-function renderSehirList(
-    filterText = ""
-) {
-    sehirList.innerHTML = "";
+  $("closeSettingsBtn").addEventListener("click", () => {
+    $("settingsModal").classList.add("hidden");
+    $("settingsModal").classList.remove("flex");
+  });
 
-    const filtered =
-        sehirler.filter(sehir =>
-            sehir
-                .toLocaleLowerCase(
-                    "tr-TR"
-                )
-                .includes(
-                    filterText
-                        .toLocaleLowerCase(
-                            "tr-TR"
-                        )
-                )
-        );
+  $("saveSettingsBtn").addEventListener(
+    "click",
+    async () => {
+      if (busy || pending) return;
 
-    if (filtered.length === 0) {
-        sehirList.innerHTML =
-            "<li>Sonuç bulunamadı</li>";
+      const url = $("scriptUrlInput").value.trim();
+      $("saveSettingsBtn").disabled = true;
 
-        return;
-    }
+      try {
+        const data = await api("ping", {}, url);
+        version(data);
 
-    filtered.forEach(sehir => {
-        const li =
-            document.createElement("li");
+        endpoint = url;
 
-        li.textContent = sehir;
-
-        li.addEventListener(
-            "mousedown",
-            event => {
-                event.preventDefault();
-
-                sehirInput.value =
-                    sehir;
-
-                ilceInput.value =
-                    sehir;
-
-                sehirList
-                    .classList
-                    .add("hidden");
-            }
-        );
-
-        sehirList.appendChild(li);
-    });
-}
-
-sehirInput.addEventListener(
-    "focus",
-    () => {
-        renderSehirList(
-            sehirInput.value
-        );
-
-        sehirList
-            .classList
-            .remove("hidden");
-    }
-);
-
-sehirInput.addEventListener(
-    "input",
-    event => {
-        renderSehirList(
-            event.target.value
-        );
-
-        sehirList
-            .classList
-            .remove("hidden");
-    }
-);
-
-sehirInput.addEventListener(
-    "blur",
-    () => {
-        setTimeout(() => {
-            sehirList
-                .classList
-                .add("hidden");
-        }, 150);
-    }
-);
-
-async function getLastZiyaretNo() {
-    const scriptUrl =
-        localStorage.getItem(
-            "scriptUrl"
-        );
-
-    const rawDate =
-        document
-            .getElementById("tarih")
-            .value;
-
-    const noInput =
-        document.getElementById(
-            "ziyaretNo"
-        );
-
-    if (
-        !scriptUrl ||
-        !rawDate
-    ) {
-        return;
-    }
-
-    const date =
-        new Date(rawDate);
-
-    const formattedDate =
-        ("0" + date.getDate())
-            .slice(-2) +
-        "." +
-        ("0" + (date.getMonth() + 1))
-            .slice(-2) +
-        "." +
-        date.getFullYear();
-
-    noInput.value = "";
-    noInput.placeholder =
-        "Bulunuyor...";
-
-    try {
-        const response = await fetch(
-            scriptUrl +
-            "?action=getLastZiyaretNo&tarih=" +
-            encodeURIComponent(
-                formattedDate
-            ),
-            {
-                method: "GET"
-            }
-        );
-
-        const data =
-            await response.json();
-
-        if (
-            data &&
-            data.result === "success"
-        ) {
-            noInput.value =
-                data.lastNo + 1;
-        } else {
-            noInput.placeholder =
-                "1, 2, 3...";
+        try {
+          localStorage.setItem("scriptUrl", url);
+        } catch (_) {
+          storageNote.textContent =
+            "Bağlantı yalnızca bu oturumda saklanabildi.";
         }
-    } catch (error) {
-        noInput.placeholder =
-            "1, 2, 3...";
+
+        loadCache();
+        restorePending();
+
+        $("closeSettingsBtn").click();
+
+        message(
+          "Bağlantı doğrulandı: " + data.spreadsheet
+        );
+
+        await lastNumber();
+        await sync();
+      } catch (error) {
+        alert(error.message);
+        message(error.message, true);
+      } finally {
+        lockForm();
+      }
     }
-}
+  );
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-        document
-            .getElementById("tarih")
-            .valueAsDate =
-                new Date();
-
-        restoreLastLocation();
-        getLastZiyaretNo();
-        syncDoctorHistory();
-    }
-);
-
-document
-    .getElementById("tarih")
-    .addEventListener(
-        "change",
-        getLastZiyaretNo
-    );
-
-const modal =
-    document.getElementById(
-        "settingsModal"
-    );
-
-const scriptUrlInput =
-    document.getElementById(
-        "scriptUrlInput"
-    );
-
-document
-    .getElementById(
-        "openSettingsBtn"
-    )
-    .addEventListener(
-        "click",
-        () => {
-            scriptUrlInput.value =
-                localStorage.getItem(
-                    "scriptUrl"
-                ) || "";
-
-            modal
-                .classList
-                .remove("hidden");
-
-            modal
-                .classList
-                .add("flex");
+  function restorePending() {
+    if (pending) {
+      fields.forEach(id => {
+        if (id !== "tarih") {
+          $(id).value = pending[id] || "";
         }
-    );
+      });
 
-document
-    .getElementById(
-        "closeSettingsBtn"
-    )
-    .addEventListener(
-        "click",
-        () => {
-            modal
-                .classList
-                .add("hidden");
+      $("tarih").value =
+        pending.tarih.split(".").reverse().join("-");
 
-            modal
-                .classList
-                .remove("flex");
-        }
-    );
-
-document
-    .getElementById(
-        "saveSettingsBtn"
-    )
-    .addEventListener(
-        "click",
-        () => {
-            const url =
-                scriptUrlInput
-                    .value
-                    .trim();
-
-            if (
-                url &&
-                url.endsWith("/exec")
-            ) {
-                localStorage.setItem(
-                    "scriptUrl",
-                    url
-                );
-
-                modal
-                    .classList
-                    .add("hidden");
-
-                modal
-                    .classList
-                    .remove("flex");
-
-                showToast(
-                    "Bağlantı başarıyla kaydedildi!",
-                    "success"
-                );
-
-                getLastZiyaretNo();
-                syncDoctorHistory();
-            } else {
-                showToast(
-                    "Hata: Link /exec ile bitmelidir!",
-                    "error"
-                );
-            }
-        }
-    );
-
-function showToast(
-    message,
-    type = "success"
-) {
-    const toast =
-        document.getElementById(
-            "toast"
-        );
-
-    const toastIcon =
-        document.getElementById(
-            "toastIcon"
-        );
-
-    const toastText =
-        document.getElementById(
-            "toastText"
-        );
-
-    toastText.textContent =
-        message;
-
-    if (type === "success") {
-        toast.style.background =
-            "#d7fff2";
-
-        toast.style.color =
-            "#075b45";
-
-        toastIcon.textContent =
-            "check_circle";
-    } else {
-        toast.style.background =
-            "#d84e4e";
-
-        toast.style.color =
-            "#ffffff";
-
-        toastIcon.textContent =
-            "error";
+      message(
+        "Önceki kaydın sonucu belirsiz. Düğmeyle kontrol edin; " +
+        "henüz yeni kayıt oluşturulmadı.",
+        true
+      );
     }
 
-    toast.classList.remove(
-        "opacity-0",
-        "-translate-y-full"
-    );
+    lockForm();
+  }
 
-    setTimeout(() => {
-        toast.classList.add(
-            "opacity-0",
-            "-translate-y-full"
-        );
-    }, 3000);
-}
+  window.addEventListener("online", sync);
 
-document
-    .getElementById("submitBtn")
-    .addEventListener(
-        "click",
-        async function () {
-            const button = this;
-
-            const icon =
-                document.getElementById(
-                    "btnIcon"
-                );
-
-            const text =
-                document.getElementById(
-                    "btnText"
-                );
-
-            const spinner =
-                document.getElementById(
-                    "btnSpinner"
-                );
-
-            const scriptUrl =
-                localStorage.getItem(
-                    "scriptUrl"
-                );
-
-            if (!scriptUrl) {
-                showToast(
-                    "Lütfen ayarlardan bağlantı linkini ekleyin.",
-                    "error"
-                );
-
-                return;
-            }
-
-            const rawDate =
-                document
-                    .getElementById(
-                        "tarih"
-                    )
-                    .value;
-
-            if (!rawDate) {
-                showToast(
-                    "Lütfen tarih seçin.",
-                    "error"
-                );
-
-                return;
-            }
-
-            const date =
-                new Date(rawDate);
-
-            const formattedDate =
-                ("0" + date.getDate())
-                    .slice(-2) +
-                "." +
-                (
-                    "0" +
-                    (
-                        date.getMonth() +
-                        1
-                    )
-                ).slice(-2) +
-                "." +
-                date.getFullYear();
-
-            const gunler = [
-                "Pazar",
-                "Pazartesi",
-                "Salı",
-                "Çarşamba",
-                "Perşembe",
-                "Cuma",
-                "Cumartesi"
-            ];
-
-            const ziyaretNoInput =
-                document.getElementById(
-                    "ziyaretNo"
-                );
-
-            const ziyaretNo =
-                ziyaretNoInput.value;
-
-            if (!ziyaretNo) {
-                showToast(
-                    "Lütfen Ziyaret No girin.",
-                    "error"
-                );
-
-                return;
-            }
-
-            const payload = {
-                tarih:
-                    formattedDate,
-
-                gun:
-                    gunler[
-                        date.getDay()
-                    ],
-
-                ziyaretNo:
-                    ziyaretNo,
-
-                sehir:
-                    sehirInput.value,
-
-                ilce:
-                    ilceInput.value,
-
-                hastane:
-                    hastaneInput
-                        .value
-                        .toLocaleUpperCase(
-                            "tr-TR"
-                        ),
-
-                doktor:
-                    doktorInput
-                        .value
-                        .toLocaleUpperCase(
-                            "tr-TR"
-                        ),
-
-                not:
-                    document
-                        .getElementById(
-                            "not"
-                        )
-                        .value
-            };
-
-            icon
-                .classList
-                .add("hidden");
-
-            spinner
-                .classList
-                .remove("hidden");
-
-            text.textContent =
-                "Kaydediliyor...";
-
-            button.classList.add(
-                "opacity-90",
-                "pointer-events-none"
-            );
-
-            try {
-                const cacheBuster =
-                    "?t=" +
-                    new Date().getTime();
-
-                await fetch(
-                    scriptUrl +
-                    cacheBuster,
-                    {
-                        method: "POST",
-                        mode: "no-cors",
-
-                        body:
-                            JSON.stringify(
-                                payload
-                            ),
-
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        }
-                    }
-                );
-
-                showToast(
-                    "Ziyaret Excel'e işlendi!",
-                    "success"
-                );
-
-                saveLastLocation();
-                rememberDoctor(
-                    payload.doktor
-                );
-
-                const currentNo =
-                    parseInt(
-                        ziyaretNo,
-                        10
-                    );
-
-                if (
-                    !isNaN(currentNo)
-                ) {
-                    ziyaretNoInput.value =
-                        currentNo + 1;
-                } else {
-                    ziyaretNoInput.value =
-                        "";
-                }
-
-                doktorInput.value = "";
-
-                document
-                    .getElementById("not")
-                    .value = "";
-
-                doktorList
-                    .classList
-                    .add("hidden");
-
-            } catch (error) {
-                showToast(
-                    "Bağlantı hatası!",
-                    "error"
-                );
-            } finally {
-                icon
-                    .classList
-                    .remove("hidden");
-
-                spinner
-                    .classList
-                    .add("hidden");
-
-                text.textContent =
-                    "Ziyareti Kaydet";
-
-                button.classList.remove(
-                    "opacity-90",
-                    "pointer-events-none"
-                );
-            }
-        }
-    );
+  loadCache();
+  restorePending();
+  lastNumber();
+  sync();
+})();
 </script>
 
 </body>
