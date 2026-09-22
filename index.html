@@ -2,17 +2,40 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no">
+
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no"
+>
+
 <meta name="theme-color" content="#0d0f10">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Ziyaret">
+
+<meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+>
+
+<meta
+    name="apple-mobile-web-app-title"
+    content="Ziyaret"
+>
+
 <title>Ziyaret Asistanı</title>
 
 <link rel="manifest" href="manifest.json">
+
 <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    rel="stylesheet"
+>
 
 <style>
 :root {
@@ -40,12 +63,20 @@ body {
     margin: 0;
     min-height: 100dvh;
     overflow-x: hidden;
+
     background:
-        radial-gradient(circle at 0 0, rgba(12,112,82,.18), transparent 25rem),
+        radial-gradient(
+            circle at 0 0,
+            rgba(12, 112, 82, .18),
+            transparent 25rem
+        ),
         var(--bg);
+
     color: var(--white);
     font-family: Manrope, sans-serif;
-    padding-bottom: calc(28px + env(safe-area-inset-bottom));
+
+    padding-bottom:
+        calc(28px + env(safe-area-inset-bottom));
 }
 
 button,
@@ -77,13 +108,19 @@ button {
     position: sticky;
     top: 0;
     z-index: 40;
+
     margin: 0 -16px;
+
     padding:
         calc(12px + env(safe-area-inset-top))
         16px
         12px;
-    background: rgba(13,15,16,.9);
-    border-bottom: 1px solid rgba(255,255,255,.05);
+
+    background: rgba(13, 15, 16, .9);
+
+    border-bottom:
+        1px solid rgba(255, 255, 255, .05);
+
     backdrop-filter: blur(18px);
 }
 
@@ -91,6 +128,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     max-width: 448px;
     margin: 0 auto;
 }
@@ -104,26 +142,38 @@ button {
 .brand-mark {
     width: 40px;
     height: 40px;
+
     display: grid;
     place-items: center;
+
     flex-shrink: 0;
-    border: 1px solid rgba(24,201,154,.55);
+
+    border:
+        1px solid rgba(24, 201, 154, .55);
+
     border-radius: 50%;
-    background: rgba(24,201,154,.07);
+
+    background:
+        rgba(24, 201, 154, .07);
+
     color: var(--green);
+
     font-size: 13px;
     font-weight: 800;
 }
 
 .brand h1 {
     margin: 0;
+
     font-size: 16px;
     line-height: 1.2;
 }
 
 .brand p {
     margin: 3px 0 0;
+
     color: var(--muted);
+
     font-size: 9px;
     font-weight: 600;
     letter-spacing: .14em;
@@ -132,11 +182,15 @@ button {
 .settings {
     width: 40px;
     height: 40px;
+
     display: grid;
     place-items: center;
+
     flex-shrink: 0;
+
     border: 1px solid var(--line);
     border-radius: 50%;
+
     background: var(--card);
     color: #c8c9cc;
 }
@@ -144,7 +198,9 @@ button {
 .settings:active {
     transform: scale(.94);
     color: var(--green);
-    border-color: rgba(24,201,154,.5);
+
+    border-color:
+        rgba(24, 201, 154, .5);
 }
 
 .intro {
@@ -153,27 +209,12 @@ button {
 
 .kicker {
     margin: 0 0 8px;
+
     color: var(--green);
+
     font-size: 10px;
     font-weight: 800;
     letter-spacing: .18em;
-}
-
-.intro h2 {
-    margin: 0;
-    font-size: 30px;
-    line-height: 1.08;
-    letter-spacing: -.045em;
-}
-
-.intro h2 span {
-    color: var(--green);
-}
-
-.intro p {
-    margin: 10px 0 0;
-    color: var(--muted);
-    font-size: 13px;
 }
 
 .form-stack {
@@ -185,15 +226,20 @@ button {
 .card {
     width: 100%;
     padding: 19px 16px;
+
     border: 1px solid var(--line);
     border-radius: 20px;
+
     background:
         linear-gradient(
             145deg,
-            rgba(25,27,29,.98),
-            rgba(20,22,24,.98)
+            rgba(25, 27, 29, .98),
+            rgba(20, 22, 24, .98)
         );
-    box-shadow: 0 18px 42px rgba(0,0,0,.17);
+
+    box-shadow:
+        0 18px 42px rgba(0, 0, 0, .17);
+
     animation: cardEnter .45s both;
 }
 
@@ -206,13 +252,15 @@ button {
 }
 
 .card.accent {
-    border-color: rgba(24,201,154,.5);
+    border-color:
+        rgba(24, 201, 154, .5);
 }
 
 .card-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     margin-bottom: 17px;
 }
 
@@ -225,12 +273,20 @@ button {
 .card-icon {
     width: 34px;
     height: 34px;
+
     display: grid;
     place-items: center;
+
     flex-shrink: 0;
-    border: 1px solid rgba(24,201,154,.28);
+
+    border:
+        1px solid rgba(24, 201, 154, .28);
+
     border-radius: 12px;
-    background: rgba(24,201,154,.07);
+
+    background:
+        rgba(24, 201, 154, .07);
+
     color: var(--green);
 }
 
@@ -245,9 +301,14 @@ button {
 
 .step {
     padding: 5px 8px;
-    border: 1px solid rgba(24,201,154,.24);
+
+    border:
+        1px solid rgba(24, 201, 154, .24);
+
     border-radius: 999px;
+
     color: var(--green);
+
     font-size: 9px;
     font-weight: 800;
     letter-spacing: .12em;
@@ -261,6 +322,7 @@ button {
 
 .field {
     position: relative;
+
     display: flex;
     flex-direction: column;
     gap: 7px;
@@ -270,17 +332,20 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 0 2px;
 }
 
 .field label {
     color: #aaaeb2;
+
     font-size: 12px;
     font-weight: 650;
 }
 
 .auto {
     color: var(--green);
+
     font-size: 8px;
     font-weight: 800;
     letter-spacing: .12em;
@@ -295,27 +360,49 @@ button {
     top: 50%;
     left: 14px;
     z-index: 2;
+
     color: #668078;
     font-size: 19px;
+
     pointer-events: none;
-    transform: translateY(-50%);
+
+    transform:
+        translateY(-50%);
 }
 
 .control {
     width: 100%;
     min-height: 52px;
-    padding: 13px 14px !important;
-    border: 1px solid #303337 !important;
-    border-radius: 14px !important;
-    outline: none !important;
-    background: var(--field) !important;
-    color: var(--white) !important;
-    box-shadow: none !important;
-    transition: border-color .2s, box-shadow .2s;
+
+    padding:
+        13px 14px !important;
+
+    border:
+        1px solid #303337 !important;
+
+    border-radius:
+        14px !important;
+
+    outline:
+        none !important;
+
+    background:
+        var(--field) !important;
+
+    color:
+        var(--white) !important;
+
+    box-shadow:
+        none !important;
+
+    transition:
+        border-color .2s,
+        box-shadow .2s;
 }
 
 .control.icon {
-    padding-left: 43px !important;
+    padding-left:
+        43px !important;
 }
 
 .control::placeholder {
@@ -323,8 +410,13 @@ button {
 }
 
 .control:focus {
-    border-color: var(--green) !important;
-    box-shadow: 0 0 0 4px rgba(24,201,154,.08) !important;
+    border-color:
+        var(--green) !important;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(24, 201, 154, .08)
+        !important;
 }
 
 textarea.control {
@@ -332,70 +424,111 @@ textarea.control {
     resize: none;
 }
 
-#sehirList {
+#sehirList,
+#doktorList {
     position: absolute;
+
     top: 100%;
     right: 0;
     left: 0;
+
     z-index: 50;
+
     max-height: 210px;
+
     margin-top: 6px;
     padding: 5px;
+
     overflow-y: auto;
-    border: 1px solid rgba(24,201,154,.3);
+
+    border:
+        1px solid rgba(24, 201, 154, .3);
+
     border-radius: 14px;
+
     background: #191c1d;
-    box-shadow: 0 20px 45px rgba(0,0,0,.55);
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, .55);
 }
 
-#sehirList li {
+#sehirList li,
+#doktorList li {
     padding: 11px !important;
+
     border: 0 !important;
     border-radius: 9px !important;
+
     color: #c6c8ca !important;
+
     font-size: 13px;
     cursor: pointer;
 }
 
-#sehirList li:active {
-    background: rgba(24,201,154,.1) !important;
+#sehirList li:active,
+#doktorList li:active {
+    background:
+        rgba(24, 201, 154, .1)
+        !important;
 }
 
 .submit {
     position: relative;
+
     width: 100%;
     height: 56px;
     min-height: 56px;
     max-height: 56px;
+
     margin: 0;
     padding: 0 18px;
+
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 9px;
+
     overflow: hidden;
+
     border: 0;
     border-radius: 16px;
-    background: linear-gradient(110deg,#1ad09d,#10b986);
+
+    background:
+        linear-gradient(
+            110deg,
+            #1ad09d,
+            #10b986
+        );
+
     color: #061510;
+
     font-size: 14px;
     font-weight: 800;
-    box-shadow: 0 14px 32px rgba(11,185,132,.2);
+
+    box-shadow:
+        0 14px 32px
+        rgba(11, 185, 132, .2);
 }
 
 .submit::after {
     content: "";
+
     position: absolute;
     inset: 0;
+
     background:
         linear-gradient(
             100deg,
             transparent 20%,
-            rgba(255,255,255,.42),
+            rgba(255, 255, 255, .42),
             transparent 55%
         );
-    transform: translateX(-110%);
-    animation: buttonShine 3.5s infinite;
+
+    transform:
+        translateX(-110%);
+
+    animation:
+        buttonShine 3.5s infinite;
 }
 
 .submit > * {
@@ -409,49 +542,88 @@ textarea.control {
 
 .footer {
     margin: 19px 0 0;
+
     color: #55585c;
+
     font-size: 9px;
     font-weight: 700;
+
     text-align: center;
     letter-spacing: .14em;
 }
 
 #toast {
     position: fixed;
-    top: calc(16px + env(safe-area-inset-top));
+
+    top:
+        calc(
+            16px +
+            env(safe-area-inset-top)
+        );
+
     left: 50%;
     z-index: 60;
+
     width: max-content;
-    max-width: calc(100vw - 32px);
+    max-width:
+        calc(100vw - 32px);
+
     padding: 12px 16px;
+
     border-radius: 999px;
+
     font-size: 12px;
     font-weight: 700;
+
     white-space: normal;
-    transform: translateX(-50%);
+
+    transform:
+        translateX(-50%);
 }
 
 #settingsModal {
     position: fixed;
     inset: 0;
     z-index: 50;
+
     align-items: flex-end;
     justify-content: center;
+
     padding: 0;
-    background: rgba(2,4,5,.78);
-    backdrop-filter: blur(8px);
+
+    background:
+        rgba(2, 4, 5, .78);
+
+    backdrop-filter:
+        blur(8px);
 }
 
 #settingsCard {
     width: 100%;
     max-width: 480px;
-    padding: 22px 18px calc(22px + env(safe-area-inset-bottom));
-    border: 1px solid rgba(24,201,154,.32);
+
+    padding:
+        22px
+        18px
+        calc(
+            22px +
+            env(safe-area-inset-bottom)
+        );
+
+    border:
+        1px solid rgba(24, 201, 154, .32);
+
     border-bottom: 0;
-    border-radius: 24px 24px 0 0;
+
+    border-radius:
+        24px 24px 0 0;
+
     background: #181a1b;
     color: white;
-    box-shadow: 0 25px 70px rgba(0,0,0,.65);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, .65);
 }
 
 #settingsCard h2 {
@@ -466,7 +638,10 @@ textarea.control {
 
 .modal-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns:
+        1fr 1fr;
+
     gap: 10px;
     margin-top: 18px;
 }
@@ -474,12 +649,16 @@ textarea.control {
 .cancel,
 .save {
     min-height: 47px;
+
     border-radius: 14px;
+
     font-weight: 700;
 }
 
 .cancel {
-    border: 1px solid var(--line);
+    border:
+        1px solid var(--line);
+
     background: #111314;
     color: #a9abad;
 }
@@ -493,31 +672,40 @@ textarea.control {
 @keyframes cardEnter {
     from {
         opacity: 0;
-        transform: translateY(14px);
+
+        transform:
+            translateY(14px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 }
 
 @keyframes buttonShine {
     0%,
     55% {
-        transform: translateX(-110%);
+        transform:
+            translateX(-110%);
     }
 
     85%,
     100% {
-        transform: translateX(110%);
+        transform:
+            translateX(110%);
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
     * {
-        animation: none !important;
-        transition: none !important;
+        animation:
+            none !important;
+
+        transition:
+            none !important;
     }
 }
 </style>
@@ -528,12 +716,20 @@ textarea.control {
 
 <header class="topbar">
     <div class="topbar-inner">
+
         <div class="brand">
-            <div class="brand-mark">SD</div>
+            <div class="brand-mark">
+                SD
+            </div>
 
             <div>
-                <h1>Ziyaret Asistanı</h1>
-                <p>KİŞİSEL ÇALIŞMA ALANI</p>
+                <h1>
+                    Ziyaret Asistanı
+                </h1>
+
+                <p>
+                    KİŞİSEL ÇALIŞMA ALANI
+                </p>
             </div>
         </div>
 
@@ -543,8 +739,11 @@ textarea.control {
             type="button"
             aria-label="Ayarlar"
         >
-            <span class="material-symbols-outlined">tune</span>
+            <span class="material-symbols-outlined">
+                tune
+            </span>
         </button>
+
     </div>
 </header>
 
@@ -552,41 +751,64 @@ textarea.control {
     id="toast"
     class="opacity-0 -translate-y-full flex items-center gap-2 bg-[#d7fff2] text-[#075b45]"
 >
-    <span class="material-symbols-outlined" id="toastIcon">
+    <span
+        class="material-symbols-outlined"
+        id="toastIcon"
+    >
         check_circle
     </span>
 
-    <span id="toastText">Kaydedildi</span>
+    <span id="toastText">
+        Kaydedildi
+    </span>
 </div>
 
 <main>
-    <section class="intro">
-        <p class="kicker">YENİ ZİYARET</p>
 
+    <section class="intro">
+        <p class="kicker">
+            YENİ ZİYARET
+        </p>
     </section>
 
-    <form id="visitForm" class="form-stack">
+    <form
+        id="visitForm"
+        class="form-stack"
+    >
 
         <section class="card accent">
+
             <div class="card-head">
+
                 <div class="card-title">
+
                     <div class="card-icon">
                         <span class="material-symbols-outlined">
                             calendar_month
                         </span>
                     </div>
 
-                    <h3>Ziyaret bilgileri</h3>
+                    <h3>
+                        Ziyaret bilgileri
+                    </h3>
+
                 </div>
 
-                <span class="step">01</span>
+                <span class="step">
+                    01
+                </span>
+
             </div>
 
             <div class="fields">
+
                 <div class="field">
-                    <label for="tarih">Tarih</label>
+                    <label for="tarih">
+                        Tarih
+                    </label>
 
                     <div class="input-wrap">
+
                         <span class="material-symbols-outlined input-icon">
                             calendar_month
                         </span>
@@ -596,16 +818,24 @@ textarea.control {
                             class="control icon"
                             type="date"
                         >
+
                     </div>
                 </div>
 
                 <div class="field">
+
                     <div class="label-row">
-                        <label for="ziyaretNo">Ziyaret No</label>
-                        <span class="auto">OTOMATİK</span>
+                        <label for="ziyaretNo">
+                            Ziyaret No
+                        </label>
+
+                        <span class="auto">
+                            OTOMATİK
+                        </span>
                     </div>
 
                     <div class="input-wrap">
+
                         <span class="material-symbols-outlined input-icon">
                             tag
                         </span>
@@ -616,31 +846,47 @@ textarea.control {
                             type="number"
                             placeholder="..."
                         >
+
                     </div>
                 </div>
+
             </div>
         </section>
 
         <section class="card">
+
             <div class="card-head">
+
                 <div class="card-title">
+
                     <div class="card-icon">
                         <span class="material-symbols-outlined">
                             location_on
                         </span>
                     </div>
 
-                    <h3>Konum ve kurum</h3>
+                    <h3>
+                        Konum ve kurum
+                    </h3>
+
                 </div>
 
-                <span class="step">02</span>
+                <span class="step">
+                    02
+                </span>
+
             </div>
 
             <div class="fields">
+
                 <div class="field">
-                    <label for="sehir">Şehir</label>
+
+                    <label for="sehir">
+                        Şehir
+                    </label>
 
                     <div class="input-wrap">
+
                         <span class="material-symbols-outlined input-icon">
                             search
                         </span>
@@ -652,15 +898,24 @@ textarea.control {
                             autocomplete="off"
                             placeholder="Şehir ara..."
                         >
+
                     </div>
 
-                    <ul id="sehirList" class="hidden flex-col"></ul>
+                    <ul
+                        id="sehirList"
+                        class="hidden flex-col"
+                    ></ul>
+
                 </div>
 
                 <div class="field">
-                    <label for="ilce">İlçe</label>
+
+                    <label for="ilce">
+                        İlçe
+                    </label>
 
                     <div class="input-wrap">
+
                         <span class="material-symbols-outlined input-icon">
                             map
                         </span>
@@ -671,13 +926,18 @@ textarea.control {
                             type="text"
                             placeholder="Otomatik dolar"
                         >
+
                     </div>
                 </div>
 
                 <div class="field">
-                    <label for="hastane">Hastane / Kurum Adı</label>
+
+                    <label for="hastane">
+                        Hastane / Kurum Adı
+                    </label>
 
                     <div class="input-wrap">
+
                         <span class="material-symbols-outlined input-icon">
                             domain
                         </span>
@@ -688,31 +948,47 @@ textarea.control {
                             type="text"
                             placeholder="Kurum adını yazın"
                         >
+
                     </div>
                 </div>
+
             </div>
         </section>
 
         <section class="card">
+
             <div class="card-head">
+
                 <div class="card-title">
+
                     <div class="card-icon">
                         <span class="material-symbols-outlined">
                             person
                         </span>
                     </div>
 
-                    <h3>Görüşme</h3>
+                    <h3>
+                        Görüşme
+                    </h3>
+
                 </div>
 
-                <span class="step">03</span>
+                <span class="step">
+                    03
+                </span>
+
             </div>
 
             <div class="fields">
+
                 <div class="field">
-                    <label for="doktor">Doktor Adı</label>
+
+                    <label for="doktor">
+                        Doktor Adı
+                    </label>
 
                     <div class="input-wrap">
+
                         <span class="material-symbols-outlined input-icon">
                             person
                         </span>
@@ -721,13 +997,24 @@ textarea.control {
                             id="doktor"
                             class="control icon uppercase"
                             type="text"
+                            autocomplete="off"
                             placeholder="Doktor adını yazın"
                         >
+
                     </div>
+
+                    <ul
+                        id="doktorList"
+                        class="hidden flex-col"
+                    ></ul>
+
                 </div>
 
                 <div class="field">
-                    <label for="not">Notlar</label>
+
+                    <label for="not">
+                        Notlar
+                    </label>
 
                     <textarea
                         id="not"
@@ -735,7 +1022,9 @@ textarea.control {
                         rows="3"
                         placeholder="Ziyaret detaylarını buraya girin..."
                     ></textarea>
+
                 </div>
+
             </div>
         </section>
 
@@ -744,6 +1033,7 @@ textarea.control {
             type="button"
             class="submit"
         >
+
             <span
                 class="material-symbols-outlined"
                 id="btnIcon"
@@ -751,7 +1041,9 @@ textarea.control {
                 add_circle
             </span>
 
-            <span id="btnText">Ziyareti Kaydet</span>
+            <span id="btnText">
+                Ziyareti Kaydet
+            </span>
 
             <svg
                 id="btnSpinner"
@@ -774,12 +1066,15 @@ textarea.control {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 ></path>
             </svg>
+
         </button>
+
     </form>
 
     <p class="footer">
         SEDAT DEMİR · ZİYARET YÖNETİMİ
     </p>
+
 </main>
 </div>
 
@@ -788,6 +1083,7 @@ textarea.control {
     class="hidden flex-col"
 >
     <div id="settingsCard">
+
         <h2>
             <span
                 class="material-symbols-outlined"
@@ -811,6 +1107,7 @@ textarea.control {
         >
 
         <div class="modal-actions">
+
             <button
                 type="button"
                 id="closeSettingsBtn"
@@ -826,194 +1123,670 @@ textarea.control {
             >
                 Kaydet
             </button>
+
         </div>
     </div>
 </div>
 
 <script>
 const sehirler = [
-    "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı",
-    "Aksaray", "Amasya", "Ankara", "Antalya",
-    "Artvin", "Aydın", "Balıkesir", "Bartın",
-    "Batman", "Bayburt", "Bilecik", "Bingöl",
-    "Bitlis", "Bolu", "Burdur", "Bursa",
-    "Çanakkale", "Çankırı", "Çorum", "Denizli",
-    "Diyarbakır", "Düzce", "Edirne", "Elazığ",
-    "Erzincan", "Erzurum", "Eskişehir", "Gaziantep",
-    "Giresun", "Gümüşhane", "Hakkari", "Hatay",
-    "Iğdır", "Isparta", "İstanbul", "İzmir",
-    "Kahramanmaraş", "Karabük", "Karaman", "Kars",
-    "Kastamonu", "Kayseri", "Kırıkkale", "Kırklareli",
-    "Kırşehir", "Kilis", "Kocaeli", "Konya",
-    "Kütahya", "Malatya", "Manisa", "Mardin",
-    "Mersin", "Muğla", "Muş", "Nevşehir",
-    "Niğde", "Ordu", "Osmaniye", "Rize",
-    "Sakarya", "Samsun", "Siirt", "Sinop",
-    "Sivas", "Şanlıurfa", "Şırnak", "Tekirdağ",
-    "Tokat", "Trabzon", "Tunceli", "Uşak",
-    "Van", "Yalova", "Yozgat", "Zonguldak"
-].sort((a, b) => a.localeCompare(b, "tr"));
+    "Adana",
+    "Adıyaman",
+    "Afyonkarahisar",
+    "Ağrı",
+    "Aksaray",
+    "Amasya",
+    "Ankara",
+    "Antalya",
+    "Artvin",
+    "Aydın",
+    "Balıkesir",
+    "Bartın",
+    "Batman",
+    "Bayburt",
+    "Bilecik",
+    "Bingöl",
+    "Bitlis",
+    "Bolu",
+    "Burdur",
+    "Bursa",
+    "Çanakkale",
+    "Çankırı",
+    "Çorum",
+    "Denizli",
+    "Diyarbakır",
+    "Düzce",
+    "Edirne",
+    "Elazığ",
+    "Erzincan",
+    "Erzurum",
+    "Eskişehir",
+    "Gaziantep",
+    "Giresun",
+    "Gümüşhane",
+    "Hakkari",
+    "Hatay",
+    "Iğdır",
+    "Isparta",
+    "İstanbul",
+    "İzmir",
+    "Kahramanmaraş",
+    "Karabük",
+    "Karaman",
+    "Kars",
+    "Kastamonu",
+    "Kayseri",
+    "Kırıkkale",
+    "Kırklareli",
+    "Kırşehir",
+    "Kilis",
+    "Kocaeli",
+    "Konya",
+    "Kütahya",
+    "Malatya",
+    "Manisa",
+    "Mardin",
+    "Mersin",
+    "Muğla",
+    "Muş",
+    "Nevşehir",
+    "Niğde",
+    "Ordu",
+    "Osmaniye",
+    "Rize",
+    "Sakarya",
+    "Samsun",
+    "Siirt",
+    "Sinop",
+    "Sivas",
+    "Şanlıurfa",
+    "Şırnak",
+    "Tekirdağ",
+    "Tokat",
+    "Trabzon",
+    "Tunceli",
+    "Uşak",
+    "Van",
+    "Yalova",
+    "Yozgat",
+    "Zonguldak"
+].sort((a, b) =>
+    a.localeCompare(b, "tr")
+);
 
-const sehirInput = document.getElementById("sehir");
-const sehirList = document.getElementById("sehirList");
-const ilceInput = document.getElementById("ilce");
+const sehirInput =
+    document.getElementById("sehir");
 
-function renderSehirList(filterText = "") {
+const sehirList =
+    document.getElementById("sehirList");
+
+const ilceInput =
+    document.getElementById("ilce");
+
+const hastaneInput =
+    document.getElementById("hastane");
+
+const doktorInput =
+    document.getElementById("doktor");
+
+const doktorList =
+    document.getElementById("doktorList");
+
+const STORAGE_KEYS = {
+    lastLocation:
+        "visitAssistantLastLocation",
+
+    doctors:
+        "visitAssistantDoctors"
+};
+
+function normalizeDoctorName(value = "") {
+    return value
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLocaleUpperCase("tr-TR");
+}
+
+function getStoredDoctors() {
+    try {
+        const parsed = JSON.parse(
+            localStorage.getItem(
+                STORAGE_KEYS.doctors
+            ) || "[]"
+        );
+
+        return Array.isArray(parsed)
+            ? parsed
+                .map(normalizeDoctorName)
+                .filter(Boolean)
+            : [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function storeDoctors(names) {
+    const uniqueNames = [
+        ...new Set(
+            names
+                .map(normalizeDoctorName)
+                .filter(
+                    name =>
+                        name.length >= 3
+                )
+        )
+    ].slice(0, 1000);
+
+    localStorage.setItem(
+        STORAGE_KEYS.doctors,
+        JSON.stringify(uniqueNames)
+    );
+
+    return uniqueNames;
+}
+
+function rememberDoctor(name) {
+    const normalizedName =
+        normalizeDoctorName(name);
+
+    if (
+        normalizedName.length < 3
+    ) {
+        return;
+    }
+
+    const currentDoctors =
+        getStoredDoctors().filter(
+            doctor =>
+                doctor !== normalizedName
+        );
+
+    storeDoctors([
+        normalizedName,
+        ...currentDoctors
+    ]);
+}
+
+function renderDoktorList(
+    filterText = ""
+) {
+    doktorList.innerHTML = "";
+
+    const query =
+        normalizeDoctorName(filterText);
+
+    if (query.length < 2) {
+        doktorList
+            .classList
+            .add("hidden");
+
+        return;
+    }
+
+    const matches =
+        getStoredDoctors()
+            .filter(name =>
+                name.startsWith(query)
+            )
+            .slice(0, 8);
+
+    if (matches.length === 0) {
+        doktorList
+            .classList
+            .add("hidden");
+
+        return;
+    }
+
+    matches.forEach(name => {
+        const li =
+            document.createElement("li");
+
+        li.textContent = name;
+
+        li.addEventListener(
+            "mousedown",
+            event => {
+                event.preventDefault();
+
+                doktorInput.value =
+                    name;
+
+                doktorList
+                    .classList
+                    .add("hidden");
+            }
+        );
+
+        doktorList.appendChild(li);
+    });
+
+    doktorList
+        .classList
+        .remove("hidden");
+}
+
+function saveLastLocation() {
+    localStorage.setItem(
+        STORAGE_KEYS.lastLocation,
+
+        JSON.stringify({
+            sehir:
+                sehirInput.value.trim(),
+
+            ilce:
+                ilceInput.value.trim(),
+
+            hastane:
+                hastaneInput.value.trim()
+        })
+    );
+}
+
+function restoreLastLocation() {
+    try {
+        const saved = JSON.parse(
+            localStorage.getItem(
+                STORAGE_KEYS.lastLocation
+            ) || "{}"
+        );
+
+        sehirInput.value =
+            saved.sehir || "";
+
+        ilceInput.value =
+            saved.ilce || "";
+
+        hastaneInput.value =
+            saved.hastane || "";
+    } catch (error) {
+        localStorage.removeItem(
+            STORAGE_KEYS.lastLocation
+        );
+    }
+}
+
+async function syncDoctorHistory() {
+    const scriptUrl =
+        localStorage.getItem(
+            "scriptUrl"
+        );
+
+    if (!scriptUrl) return;
+
+    try {
+        const response = await fetch(
+            scriptUrl +
+            "?action=getDoctors&t=" +
+            Date.now(),
+
+            {
+                method: "GET"
+            }
+        );
+
+        const data =
+            await response.json();
+
+        if (
+            data &&
+            data.result === "success" &&
+            Array.isArray(data.doctors)
+        ) {
+            storeDoctors([
+                ...getStoredDoctors(),
+                ...data.doctors
+            ]);
+        }
+    } catch (error) {
+        // İnternet olmasa da cihazdaki doktor geçmişi çalışır.
+    }
+}
+
+doktorInput.addEventListener(
+    "input",
+    event => {
+        renderDoktorList(
+            event.target.value
+        );
+    }
+);
+
+doktorInput.addEventListener(
+    "focus",
+    event => {
+        renderDoktorList(
+            event.target.value
+        );
+    }
+);
+
+doktorInput.addEventListener(
+    "blur",
+    () => {
+        setTimeout(() => {
+            doktorList
+                .classList
+                .add("hidden");
+        }, 150);
+    }
+);
+
+function renderSehirList(
+    filterText = ""
+) {
     sehirList.innerHTML = "";
 
-    const filtered = sehirler.filter(sehir =>
-        sehir
-            .toLocaleLowerCase("tr-TR")
-            .includes(filterText.toLocaleLowerCase("tr-TR"))
-    );
+    const filtered =
+        sehirler.filter(sehir =>
+            sehir
+                .toLocaleLowerCase(
+                    "tr-TR"
+                )
+                .includes(
+                    filterText
+                        .toLocaleLowerCase(
+                            "tr-TR"
+                        )
+                )
+        );
 
     if (filtered.length === 0) {
         sehirList.innerHTML =
             "<li>Sonuç bulunamadı</li>";
+
         return;
     }
 
     filtered.forEach(sehir => {
-        const li = document.createElement("li");
+        const li =
+            document.createElement("li");
+
         li.textContent = sehir;
 
-        li.addEventListener("mousedown", event => {
-            event.preventDefault();
+        li.addEventListener(
+            "mousedown",
+            event => {
+                event.preventDefault();
 
-            sehirInput.value = sehir;
-            ilceInput.value = sehir;
-            sehirList.classList.add("hidden");
-        });
+                sehirInput.value =
+                    sehir;
+
+                ilceInput.value =
+                    sehir;
+
+                sehirList
+                    .classList
+                    .add("hidden");
+            }
+        );
 
         sehirList.appendChild(li);
     });
 }
 
-sehirInput.addEventListener("focus", () => {
-    renderSehirList(sehirInput.value);
-    sehirList.classList.remove("hidden");
-});
+sehirInput.addEventListener(
+    "focus",
+    () => {
+        renderSehirList(
+            sehirInput.value
+        );
 
-sehirInput.addEventListener("input", event => {
-    renderSehirList(event.target.value);
-    sehirList.classList.remove("hidden");
-});
+        sehirList
+            .classList
+            .remove("hidden");
+    }
+);
 
-sehirInput.addEventListener("blur", () => {
-    setTimeout(() => {
-        sehirList.classList.add("hidden");
-    }, 150);
-});
+sehirInput.addEventListener(
+    "input",
+    event => {
+        renderSehirList(
+            event.target.value
+        );
+
+        sehirList
+            .classList
+            .remove("hidden");
+    }
+);
+
+sehirInput.addEventListener(
+    "blur",
+    () => {
+        setTimeout(() => {
+            sehirList
+                .classList
+                .add("hidden");
+        }, 150);
+    }
+);
 
 async function getLastZiyaretNo() {
-    const scriptUrl = localStorage.getItem("scriptUrl");
-    const rawDate = document.getElementById("tarih").value;
-    const noInput = document.getElementById("ziyaretNo");
+    const scriptUrl =
+        localStorage.getItem(
+            "scriptUrl"
+        );
 
-    if (!scriptUrl || !rawDate) return;
+    const rawDate =
+        document
+            .getElementById("tarih")
+            .value;
 
-    const date = new Date(rawDate);
+    const noInput =
+        document.getElementById(
+            "ziyaretNo"
+        );
+
+    if (
+        !scriptUrl ||
+        !rawDate
+    ) {
+        return;
+    }
+
+    const date =
+        new Date(rawDate);
 
     const formattedDate =
-        ("0" + date.getDate()).slice(-2) + "." +
-        ("0" + (date.getMonth() + 1)).slice(-2) + "." +
+        ("0" + date.getDate())
+            .slice(-2) +
+        "." +
+        ("0" + (date.getMonth() + 1))
+            .slice(-2) +
+        "." +
         date.getFullYear();
 
     noInput.value = "";
-    noInput.placeholder = "Bulunuyor...";
+    noInput.placeholder =
+        "Bulunuyor...";
 
     try {
         const response = await fetch(
             scriptUrl +
             "?action=getLastZiyaretNo&tarih=" +
-            formattedDate,
-            { method: "GET" }
+            encodeURIComponent(
+                formattedDate
+            ),
+            {
+                method: "GET"
+            }
         );
 
-        const data = await response.json();
+        const data =
+            await response.json();
 
-        if (data && data.result === "success") {
-            noInput.value = data.lastNo + 1;
+        if (
+            data &&
+            data.result === "success"
+        ) {
+            noInput.value =
+                data.lastNo + 1;
         } else {
-            noInput.placeholder = "1, 2, 3...";
+            noInput.placeholder =
+                "1, 2, 3...";
         }
     } catch (error) {
-        noInput.placeholder = "1, 2, 3...";
+        noInput.placeholder =
+            "1, 2, 3...";
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("tarih").valueAsDate = new Date();
-    getLastZiyaretNo();
-});
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+        document
+            .getElementById("tarih")
+            .valueAsDate =
+                new Date();
+
+        restoreLastLocation();
+        getLastZiyaretNo();
+        syncDoctorHistory();
+    }
+);
 
 document
     .getElementById("tarih")
-    .addEventListener("change", getLastZiyaretNo);
+    .addEventListener(
+        "change",
+        getLastZiyaretNo
+    );
 
-const modal = document.getElementById("settingsModal");
+const modal =
+    document.getElementById(
+        "settingsModal"
+    );
+
 const scriptUrlInput =
-    document.getElementById("scriptUrlInput");
+    document.getElementById(
+        "scriptUrlInput"
+    );
 
 document
-    .getElementById("openSettingsBtn")
-    .addEventListener("click", () => {
-        scriptUrlInput.value =
-            localStorage.getItem("scriptUrl") || "";
+    .getElementById(
+        "openSettingsBtn"
+    )
+    .addEventListener(
+        "click",
+        () => {
+            scriptUrlInput.value =
+                localStorage.getItem(
+                    "scriptUrl"
+                ) || "";
 
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-    });
+            modal
+                .classList
+                .remove("hidden");
 
-document
-    .getElementById("closeSettingsBtn")
-    .addEventListener("click", () => {
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-    });
-
-document
-    .getElementById("saveSettingsBtn")
-    .addEventListener("click", () => {
-        const url = scriptUrlInput.value.trim();
-
-        if (url && url.endsWith("/exec")) {
-            localStorage.setItem("scriptUrl", url);
-
-            modal.classList.add("hidden");
-            modal.classList.remove("flex");
-
-            showToast(
-                "Bağlantı başarıyla kaydedildi!",
-                "success"
-            );
-
-            getLastZiyaretNo();
-        } else {
-            showToast(
-                "Hata: Link /exec ile bitmelidir!",
-                "error"
-            );
+            modal
+                .classList
+                .add("flex");
         }
-    });
+    );
 
-function showToast(message, type = "success") {
-    const toast = document.getElementById("toast");
+document
+    .getElementById(
+        "closeSettingsBtn"
+    )
+    .addEventListener(
+        "click",
+        () => {
+            modal
+                .classList
+                .add("hidden");
+
+            modal
+                .classList
+                .remove("flex");
+        }
+    );
+
+document
+    .getElementById(
+        "saveSettingsBtn"
+    )
+    .addEventListener(
+        "click",
+        () => {
+            const url =
+                scriptUrlInput
+                    .value
+                    .trim();
+
+            if (
+                url &&
+                url.endsWith("/exec")
+            ) {
+                localStorage.setItem(
+                    "scriptUrl",
+                    url
+                );
+
+                modal
+                    .classList
+                    .add("hidden");
+
+                modal
+                    .classList
+                    .remove("flex");
+
+                showToast(
+                    "Bağlantı başarıyla kaydedildi!",
+                    "success"
+                );
+
+                getLastZiyaretNo();
+                syncDoctorHistory();
+            } else {
+                showToast(
+                    "Hata: Link /exec ile bitmelidir!",
+                    "error"
+                );
+            }
+        }
+    );
+
+function showToast(
+    message,
+    type = "success"
+) {
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
     const toastIcon =
-        document.getElementById("toastIcon");
-    const toastText =
-        document.getElementById("toastText");
+        document.getElementById(
+            "toastIcon"
+        );
 
-    toastText.textContent = message;
+    const toastText =
+        document.getElementById(
+            "toastText"
+        );
+
+    toastText.textContent =
+        message;
 
     if (type === "success") {
-        toast.style.background = "#d7fff2";
-        toast.style.color = "#075b45";
-        toastIcon.textContent = "check_circle";
+        toast.style.background =
+            "#d7fff2";
+
+        toast.style.color =
+            "#075b45";
+
+        toastIcon.textContent =
+            "check_circle";
     } else {
-        toast.style.background = "#d84e4e";
-        toast.style.color = "#ffffff";
-        toastIcon.textContent = "error";
+        toast.style.background =
+            "#d84e4e";
+
+        toast.style.color =
+            "#ffffff";
+
+        toastIcon.textContent =
+            "error";
     }
 
     toast.classList.remove(
@@ -1031,152 +1804,241 @@ function showToast(message, type = "success") {
 
 document
     .getElementById("submitBtn")
-    .addEventListener("click", async function () {
-        const button = this;
+    .addEventListener(
+        "click",
+        async function () {
+            const button = this;
 
-        const icon =
-            document.getElementById("btnIcon");
+            const icon =
+                document.getElementById(
+                    "btnIcon"
+                );
 
-        const text =
-            document.getElementById("btnText");
+            const text =
+                document.getElementById(
+                    "btnText"
+                );
 
-        const spinner =
-            document.getElementById("btnSpinner");
+            const spinner =
+                document.getElementById(
+                    "btnSpinner"
+                );
 
-        const scriptUrl =
-            localStorage.getItem("scriptUrl");
+            const scriptUrl =
+                localStorage.getItem(
+                    "scriptUrl"
+                );
 
-        if (!scriptUrl) {
-            showToast(
-                "Lütfen ayarlardan bağlantı linkini ekleyin.",
-                "error"
-            );
-            return;
-        }
+            if (!scriptUrl) {
+                showToast(
+                    "Lütfen ayarlardan bağlantı linkini ekleyin.",
+                    "error"
+                );
 
-        const rawDate =
-            document.getElementById("tarih").value;
-
-        if (!rawDate) {
-            showToast(
-                "Lütfen tarih seçin.",
-                "error"
-            );
-            return;
-        }
-
-        const date = new Date(rawDate);
-
-        const formattedDate =
-            ("0" + date.getDate()).slice(-2) + "." +
-            ("0" + (date.getMonth() + 1)).slice(-2) +
-            "." +
-            date.getFullYear();
-
-        const gunler = [
-            "Pazar",
-            "Pazartesi",
-            "Salı",
-            "Çarşamba",
-            "Perşembe",
-            "Cuma",
-            "Cumartesi"
-        ];
-
-        const ziyaretNoInput =
-            document.getElementById("ziyaretNo");
-
-        const ziyaretNo =
-            ziyaretNoInput.value;
-
-        if (!ziyaretNo) {
-            showToast(
-                "Lütfen Ziyaret No girin.",
-                "error"
-            );
-            return;
-        }
-
-        const payload = {
-            tarih: formattedDate,
-            gun: gunler[date.getDay()],
-            ziyaretNo,
-            sehir:
-                document.getElementById("sehir").value,
-            ilce:
-                document.getElementById("ilce").value,
-            hastane:
-                document
-                    .getElementById("hastane")
-                    .value
-                    .toUpperCase(),
-            doktor:
-                document
-                    .getElementById("doktor")
-                    .value
-                    .toUpperCase(),
-            not:
-                document.getElementById("not").value
-        };
-
-        icon.classList.add("hidden");
-        spinner.classList.remove("hidden");
-        text.textContent = "Kaydediliyor...";
-
-        button.classList.add(
-            "opacity-90",
-            "pointer-events-none"
-        );
-
-        try {
-            const cacheBuster =
-                "?t=" + new Date().getTime();
-
-            await fetch(scriptUrl + cacheBuster, {
-                method: "POST",
-                mode: "no-cors",
-                body: JSON.stringify(payload),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
-
-            showToast(
-                "Ziyaret Excel'e işlendi!",
-                "success"
-            );
-
-            const currentNo =
-                parseInt(ziyaretNo, 10);
-
-            if (!isNaN(currentNo)) {
-                ziyaretNoInput.value =
-                    currentNo + 1;
-            } else {
-                ziyaretNoInput.value = "";
+                return;
             }
 
-            document.getElementById("hastane").value = "";
-            document.getElementById("doktor").value = "";
-            document.getElementById("not").value = "";
-        } catch (error) {
-            showToast(
-                "Bağlantı hatası!",
-                "error"
-            );
-        } finally {
-            icon.classList.remove("hidden");
-            spinner.classList.add("hidden");
+            const rawDate =
+                document
+                    .getElementById(
+                        "tarih"
+                    )
+                    .value;
+
+            if (!rawDate) {
+                showToast(
+                    "Lütfen tarih seçin.",
+                    "error"
+                );
+
+                return;
+            }
+
+            const date =
+                new Date(rawDate);
+
+            const formattedDate =
+                ("0" + date.getDate())
+                    .slice(-2) +
+                "." +
+                (
+                    "0" +
+                    (
+                        date.getMonth() +
+                        1
+                    )
+                ).slice(-2) +
+                "." +
+                date.getFullYear();
+
+            const gunler = [
+                "Pazar",
+                "Pazartesi",
+                "Salı",
+                "Çarşamba",
+                "Perşembe",
+                "Cuma",
+                "Cumartesi"
+            ];
+
+            const ziyaretNoInput =
+                document.getElementById(
+                    "ziyaretNo"
+                );
+
+            const ziyaretNo =
+                ziyaretNoInput.value;
+
+            if (!ziyaretNo) {
+                showToast(
+                    "Lütfen Ziyaret No girin.",
+                    "error"
+                );
+
+                return;
+            }
+
+            const payload = {
+                tarih:
+                    formattedDate,
+
+                gun:
+                    gunler[
+                        date.getDay()
+                    ],
+
+                ziyaretNo:
+                    ziyaretNo,
+
+                sehir:
+                    sehirInput.value,
+
+                ilce:
+                    ilceInput.value,
+
+                hastane:
+                    hastaneInput
+                        .value
+                        .toLocaleUpperCase(
+                            "tr-TR"
+                        ),
+
+                doktor:
+                    doktorInput
+                        .value
+                        .toLocaleUpperCase(
+                            "tr-TR"
+                        ),
+
+                not:
+                    document
+                        .getElementById(
+                            "not"
+                        )
+                        .value
+            };
+
+            icon
+                .classList
+                .add("hidden");
+
+            spinner
+                .classList
+                .remove("hidden");
 
             text.textContent =
-                "Ziyareti Kaydet";
+                "Kaydediliyor...";
 
-            button.classList.remove(
+            button.classList.add(
                 "opacity-90",
                 "pointer-events-none"
             );
+
+            try {
+                const cacheBuster =
+                    "?t=" +
+                    new Date().getTime();
+
+                await fetch(
+                    scriptUrl +
+                    cacheBuster,
+                    {
+                        method: "POST",
+                        mode: "no-cors",
+
+                        body:
+                            JSON.stringify(
+                                payload
+                            ),
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        }
+                    }
+                );
+
+                showToast(
+                    "Ziyaret Excel'e işlendi!",
+                    "success"
+                );
+
+                saveLastLocation();
+                rememberDoctor(
+                    payload.doktor
+                );
+
+                const currentNo =
+                    parseInt(
+                        ziyaretNo,
+                        10
+                    );
+
+                if (
+                    !isNaN(currentNo)
+                ) {
+                    ziyaretNoInput.value =
+                        currentNo + 1;
+                } else {
+                    ziyaretNoInput.value =
+                        "";
+                }
+
+                doktorInput.value = "";
+
+                document
+                    .getElementById("not")
+                    .value = "";
+
+                doktorList
+                    .classList
+                    .add("hidden");
+
+            } catch (error) {
+                showToast(
+                    "Bağlantı hatası!",
+                    "error"
+                );
+            } finally {
+                icon
+                    .classList
+                    .remove("hidden");
+
+                spinner
+                    .classList
+                    .add("hidden");
+
+                text.textContent =
+                    "Ziyareti Kaydet";
+
+                button.classList.remove(
+                    "opacity-90",
+                    "pointer-events-none"
+                );
+            }
         }
-    });
+    );
 </script>
+
 </body>
 </html>
