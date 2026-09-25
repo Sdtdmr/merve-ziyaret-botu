@@ -8,1436 +8,469 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Ziyaret">
 <title>Ziyaret Asistanı</title>
-
 <link rel="manifest" href="manifest.json">
 <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-
 <style>
-:root {
-    --bg: #0d0f10;
-    --card: #17191b;
-    --field: #101214;
-    --green: #18c99a;
-    --white: #f5f6f4;
-    --muted: #9a9ca2;
-    --line: #2b2e31;
-}
+:root{--bg:#0d0f10;--card:#17191b;--field:#101214;--green:#18c99a;--white:#f5f6f4;--muted:#9a9ca2;--line:#2b2e31}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg);color-scheme:dark}
+body{margin:0;min-height:100dvh;overflow-x:hidden;background:radial-gradient(circle at 0 0,rgba(12,112,82,.18),transparent 25rem),var(--bg);color:var(--white);font-family:Manrope,sans-serif;padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.flex{display:flex!important}
+.app{width:100%;max-width:480px;margin:0 auto;padding:0 16px}
+.topbar{position:sticky;top:0;z-index:40;margin:0 -16px;padding:calc(12px + env(safe-area-inset-top)) 16px 12px;background:rgba(13,15,16,.9);border-bottom:1px solid rgba(255,255,255,.05);backdrop-filter:blur(18px)}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;max-width:448px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px}
+.brand-mark{width:40px;height:40px;display:grid;place-items:center;flex-shrink:0;border:1px solid rgba(24,201,154,.55);border-radius:50%;background:rgba(24,201,154,.07);color:var(--green);font-size:13px;font-weight:800}
+.brand h1{margin:0;font-size:16px;line-height:1.2}
+.brand p{margin:3px 0 0;color:var(--muted);font-size:9px;font-weight:600;letter-spacing:.14em}
+.settings{width:40px;height:40px;display:grid;place-items:center;flex-shrink:0;border:1px solid var(--line);border-radius:50%;background:var(--card);color:#c8c9cc}
+.settings:active{transform:scale(.94);color:var(--green);border-color:rgba(24,201,154,.5)}
+.intro{padding:27px 0 20px}
+.kicker{margin:0 0 8px;color:var(--green);font-size:10px;font-weight:800;letter-spacing:.18em}
+.form-stack{display:flex;flex-direction:column;gap:14px}
+.card{width:100%;padding:19px 16px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(25,27,29,.98),rgba(20,22,24,.98));box-shadow:0 18px 42px rgba(0,0,0,.17)}
+.card.accent{border-color:rgba(24,201,154,.5)}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:17px}
+.card-title{display:flex;align-items:center;gap:10px}
+.card-icon{width:34px;height:34px;display:grid;place-items:center;flex-shrink:0;border:1px solid rgba(24,201,154,.28);border-radius:12px;background:rgba(24,201,154,.07);color:var(--green)}
+.card-icon span{font-size:18px}
+.card h3{margin:0;font-size:15px}
+.step{padding:5px 8px;border:1px solid rgba(24,201,154,.24);border-radius:999px;color:var(--green);font-size:9px;font-weight:800;letter-spacing:.12em}
+.fields{display:flex;flex-direction:column;gap:14px}
+.field{position:relative;display:flex;flex-direction:column;gap:7px}
+.label-row{display:flex;align-items:center;justify-content:space-between;padding:0 2px}
+.field label{color:#aaaeb2;font-size:12px;font-weight:650}
+.auto{color:var(--green);font-size:8px;font-weight:800;letter-spacing:.12em}
+.input-wrap{position:relative}
+.input-icon{position:absolute;top:50%;left:14px;z-index:2;color:#668078;font-size:19px;pointer-events:none;transform:translateY(-50%)}
+.control{width:100%;min-height:52px;padding:13px 14px!important;border:1px solid #303337!important;border-radius:14px!important;outline:none!important;background:var(--field)!important;color:var(--white)!important;box-shadow:none!important}
+.control.icon{padding-left:43px!important}
+.control::placeholder{color:#5f6267}
+.control:focus{border-color:var(--green)!important;box-shadow:0 0 0 4px rgba(24,201,154,.08)!important}
+textarea.control{min-height:98px;resize:none}
+.submit{width:100%;min-height:56px;display:flex;align-items:center;justify-content:center;gap:9px;border:0;border-radius:16px;background:linear-gradient(110deg,#1ad09d,#10b986);color:#061510;font-size:14px;font-weight:800;box-shadow:0 14px 32px rgba(11,185,132,.2)}
+.submit:active{transform:scale(.985)}
+.submit:disabled{opacity:.65;cursor:wait}
+.footer{margin:19px 0 0;color:#55585c;font-size:9px;font-weight:700;text-align:center;letter-spacing:.14em}
+#settingsModal{position:fixed;inset:0;z-index:80;align-items:flex-end;justify-content:center;background:rgba(2,4,5,.78);backdrop-filter:blur(8px)}
+#settingsCard{width:100%;max-width:480px;padding:22px 18px calc(22px + env(safe-area-inset-bottom));border:1px solid rgba(24,201,154,.32);border-bottom:0;border-radius:24px 24px 0 0;background:#181a1b}
+#settingsCard h2{margin:0 0 8px}
+#settingsCard p{margin:0 0 16px;color:var(--muted)}
+.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.cancel,.save{min-height:47px;border-radius:14px;font-weight:700}
+.cancel{border:1px solid var(--line);background:#111314;color:#a9abad}
+.save{border:0;background:var(--green);color:#07140f}
 
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-}
+/* Duplicate uyarı kutusu */
+#dupWarning{display:none;margin-top:10px;padding:14px 16px;border:1px solid rgba(255,180,0,.35);border-radius:14px;background:rgba(255,160,0,.07);color:#f4be7c;font-size:13px;line-height:1.5;gap:10px;align-items:flex-start}
+#dupWarning.visible{display:flex}
+#dupWarning .dup-icon{font-size:20px;flex-shrink:0;color:#f4be7c}
+#dupActions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+#dupIgnoreBtn{padding:8px 14px;border:0;border-radius:10px;background:#f4be7c;color:#1a1200;font-size:12px;font-weight:800;cursor:pointer}
+#dupCancelBtn{padding:8px 14px;border:1px solid #444;border-radius:10px;background:transparent;color:#aaa;font-size:12px;font-weight:700;cursor:pointer}
 
-html {
-    background: var(--bg);
-    color-scheme: dark;
-}
+/* Yeşil flash overlay */
+#flashOverlay{position:fixed;inset:0;z-index:200;pointer-events:none;background:rgba(24,201,154,0);transition:background .15s ease}
+#flashOverlay.flash{background:rgba(24,201,154,.22)}
 
-body {
-    margin: 0;
-    min-height: 100dvh;
-    overflow-x: hidden;
-    background:
-        radial-gradient(
-            circle at 0 0,
-            rgba(12,112,82,.18),
-            transparent 25rem
-        ),
-        var(--bg);
-    color: var(--white);
-    font-family: Manrope, sans-serif;
-    padding-bottom:
-        calc(28px + env(safe-area-inset-bottom));
-}
-
-button,
-input,
-textarea {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-.hidden {
-    display: none !important;
-}
-
-.flex {
-    display: flex !important;
-}
-
-.app {
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 0 16px;
-}
-
-.topbar {
-    position: sticky;
-    top: 0;
-    z-index: 40;
-    margin: 0 -16px;
-    padding:
-        calc(12px + env(safe-area-inset-top))
-        16px
-        12px;
-    background: rgba(13,15,16,.9);
-    border-bottom:
-        1px solid rgba(255,255,255,.05);
-    backdrop-filter: blur(18px);
-}
-
-.topbar-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 448px;
-    margin: 0 auto;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-}
-
-.brand-mark {
-    width: 40px;
-    height: 40px;
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-    border:
-        1px solid rgba(24,201,154,.55);
-    border-radius: 50%;
-    background: rgba(24,201,154,.07);
-    color: var(--green);
-    font-size: 13px;
-    font-weight: 800;
-}
-
-.brand h1 {
-    margin: 0;
-    font-size: 16px;
-    line-height: 1.2;
-}
-
-.brand p {
-    margin: 3px 0 0;
-    color: var(--muted);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: .14em;
-}
-
-.settings {
-    width: 40px;
-    height: 40px;
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    background: var(--card);
-    color: #c8c9cc;
-}
-
-.settings:active {
-    transform: scale(.94);
-    color: var(--green);
-    border-color:
-        rgba(24,201,154,.5);
-}
-
-.intro {
-    padding: 27px 0 20px;
-}
-
-.kicker {
-    margin: 0 0 8px;
-    color: var(--green);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .18em;
-}
-
-.form-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.card {
-    width: 100%;
-    padding: 19px 16px;
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    background:
-        linear-gradient(
-            145deg,
-            rgba(25,27,29,.98),
-            rgba(20,22,24,.98)
-        );
-    box-shadow:
-        0 18px 42px rgba(0,0,0,.17);
-}
-
-.card.accent {
-    border-color:
-        rgba(24,201,154,.5);
-}
-
-.card-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 17px;
-}
-
-.card-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.card-icon {
-    width: 34px;
-    height: 34px;
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-    border:
-        1px solid rgba(24,201,154,.28);
-    border-radius: 12px;
-    background:
-        rgba(24,201,154,.07);
-    color: var(--green);
-}
-
-.card-icon span {
-    font-size: 18px;
-}
-
-.card h3 {
-    margin: 0;
-    font-size: 15px;
-}
-
-.step {
-    padding: 5px 8px;
-    border:
-        1px solid rgba(24,201,154,.24);
-    border-radius: 999px;
-    color: var(--green);
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: .12em;
-}
-
-.fields {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.field {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-}
-
-.label-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2px;
-}
-
-.field label {
-    color: #aaaeb2;
-    font-size: 12px;
-    font-weight: 650;
-}
-
-.auto {
-    color: var(--green);
-    font-size: 8px;
-    font-weight: 800;
-    letter-spacing: .12em;
-}
-
-.input-wrap {
-    position: relative;
-}
-
-.input-icon {
-    position: absolute;
-    top: 50%;
-    left: 14px;
-    z-index: 2;
-    color: #668078;
-    font-size: 19px;
-    pointer-events: none;
-    transform: translateY(-50%);
-}
-
-.control {
-    width: 100%;
-    min-height: 52px;
-    padding: 13px 14px !important;
-    border:
-        1px solid #303337 !important;
-    border-radius: 14px !important;
-    outline: none !important;
-    background:
-        var(--field) !important;
-    color:
-        var(--white) !important;
-    box-shadow: none !important;
-}
-
-.control.icon {
-    padding-left: 43px !important;
-}
-
-.control::placeholder {
-    color: #5f6267;
-}
-
-.control:focus {
-    border-color:
-        var(--green) !important;
-    box-shadow:
-        0 0 0 4px rgba(24,201,154,.08)
-        !important;
-}
-
-textarea.control {
-    min-height: 98px;
-    resize: none;
-}
-
-.submit {
-    width: 100%;
-    min-height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-    border: 0;
-    border-radius: 16px;
-    background:
-        linear-gradient(
-            110deg,
-            #1ad09d,
-            #10b986
-        );
-    color: #061510;
-    font-size: 14px;
-    font-weight: 800;
-    box-shadow:
-        0 14px 32px rgba(11,185,132,.2);
-}
-
-.submit:active {
-    transform: scale(.985);
-}
-
-.submit:disabled {
-    opacity: .65;
-    cursor: wait;
-}
-
-.footer {
-    margin: 19px 0 0;
-    color: #55585c;
-    font-size: 9px;
-    font-weight: 700;
-    text-align: center;
-    letter-spacing: .14em;
-}
-
-#settingsModal {
-    position: fixed;
-    inset: 0;
-    z-index: 80;
-    align-items: flex-end;
-    justify-content: center;
-    background: rgba(2,4,5,.78);
-    backdrop-filter: blur(8px);
-}
-
-#settingsCard {
-    width: 100%;
-    max-width: 480px;
-    padding:
-        22px
-        18px
-        calc(22px + env(safe-area-inset-bottom));
-    border:
-        1px solid rgba(24,201,154,.32);
-    border-bottom: 0;
-    border-radius:
-        24px 24px 0 0;
-    background: #181a1b;
-}
-
-#settingsCard h2 {
-    margin: 0 0 8px;
-}
-
-#settingsCard p {
-    margin: 0 0 16px;
-    color: var(--muted);
-}
-
-.modal-actions {
-    display: grid;
-    grid-template-columns:
-        1fr 1fr;
-    gap: 10px;
-    margin-top: 18px;
-}
-
-.cancel,
-.save {
-    min-height: 47px;
-    border-radius: 14px;
-    font-weight: 700;
-}
-
-.cancel {
-    border:
-        1px solid var(--line);
-    background: #111314;
-    color: #a9abad;
-}
-
-.save {
-    border: 0;
-    background: var(--green);
-    color: #07140f;
-}
+/* Durum mesajı */
+#syncStatus{font-size:12px;line-height:1.6;margin:10px 0;color:#a9c5ba;overflow-wrap:anywhere}
 </style>
 </head>
-
 <body>
+
+<div id="flashOverlay"></div>
+
 <div class="app">
-
 <header class="topbar">
-    <div class="topbar-inner">
-        <div class="brand">
-            <div class="brand-mark">
-                SD
-            </div>
-
-            <div>
-                <h1>Ziyaret Asistanı</h1>
-                <p>KİŞİSEL ÇALIŞMA ALANI</p>
-            </div>
-        </div>
-
-        <button
-            id="openSettingsBtn"
-            class="settings"
-            type="button"
-            aria-label="Ayarlar"
-        >
-            <span class="material-symbols-outlined">
-                tune
-            </span>
-        </button>
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">SD</div>
+      <div>
+        <h1>Ziyaret Asistanı</h1>
+        <p>KİŞİSEL ÇALIŞMA ALANI</p>
+      </div>
     </div>
+    <button id="openSettingsBtn" class="settings" type="button" aria-label="Ayarlar">
+      <span class="material-symbols-outlined">tune</span>
+    </button>
+  </div>
 </header>
 
 <main>
-    <section class="intro">
-        <p class="kicker">
-            YENİ ZİYARET
-        </p>
+  <section class="intro">
+    <p class="kicker">YENİ ZİYARET</p>
+  </section>
+
+  <form id="visitForm" class="form-stack">
+
+    <section class="card accent">
+      <div class="card-head">
+        <div class="card-title">
+          <div class="card-icon"><span class="material-symbols-outlined">calendar_month</span></div>
+          <h3>Ziyaret bilgileri</h3>
+        </div>
+        <span class="step">01</span>
+      </div>
+      <div class="fields">
+        <div class="field">
+          <label for="tarih">Tarih</label>
+          <div class="input-wrap">
+            <span class="material-symbols-outlined input-icon">calendar_month</span>
+            <input id="tarih" class="control icon" type="date">
+          </div>
+        </div>
+        <div class="field">
+          <div class="label-row">
+            <label for="ziyaretNo">Ziyaret No</label>
+            <span class="auto">OTOMATİK</span>
+          </div>
+          <div class="input-wrap">
+            <span class="material-symbols-outlined input-icon">tag</span>
+            <input id="ziyaretNo" class="control icon" type="number" min="1" step="1" placeholder="...">
+          </div>
+        </div>
+      </div>
     </section>
 
-    <form
-        id="visitForm"
-        class="form-stack"
-    >
-        <section class="card accent">
-            <div class="card-head">
-                <div class="card-title">
-                    <div class="card-icon">
-                        <span class="material-symbols-outlined">
-                            calendar_month
-                        </span>
-                    </div>
+    <section class="card">
+      <div class="card-head">
+        <div class="card-title">
+          <div class="card-icon"><span class="material-symbols-outlined">location_on</span></div>
+          <h3>Konum ve kurum</h3>
+        </div>
+        <span class="step">02</span>
+      </div>
+      <div class="fields">
+        <div class="field">
+          <label for="sehir">Şehir</label>
+          <div class="input-wrap">
+            <span class="material-symbols-outlined input-icon">search</span>
+            <input id="sehir" class="control icon" type="text" autocomplete="off" placeholder="Şehir ara...">
+          </div>
+          <ul id="sehirList" class="hidden"></ul>
+        </div>
+        <div class="field">
+          <label for="ilce">İlçe</label>
+          <div class="input-wrap">
+            <span class="material-symbols-outlined input-icon">map</span>
+            <input id="ilce" class="control icon" type="text" placeholder="İlçe adını yazın">
+          </div>
+        </div>
+        <div class="field">
+          <label for="hastane">Hastane / Kurum Adı</label>
+          <div class="input-wrap">
+            <span class="material-symbols-outlined input-icon">domain</span>
+            <input id="hastane" class="control icon" type="text" autocomplete="off" placeholder="Kurum adını yazın">
+          </div>
+          <ul id="hastaneList" class="hidden"></ul>
+        </div>
+      </div>
+    </section>
 
-                    <h3>Ziyaret bilgileri</h3>
-                </div>
+    <section class="card">
+      <div class="card-head">
+        <div class="card-title">
+          <div class="card-icon"><span class="material-symbols-outlined">person</span></div>
+          <h3>Görüşme</h3>
+        </div>
+        <span class="step">03</span>
+      </div>
+      <div class="fields">
+        <div class="field">
+          <label for="doktor">Doktor Adı</label>
+          <div class="input-wrap">
+            <span class="material-symbols-outlined input-icon">person</span>
+            <input id="doktor" class="control icon" type="text" autocomplete="off" placeholder="Doktor adını yazın">
+          </div>
+          <ul id="doktorList" class="hidden"></ul>
+        </div>
 
-                <span class="step">01</span>
+        <!-- Duplicate uyarısı -->
+        <div id="dupWarning">
+          <span class="material-symbols-outlined dup-icon">warning</span>
+          <div>
+            <div id="dupText"></div>
+            <div id="dupActions">
+              <button type="button" id="dupIgnoreBtn">Yine de Kaydet</button>
+              <button type="button" id="dupCancelBtn">Vazgeç</button>
             </div>
+          </div>
+        </div>
 
-            <div class="fields">
-                <div class="field">
-                    <label for="tarih">
-                        Tarih
-                    </label>
+        <div class="field">
+          <label for="not">Notlar</label>
+          <textarea id="not" class="control" rows="3" placeholder="Ziyaret detaylarını buraya girin..."></textarea>
+        </div>
+      </div>
+    </section>
 
-                    <div class="input-wrap">
-                        <span class="material-symbols-outlined input-icon">
-                            calendar_month
-                        </span>
+    <button id="submitBtn" type="button" class="submit">
+      <span id="btnIcon" class="material-symbols-outlined">add_circle</span>
+      <span id="btnText">Ziyareti Kaydet</span>
+      <svg id="btnSpinner" class="hidden animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    </button>
+  </form>
 
-                        <input
-                            id="tarih"
-                            class="control icon"
-                            type="date"
-                        >
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="label-row">
-                        <label for="ziyaretNo">
-                            Ziyaret No
-                        </label>
-
-                        <span class="auto">
-                            OTOMATİK
-                        </span>
-                    </div>
-
-                    <div class="input-wrap">
-                        <span class="material-symbols-outlined input-icon">
-                            tag
-                        </span>
-
-                        <input
-                            id="ziyaretNo"
-                            class="control icon"
-                            type="number"
-                            min="1"
-                            step="1"
-                            placeholder="..."
-                        >
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="card">
-            <div class="card-head">
-                <div class="card-title">
-                    <div class="card-icon">
-                        <span class="material-symbols-outlined">
-                            location_on
-                        </span>
-                    </div>
-
-                    <h3>Konum ve kurum</h3>
-                </div>
-
-                <span class="step">02</span>
-            </div>
-
-            <div class="fields">
-                <div class="field">
-                    <label for="sehir">
-                        Şehir
-                    </label>
-
-                    <div class="input-wrap">
-                        <span class="material-symbols-outlined input-icon">
-                            search
-                        </span>
-
-                        <input
-                            id="sehir"
-                            class="control icon"
-                            type="text"
-                            autocomplete="off"
-                            placeholder="Şehir ara..."
-                        >
-                    </div>
-
-                    <ul
-                        id="sehirList"
-                        class="hidden"
-                    ></ul>
-                </div>
-
-                <div class="field">
-                    <label for="ilce">
-                        İlçe
-                    </label>
-
-                    <div class="input-wrap">
-                        <span class="material-symbols-outlined input-icon">
-                            map
-                        </span>
-
-                        <input
-                            id="ilce"
-                            class="control icon"
-                            type="text"
-                            placeholder="İlçe adını yazın"
-                        >
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label for="hastane">
-                        Hastane / Kurum Adı
-                    </label>
-
-                    <div class="input-wrap">
-                        <span class="material-symbols-outlined input-icon">
-                            domain
-                        </span>
-
-                        <input
-                            id="hastane"
-                            class="control icon"
-                            type="text"
-                            autocomplete="off"
-                            placeholder="Kurum adını yazın"
-                        >
-                    </div>
-
-                    <ul
-                        id="hastaneList"
-                        class="hidden"
-                    ></ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="card">
-            <div class="card-head">
-                <div class="card-title">
-                    <div class="card-icon">
-                        <span class="material-symbols-outlined">
-                            person
-                        </span>
-                    </div>
-
-                    <h3>Görüşme</h3>
-                </div>
-
-                <span class="step">03</span>
-            </div>
-
-            <div class="fields">
-                <div class="field">
-                    <label for="doktor">
-                        Doktor Adı
-                    </label>
-
-                    <div class="input-wrap">
-                        <span class="material-symbols-outlined input-icon">
-                            person
-                        </span>
-
-                        <input
-                            id="doktor"
-                            class="control icon"
-                            type="text"
-                            autocomplete="off"
-                            placeholder="Doktor adını yazın"
-                        >
-                    </div>
-
-                    <ul
-                        id="doktorList"
-                        class="hidden"
-                    ></ul>
-                </div>
-
-                <div class="field">
-                    <label for="not">
-                        Notlar
-                    </label>
-
-                    <textarea
-                        id="not"
-                        class="control"
-                        rows="3"
-                        placeholder="Ziyaret detaylarını buraya girin..."
-                    ></textarea>
-                </div>
-            </div>
-        </section>
-
-        <button
-            id="submitBtn"
-            type="button"
-            class="submit"
-        >
-            <span
-                id="btnIcon"
-                class="material-symbols-outlined"
-            >
-                add_circle
-            </span>
-
-            <span id="btnText">
-                Ziyareti Kaydet
-            </span>
-
-            <svg
-                id="btnSpinner"
-                class="hidden animate-spin h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-            >
-                <circle
-                    class="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    stroke-width="4"
-                ></circle>
-
-                <path
-                    class="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
-            </svg>
-        </button>
-    </form>
-
-    <p class="footer">
-        SEDAT DEMİR · ZİYARET YÖNETİMİ
-    </p>
+  <p class="footer">SEDAT DEMİR · ZİYARET YÖNETİMİ</p>
 </main>
 </div>
 
-<div
-    id="settingsModal"
-    class="hidden flex-col"
->
-    <div id="settingsCard">
-        <h2>Ayarlar</h2>
-
-        <p>
-            Google Apps Script bağlantısını buraya yapıştırın.
-        </p>
-
-        <input
-            type="text"
-            id="scriptUrlInput"
-            class="control"
-            placeholder="https://script.google.com/macros/s/.../exec"
-        >
-
-        <div class="modal-actions">
-            <button
-                type="button"
-                id="closeSettingsBtn"
-                class="cancel"
-            >
-                İptal
-            </button>
-
-            <button
-                type="button"
-                id="saveSettingsBtn"
-                class="save"
-            >
-                Kaydet
-            </button>
-        </div>
+<div id="settingsModal" class="hidden flex-col">
+  <div id="settingsCard">
+    <h2>Ayarlar</h2>
+    <p>Google Apps Script bağlantısını buraya yapıştırın.</p>
+    <input type="text" id="scriptUrlInput" class="control" placeholder="https://script.google.com/macros/s/.../exec">
+    <div class="modal-actions">
+      <button type="button" id="closeSettingsBtn" class="cancel">İptal</button>
+      <button type="button" id="saveSettingsBtn" class="save">Kaydet</button>
     </div>
+  </div>
 </div>
 
 <script>
 (() => {
   "use strict";
 
-  const $ = id =>
-    document.getElementById(id);
+  const $ = id => document.getElementById(id);
 
-  const fields = [
-    "tarih",
-    "ziyaretNo",
-    "sehir",
-    "ilce",
-    "hastane",
-    "doktor",
-    "not"
-  ];
+  const fields = ["tarih","ziyaretNo","sehir","ilce","hastane","doktor","not"];
 
   const required = {
-    tarih: "Tarih",
-    ziyaretNo: "Ziyaret no",
-    sehir: "İl",
-    ilce: "İlçe",
-    hastane: "Kurum",
-    doktor: "Doktor"
+    tarih:"Tarih", ziyaretNo:"Ziyaret no", sehir:"İl",
+    ilce:"İlçe", hastane:"Kurum", doktor:"Doktor"
   };
 
   const cities = (
-    "Adana|Adıyaman|Afyonkarahisar|Ağrı|Aksaray|" +
-    "Amasya|Ankara|Antalya|Artvin|Aydın|Balıkesir|" +
-    "Bartın|Batman|Bayburt|Bilecik|Bingöl|Bitlis|" +
-    "Bolu|Burdur|Bursa|Çanakkale|Çankırı|Çorum|" +
-    "Denizli|Diyarbakır|Düzce|Edirne|Elazığ|" +
-    "Erzincan|Erzurum|Eskişehir|Gaziantep|Giresun|" +
-    "Gümüşhane|Hakkari|Hatay|Iğdır|Isparta|İstanbul|" +
-    "İzmir|Kahramanmaraş|Karabük|Karaman|Kars|" +
-    "Kastamonu|Kayseri|Kırıkkale|Kırklareli|Kırşehir|" +
-    "Kilis|Kocaeli|Konya|Kütahya|Malatya|Manisa|" +
-    "Mardin|Mersin|Muğla|Muş|Nevşehir|Niğde|Ordu|" +
-    "Osmaniye|Rize|Sakarya|Samsun|Siirt|Sinop|Sivas|" +
-    "Şanlıurfa|Şırnak|Tekirdağ|Tokat|Trabzon|Tunceli|" +
-    "Uşak|Van|Yalova|Yozgat|Zonguldak"
-  )
-    .split("|")
-    .sort((a, b) =>
-      a.localeCompare(b, "tr")
-    );
+    "Adana|Adıyaman|Afyonkarahisar|Ağrı|Aksaray|Amasya|Ankara|Antalya|Artvin|Aydın|" +
+    "Balıkesir|Bartın|Batman|Bayburt|Bilecik|Bingöl|Bitlis|Bolu|Burdur|Bursa|" +
+    "Çanakkale|Çankırı|Çorum|Denizli|Diyarbakır|Düzce|Edirne|Elazığ|Erzincan|" +
+    "Erzurum|Eskişehir|Gaziantep|Giresun|Gümüşhane|Hakkari|Hatay|Iğdır|Isparta|" +
+    "İstanbul|İzmir|Kahramanmaraş|Karabük|Karaman|Kars|Kastamonu|Kayseri|Kırıkkale|" +
+    "Kırklareli|Kırşehir|Kilis|Kocaeli|Konya|Kütahya|Malatya|Manisa|Mardin|Mersin|" +
+    "Muğla|Muş|Nevşehir|Niğde|Ordu|Osmaniye|Rize|Sakarya|Samsun|Siirt|Sinop|Sivas|" +
+    "Şanlıurfa|Şırnak|Tekirdağ|Tokat|Trabzon|Tunceli|Uşak|Van|Yalova|Yozgat|Zonguldak"
+  ).split("|").sort((a,b) => a.localeCompare(b,"tr"));
 
-  const clean = value =>
-    String(value == null ? "" : value)
-      .trim()
-      .replace(/\s+/g, " ");
-
-  const key = value =>
-    clean(value)
-      .toLocaleLowerCase("tr-TR")
-      .replace(/ı/g, "i")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
-
-  const upper = value =>
-    clean(value)
-      .toLocaleUpperCase("tr-TR");
+  const clean = v => String(v == null ? "" : v).trim().replace(/\s+/g," ");
+  const key = v => clean(v).toLocaleLowerCase("tr-TR").replace(/ı/g,"i").normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  const upper = v => clean(v).toLocaleUpperCase("tr-TR");
 
   let busy = false;
-  let pending = null;
+  let forceSave = false;
   let doctors = [];
   let institutions = [];
   let sequence = 0;
 
   const ram = new Map();
+  const flash = $("flashOverlay");
 
-  const status =
-    document.createElement("p");
-
-  status.id = "syncStatus";
-  status.setAttribute("role", "status");
-  status.style.cssText =
-    "font-size:12px;" +
-    "line-height:1.6;" +
-    "margin:10px 0;" +
-    "color:#a9c5ba;" +
-    "overflow-wrap:anywhere";
-
-  $("visitForm").before(status);
-
-  const storageNote =
-    document.createElement("p");
-
-  storageNote.style.cssText =
-    "font-size:12px;color:#f4be7c";
-
-  status.after(storageNote);
-
-  function message(
-    text,
-    error = false
-  ) {
-    status.textContent = text;
-
-    status.style.color = error
-      ? "#ff9e9e"
-      : "#a9c5ba";
+  function showFlash() {
+    flash.classList.add("flash");
+    setTimeout(() => flash.classList.remove("flash"), 600);
   }
 
-  function read(
-    name,
-    fallback
-  ) {
-    try {
-      const raw =
-        localStorage.getItem(name);
+  const status = document.createElement("p");
+  status.id = "syncStatus";
+  status.setAttribute("role","status");
+  $("visitForm").before(status);
 
-      return raw === null
-        ? fallback
-        : JSON.parse(raw);
-    } catch (_) {
-      return ram.has(name)
-        ? ram.get(name)
-        : fallback;
+  const storageNote = document.createElement("p");
+  storageNote.style.cssText = "font-size:12px;color:#f4be7c";
+  status.after(storageNote);
+
+  function message(text, error=false) {
+    status.textContent = text;
+    status.style.color = error ? "#ff9e9e" : "#a9c5ba";
+  }
+
+  function read(name, fallback) {
+    try {
+      const raw = localStorage.getItem(name);
+      return raw === null ? fallback : JSON.parse(raw);
+    } catch(_) {
+      return ram.has(name) ? ram.get(name) : fallback;
     }
   }
 
-  function save(
-    name,
-    value
-  ) {
+  function save(name, value) {
     ram.set(name, value);
-
     try {
-      localStorage.setItem(
-        name,
-        JSON.stringify(value)
-      );
-    } catch (_) {
-      storageNote.textContent =
-        "Cihaz depolaması kullanılamıyor.";
+      localStorage.setItem(name, JSON.stringify(value));
+    } catch(_) {
+      storageNote.textContent = "Cihaz depolaması kullanılamıyor.";
     }
   }
 
   let endpoint = "";
+  try { endpoint = localStorage.getItem("scriptUrl") || ""; } catch(_) {}
 
-  try {
-    endpoint =
-      localStorage.getItem(
-        "scriptUrl"
-      ) || "";
-  } catch (_) {}
-
-  const cacheKey = suffix =>
-    "visit3:" +
-    endpoint +
-    ":" +
-    suffix;
+  const cacheKey = s => "visit3:" + endpoint + ":" + s;
 
   function unique(names) {
     const seen = new Set();
-
-    return names
-      .filter(value =>
-        typeof value === "string"
-      )
-      .map(upper)
-      .filter(value => {
-        const normalized =
-          key(value);
-
-        if (
-          !value ||
-          seen.has(normalized)
-        ) {
-          return false;
-        }
-
-        seen.add(normalized);
-        return true;
-      });
+    return names.filter(v => typeof v === "string").map(upper).filter(v => {
+      const n = key(v);
+      if (!v || seen.has(n)) return false;
+      seen.add(n); return true;
+    });
   }
 
   function loadCache() {
-    const cachedDoctors =
-      read(
-        cacheKey("doctors"),
-        []
-      );
-
-    const cachedInstitutions =
-      read(
-        cacheKey("institutions"),
-        []
-      );
-
-    doctors =
-      Array.isArray(cachedDoctors)
-        ? unique(cachedDoctors)
-        : [];
-
-    institutions =
-      Array.isArray(
-        cachedInstitutions
-      )
-        ? unique(cachedInstitutions)
-        : [];
-
-    pending =
-      read(
-        cacheKey("pending"),
-        null
-      );
-
-    if (
-      !pending ||
-      !pending.requestId ||
-      !pending.tarih
-    ) {
-      pending = null;
-    }
+    const cd = read(cacheKey("doctors"), []);
+    const ci = read(cacheKey("institutions"), []);
+    doctors = Array.isArray(cd) ? unique(cd) : [];
+    institutions = Array.isArray(ci) ? unique(ci) : [];
   }
 
   function saveCache() {
-    save(
-      cacheKey("doctors"),
-      doctors.slice(0, 1000)
-    );
-
-    save(
-      cacheKey("institutions"),
-      institutions.slice(0, 1000)
-    );
+    save(cacheKey("doctors"), doctors.slice(0,1000));
+    save(cacheKey("institutions"), institutions.slice(0,1000));
   }
 
   function locationSave() {
-    save(
-      "visitAssistantLastLocation",
-      {
-        sehir:
-          $("sehir").value,
-        ilce:
-          $("ilce").value,
-        hastane:
-          $("hastane").value
-      }
-    );
+    save("visitAssistantLastLocation", {
+      sehir: $("sehir").value,
+      ilce: $("ilce").value,
+      hastane: $("hastane").value
+    });
   }
 
-  const location = read(
-    "visitAssistantLastLocation",
-    {}
-  );
-
-  [
-    "sehir",
-    "ilce",
-    "hastane"
-  ].forEach(id => {
-    $(id).value =
-      location &&
-      typeof location[id] === "string"
-        ? location[id]
-        : "";
-
-    $(id).addEventListener(
-      "input",
-      locationSave
-    );
-
-    $(id).addEventListener(
-      "change",
-      locationSave
-    );
+  const location = read("visitAssistantLastLocation", {});
+  ["sehir","ilce","hastane"].forEach(id => {
+    $(id).value = location && typeof location[id] === "string" ? location[id] : "";
+    $(id).addEventListener("input", locationSave);
+    $(id).addEventListener("change", locationSave);
   });
 
-  Object
-    .keys(required)
-    .forEach(id => {
-      $(id).required = true;
-    });
-
+  Object.keys(required).forEach(id => { $(id).required = true; });
   $("ziyaretNo").min = "1";
   $("ziyaretNo").step = "1";
   $("not").maxLength = 10000;
-
-  [
-    "sehir",
-    "ilce",
-    "hastane",
-    "doktor"
-  ].forEach(id => {
-    $(id).maxLength = 250;
-  });
-
+  ["sehir","ilce","hastane","doktor"].forEach(id => { $(id).maxLength = 250; });
   $("doktor").value = "";
   $("not").value = "";
 
   function setToday() {
-    const today =
-      new Date();
-
-    const year =
-      today.getFullYear();
-
-    const month =
-      String(
-        today.getMonth() + 1
-      ).padStart(2, "0");
-
-    const day =
-      String(
-        today.getDate()
-      ).padStart(2, "0");
-
+    const today = new Date();
     $("tarih").value =
-      year +
-      "-" +
-      month +
-      "-" +
-      day;
+      today.getFullYear() + "-" +
+      String(today.getMonth()+1).padStart(2,"0") + "-" +
+      String(today.getDate()).padStart(2,"0");
   }
-
   setToday();
 
-  const dynamicStyle =
-    document.createElement("style");
-
+  const dynamicStyle = document.createElement("style");
   dynamicStyle.textContent = `
-    #hastaneList,
-    #doktorList,
-    #sehirList {
-      position:absolute;
-      top:100%;
-      left:0;
-      right:0;
-      z-index:55;
-      max-height:220px;
-      overflow:auto;
-      padding:5px;
-      margin:6px 0 0;
-      list-style:none;
-      background:#191c1d;
-      border:1px solid #337a66;
-      border-radius:14px;
-      box-shadow:0 15px 35px #0008;
-    }
-
-    #hastaneList li,
-    #doktorList li,
-    #sehirList li {
-      padding:0 !important;
-    }
-
-    .memory-choice {
-      display:block;
-      width:100%;
-      padding:13px;
-      text-align:left;
-      border:0;
-      border-radius:9px;
-      background:transparent;
-      color:#eee;
-      font:inherit;
-      font-size:14px;
-    }
-
-    .memory-choice:hover,
-    .memory-choice:focus {
-      background:#23483d;
-      outline:2px solid #18c99a;
-      outline-offset:-2px;
-    }
-
-    .control:disabled {
-      opacity:.7;
-    }
-
-    .card:focus-within {
-      position:relative;
-      z-index:2;
-    }
+    #hastaneList,#doktorList,#sehirList{position:absolute;top:100%;left:0;right:0;z-index:55;max-height:220px;overflow:auto;padding:5px;margin:6px 0 0;list-style:none;background:#191c1d;border:1px solid #337a66;border-radius:14px;box-shadow:0 15px 35px #0008}
+    #hastaneList li,#doktorList li,#sehirList li{padding:0!important}
+    .memory-choice{display:block;width:100%;padding:13px;text-align:left;border:0;border-radius:9px;background:transparent;color:#eee;font:inherit;font-size:14px}
+    .memory-choice:hover,.memory-choice:focus{background:#23483d;outline:2px solid #18c99a;outline-offset:-2px}
+    .control:disabled{opacity:.7}
+    .card:focus-within{position:relative;z-index:2}
   `;
-
-  document.head.appendChild(
-    dynamicStyle
-  );
+  document.head.appendChild(dynamicStyle);
 
   const dropdowns = [];
 
-  function autocomplete(
-    id,
-    listId,
-    source,
-    minimumLength,
-    selected
-  ) {
+  function autocomplete(id, listId, source, minimumLength, selected) {
     const input = $(id);
     let list = $(listId);
-
     if (!list) {
-      list =
-        document.createElement("ul");
-
+      list = document.createElement("ul");
       list.id = listId;
-
-      input
-        .closest(".field")
-        .appendChild(list);
+      input.closest(".field").appendChild(list);
     }
-
     list.classList.add("hidden");
     input.autocomplete = "off";
 
-    const close = () => {
-      list.classList.add("hidden");
-    };
+    const close = () => list.classList.add("hidden");
 
     function render() {
       list.replaceChildren();
-
-      const query =
-        key(input.value);
-
-      if (
-        busy ||
-        pending ||
-        query.length <
-          minimumLength
-      ) {
-        close();
-        return;
-      }
-
+      const query = key(input.value);
+      if (busy || query.length < minimumLength) { close(); return; }
       const matches = source()
-        .filter(value => {
-          if (id === "sehir") {
-            return key(value)
-              .includes(query);
-          }
-
-          return key(value)
-            .startsWith(query);
-        })
-        .slice(0, 30);
-
-      matches.forEach(value => {
-        const item =
-          document.createElement("li");
-
-        const button =
-          document.createElement("button");
-
+        .filter(v => id === "sehir" ? key(v).includes(query) : key(v).startsWith(query))
+        .slice(0,30);
+      matches.forEach(v => {
+        const item = document.createElement("li");
+        const button = document.createElement("button");
         button.type = "button";
-        button.className =
-          "memory-choice";
-        button.textContent = value;
-
-        button.addEventListener(
-          "mousedown",
-          event =>
-            event.preventDefault()
-        );
-
-        button.addEventListener(
-          "click",
-          () => {
-            input.value = value;
-            selected(value);
-            close();
-            input.focus();
-          }
-        );
-
+        button.className = "memory-choice";
+        button.textContent = v;
+        button.addEventListener("mousedown", e => e.preventDefault());
+        button.addEventListener("click", () => { input.value = v; selected(v); close(); input.focus(); });
         item.appendChild(button);
         list.appendChild(item);
       });
-
-      list.classList.toggle(
-        "hidden",
-        !matches.length
-      );
+      list.classList.toggle("hidden", !matches.length);
     }
 
-    input.addEventListener(
-      "input",
-      render
-    );
-
-    input.addEventListener(
-      "focus",
-      render
-    );
-
-    document.addEventListener(
-      "pointerdown",
-      event => {
-        if (
-          event.target !== input &&
-          !list.contains(event.target)
-        ) {
-          close();
-        }
-      }
-    );
-
-    dropdowns.push({
-      input,
-      render,
-      close
+    input.addEventListener("input", render);
+    input.addEventListener("focus", render);
+    document.addEventListener("pointerdown", e => {
+      if (e.target !== input && !list.contains(e.target)) close();
     });
+    dropdowns.push({ input, render, close });
   }
 
-  autocomplete(
-    "sehir",
-    "sehirList",
-    () => cities,
-    0,
-    value => {
-      $("ilce").value = value;
-      locationSave();
-    }
-  );
+  autocomplete("sehir","sehirList",() => cities, 0, value => {
+    $("ilce").value = value;
+    locationSave();
+  });
+  autocomplete("doktor","doktorList",() => doctors, 2, () => {});
+  autocomplete("hastane","hastaneList",() => institutions, 2, locationSave);
 
-  autocomplete(
-    "doktor",
-    "doktorList",
-    () => doctors,
-    2,
-    () => {}
-  );
-
-  autocomplete(
-    "hastane",
-    "hastaneList",
-    () => institutions,
-    2,
-    locationSave
-  );
+  function hideDup() {
+    $("dupWarning").classList.remove("visible");
+    forceSave = false;
+  }
 
   function lockForm() {
-    fields.forEach(id => {
-      $(id).disabled =
-        busy ||
-        Boolean(pending);
-    });
-
-    $("submitBtn").disabled =
-      busy;
-
-    $("saveSettingsBtn").disabled =
-      busy;
-
-    $("btnText").textContent =
-      busy
-        ? "Kontrol ediliyor…"
-        : pending
-          ? "Kaydı kontrol et / yeniden dene"
-          : "Ziyareti Kaydet";
-
-    $("btnSpinner")
-      .classList
-      .toggle(
-        "hidden",
-        !busy
-      );
-
-    $("btnIcon")
-      .classList
-      .toggle(
-        "hidden",
-        busy
-      );
-
-    if (
-      busy ||
-      pending
-    ) {
-      dropdowns.forEach(item =>
-        item.close()
-      );
-    }
+    fields.forEach(id => { $(id).disabled = busy; });
+    $("submitBtn").disabled = busy;
+    $("saveSettingsBtn").disabled = busy;
+    $("btnText").textContent = busy ? "Kaydediliyor…" : "Ziyareti Kaydet";
+    $("btnSpinner").classList.toggle("hidden", !busy);
+    $("btnIcon").classList.toggle("hidden", busy);
+    if (busy) dropdowns.forEach(d => d.close());
   }
 
-  async function api(
-    action,
-    params = {},
-    url = endpoint,
-    timeoutMs = 30000
-  ) {
-    if (
-      !/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/
-        .test(url)
-    ) {
-      throw new Error(
-        "Ayarlar'a geçerli Apps Script /exec bağlantısını girin."
-      );
+  function formattedDate() {
+    const parts = $("tarih").value.split("-");
+    if (parts.length !== 3) throw new Error("Tarih seçin.");
+    return parts[2]+"."+parts[1]+"."+parts[0];
+  }
+
+  async function api(action, params={}, url=endpoint, timeoutMs=30000) {
+    if (!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(url)) {
+      throw new Error("Ayarlar'a geçerli Apps Script /exec bağlantısını girin.");
     }
-
-    const controller =
-      new AbortController();
-
-    const timer = setTimeout(
-      () => controller.abort(),
-      timeoutMs
-    );
-
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
-      const query =
-        new URLSearchParams(
-          Object.assign(
-            {
-              action: action,
-              t: String(
-                Date.now()
-              )
-            },
-            params
-          )
-        );
-
-      const response =
-        await fetch(
-          url + "?" + query,
-          {
-            signal:
-              controller.signal,
-            redirect: "follow",
-            cache: "no-store"
-          }
-        );
-
-      const raw =
-        await response.text();
-
+      const query = new URLSearchParams(Object.assign({ action, t: String(Date.now()) }, params));
+      const response = await fetch(url+"?"+query, { signal: controller.signal, redirect:"follow", cache:"no-store" });
+      const raw = await response.text();
       let data;
-
-      try {
-        data =
-          JSON.parse(raw);
-      } catch (_) {
-        throw new Error(
-          "Sunucu JSON döndürmedi. Apps Script bağlantısını kontrol edin."
-        );
+      try { data = JSON.parse(raw); } catch(_) { throw new Error("Sunucu JSON döndürmedi."); }
+      if (!response.ok || !data || data.result === "error") {
+        const err = new Error(data && data.error ? data.error : "Sunucu hatası.");
+        throw err;
       }
-
-      if (
-        !response.ok ||
-        !data ||
-        data.result === "error"
-      ) {
-        const error =
-          new Error(
-            data &&
-            data.error
-              ? data.error
-              : "Sunucu hatası."
-          );
-
-        error.terminalReceipt =
-          action === "getReceipt" &&
-          data &&
-          data.result === "error";
-
-        throw error;
-      }
-
       return data;
-    } catch (error) {
-      if (
-        error.name ===
-        "AbortError"
-      ) {
-        throw new Error(
-          "Sunucu zaman aşımı. Bağlantıyı kontrol edin."
-        );
-      }
-
-      if (
-        error instanceof TypeError
-      ) {
-        throw new Error(
-          "Sunucuya erişilemiyor. İnternet veya Apps Script bağlantısını kontrol edin."
-        );
-      }
-
+    } catch(error) {
+      if (error.name === "AbortError") throw new Error("Sunucu zaman aşımı.");
+      if (error instanceof TypeError) throw new Error("Sunucuya erişilemiyor.");
       throw error;
     } finally {
       clearTimeout(timer);
@@ -1445,296 +478,90 @@ textarea.control {
   }
 
   function version(data) {
-    if (
-      data.version !==
-      "visit-memory-3"
-    ) {
-      throw new Error(
-        "Apps Script eski sürümde. Yeni sürümü dağıtıp tekrar deneyin."
-      );
-    }
+    if (data.version !== "visit-memory-3") throw new Error("Apps Script eski sürümde. Yeni sürümü dağıtıp tekrar deneyin.");
   }
 
-  function formattedDate() {
-    const parts =
-      $("tarih")
-        .value
-        .split("-");
-
-    if (
-      parts.length !== 3
-    ) {
-      throw new Error(
-        "Tarih seçin."
-      );
-    }
-
-    return (
-      parts[2] +
-      "." +
-      parts[1] +
-      "." +
-      parts[0]
-    );
-  }
-
-  async function lastNumber() {
-    if (
-      !endpoint ||
-      busy ||
-      pending ||
-      !$("tarih").value
-    ) {
-      return;
-    }
-
-    const currentSequence =
-      ++sequence;
-
-    const selectedDate =
-      $("tarih").value;
-
-    const previousNumber =
-      $("ziyaretNo").value;
-
-    const url = endpoint;
-
-    message(
-      "Ziyaret numarası kontrol ediliyor…"
-    );
-
-    try {
-      const data =
-        await api(
-          "getLastZiyaretNo",
-          {
-            tarih:
-              formattedDate()
-          },
-          endpoint,
-          15000
-        );
-
-      version(data);
-
-      if (
-        currentSequence ===
-          sequence &&
-        url === endpoint &&
-        selectedDate ===
-          $("tarih").value &&
-        !busy &&
-        !pending &&
-        $("ziyaretNo").value ===
-          previousNumber
-      ) {
-        $("ziyaretNo").value =
-          Number(data.lastNo) + 1;
-
-        message(
-          "Ziyaret no hazır: " +
-          (
-            Number(data.lastNo) + 1
-          )
-        );
-      }
-    } catch (error) {
-      message(
-        error.message,
-        true
-      );
-    }
-  }
+  let lastSyncTime = 0;
 
   async function sync() {
-    if (!endpoint) {
-      message(
-        "Önce Ayarlar'dan Apps Script bağlantısını ekleyin.",
-        true
-      );
-
-      return;
-    }
-
+    if (!endpoint) return;
+    const now = Date.now();
+    if (now - lastSyncTime < 30 * 60 * 1000) return;
     const url = endpoint;
-
     try {
-      const data =
-        await api(
-          "getHistory",
-          {},
-          endpoint,
-          30000
-        );
-
+      const data = await api("getHistory", {}, endpoint, 30000);
       version(data);
-
-      if (url !== endpoint) {
-        return;
-      }
-
-      doctors = unique([
-        ...data.doctors,
-        ...doctors
-      ]);
-
-      institutions = unique([
-        ...data.institutions,
-        ...institutions
-      ]);
-
+      if (url !== endpoint) return;
+      doctors = unique([...data.doctors, ...doctors]);
+      institutions = unique([...data.institutions, ...institutions]);
       saveCache();
-
-      if (
-        !busy &&
-        !pending
-      ) {
-        message(
-          doctors.length +
-          " doktor · " +
-          institutions.length +
-          " kurum yüklendi."
-        );
-      }
-    } catch (error) {
-      if (
-        !busy &&
-        !pending
-      ) {
-        message(
-          "Geçmiş yüklenemedi: " +
-          error.message,
-          true
-        );
-      }
+      lastSyncTime = Date.now();
+      if (!busy) message(doctors.length+" doktor · "+institutions.length+" kurum yüklendi.");
+    } catch(error) {
+      if (!busy) message("Geçmiş yüklenemedi: "+error.message, true);
     }
+  }
+
+  let debounceTimer = null;
+
+  async function lastNumber() {
+    if (!endpoint || busy || !$("tarih").value) return;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(async () => {
+      const currentSequence = ++sequence;
+      const selectedDate = $("tarih").value;
+      const previousNumber = $("ziyaretNo").value;
+      const url = endpoint;
+      message("Ziyaret numarası kontrol ediliyor…");
+      try {
+        const data = await api("getLastZiyaretNo", { tarih: formattedDate() }, endpoint, 15000);
+        version(data);
+        if (currentSequence === sequence && url === endpoint && selectedDate === $("tarih").value && !busy && $("ziyaretNo").value === previousNumber) {
+          $("ziyaretNo").value = Number(data.lastNo)+1;
+          message("Ziyaret no hazır: "+(Number(data.lastNo)+1));
+        }
+      } catch(error) {
+        message(error.message, true);
+      }
+    }, 300);
   }
 
   function finish(data) {
-    if (
-      data.result !== "success" ||
-      !data.sheet ||
-      !Number.isInteger(data.row)
-    ) {
-      throw new Error(
-        "Geçersiz kayıt doğrulaması."
-      );
-    }
-
-    doctors = unique([
-      pending.doktor,
-      ...doctors
-    ]);
-
-    institutions = unique([
-      pending.hastane,
-      ...institutions
-    ]);
-
+    doctors = unique([upper($("doktor").value), ...doctors]);
+    institutions = unique([upper($("hastane").value), ...institutions]);
     saveCache();
     locationSave();
 
-    pending = null;
-
-    save(
-      cacheKey("pending"),
-      null
-    );
-
     $("doktor").value = "";
     $("not").value = "";
+    hideDup();
 
-    $("ziyaretNo").value =
-      Number(data.ziyaretNo) + 1;
+    $("ziyaretNo").value = Number(data.ziyaretNo)+1;
 
-    message(
-      "Doğrulandı: " +
-      data.spreadsheet +
-      " → " +
-      data.sheet +
-      " · Satır " +
-      data.row
-    );
-  }
+    message("✓ Kaydedildi → "+data.sheet+" · Satır "+data.row);
+    showFlash();
 
-  async function receipt() {
-    return api(
-      "getReceipt",
-      {
-        requestId:
-          pending.requestId
-      },
-      endpoint,
-      8000
-    );
-  }
-
-  /*
-   * Aynı gün aynı doktor sorgusu
-   */
-  async function checkDoctor() {
-    const data =
-      await api(
-        "checkDoctor",
-        {
-          tarih:
-            formattedDate(),
-          doktor:
-            upper(
-              $("doktor").value
-            )
-        },
-        endpoint,
-        15000
-      );
-
-    version(data);
-
-    return data;
+    setTimeout(() => $("doktor").focus(), 100);
   }
 
   async function submit() {
     if (busy) return;
 
-    if (!pending) {
-      for (
-        const id of
-        Object.keys(required)
-      ) {
-        if (
-          !clean($(id).value)
-        ) {
-          message(
-            required[id] +
-            " zorunludur.",
-            true
-          );
+    hideDup();
 
-          $(id).focus();
-          return;
-        }
-      }
-
-      if (
-        !$("visitForm")
-          .reportValidity()
-      ) {
+    for (const id of Object.keys(required)) {
+      if (!clean($(id).value)) {
+        message(required[id]+" zorunludur.", true);
+        $(id).focus();
         return;
       }
+    }
 
-      if (
-        !/^[1-9]\d*$/
-          .test(
-            $("ziyaretNo").value
-          )
-      ) {
-        message(
-          "Ziyaret no pozitif tam sayı olmalı.",
-          true
-        );
+    if (!$("visitForm").reportValidity()) return;
 
-        return;
-      }
+    if (!/^[1-9]\d*$/.test($("ziyaretNo").value)) {
+      message("Ziyaret no pozitif tam sayı olmalı.", true);
+      return;
     }
 
     busy = true;
@@ -1742,390 +569,102 @@ textarea.control {
     lockForm();
 
     try {
-      if (!pending) {
-        message(
-          "Aynı doktorun bugünkü kayıtları kontrol ediliyor…"
-        );
+      const id = crypto.randomUUID();
+      const params = {
+        requestId: id,
+        tarih: formattedDate(),
+        ziyaretNo: $("ziyaretNo").value,
+        sehir: clean($("sehir").value),
+        ilce: clean($("ilce").value),
+        hastane: upper($("hastane").value),
+        doktor: upper($("doktor").value),
+        not: $("not").value.trim(),
+        forceSave: forceSave ? "1" : "0"
+      };
 
-        const duplicate =
-          await checkDoctor();
+      message("Kaydediliyor…");
 
-        if (duplicate.exists) {
-          const detail =
-            (
-              duplicate.ziyaretNo
-                ? duplicate.ziyaretNo +
-                  ". ziyaret"
-                : "Daha önceki ziyaret"
-            ) +
-            (
-              duplicate.institution
-                ? " · " +
-                  duplicate.institution
-                : ""
-            );
+      const data = await api("saveVisit", params, endpoint, 30000);
+      version(data);
 
-          const continueSaving =
-            window.confirm(
-              "Bu doktor bugün daha önce kaydedilmiş:\n\n" +
-              detail +
-              "\n\nYine de yeni ziyaret kaydedilsin mi?"
-            );
-
-          if (!continueSaving) {
-            message(
-              "Kayıt yapılmadı: Bu doktor bugün daha önce kaydedilmiş.",
-              true
-            );
-
-            return;
-          }
-        }
-
-        pending = {
-          requestId:
-            crypto.randomUUID(),
-          tarih:
-            formattedDate(),
-          ziyaretNo:
-            $("ziyaretNo").value,
-          sehir:
-            clean(
-              $("sehir").value
-            ),
-          ilce:
-            clean(
-              $("ilce").value
-            ),
-          hastane:
-            upper(
-              $("hastane").value
-            ),
-          doktor:
-            upper(
-              $("doktor").value
-            ),
-          not:
-            $("not")
-              .value
-              .trim()
-        };
-
-        save(
-          cacheKey("pending"),
-          pending
-        );
-      } else {
-        message(
-          "Korunan kaydın sonucu kontrol ediliyor…"
-        );
-
-        try {
-          const previous =
-            await receipt();
-
-          if (
-            previous.result ===
-            "success"
-          ) {
-            finish(previous);
-            return;
-          }
-        } catch (error) {
-          if (
-            error.terminalReceipt
-          ) {
-            throw error;
-          }
-        }
+      if (data.result === "duplicate") {
+        const detail =
+          (data.ziyaretNo ? data.ziyaretNo+". ziyaret" : "Daha önceki ziyaret") +
+          (data.institution ? " · "+data.institution : "");
+        $("dupText").textContent = "Bu doktor bugün daha önce kaydedilmiş: "+detail;
+        $("dupWarning").classList.add("visible");
+        message("Mükerrer kayıt tespit edildi.", true);
+        return;
       }
 
-      message(
-        "Gönderiliyor; Google Sheets doğrulaması bekleniyor…"
-      );
+      finish(data);
 
-      const controller =
-        new AbortController();
-
-      const timer = setTimeout(
-        () =>
-          controller.abort(),
-        15000
-      );
-
-      fetch(
-        endpoint,
-        {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type":
-              "text/plain;charset=utf-8"
-          },
-          body:
-            JSON.stringify(
-              pending
-            ),
-          signal:
-            controller.signal
-        }
-      )
-        .catch(() => {})
-        .finally(() =>
-          clearTimeout(timer)
-        );
-
-      let lastReceiptError =
-        null;
-
-      for (
-        let index = 0;
-        index < 12;
-        index++
-      ) {
-        await new Promise(
-          resolve =>
-            setTimeout(
-              resolve,
-              index < 4
-                ? 600
-                : 1200
-            )
-        );
-
-        try {
-          const result =
-            await receipt();
-
-          if (
-            result.result ===
-            "success"
-          ) {
-            finish(result);
-            return;
-          }
-
-          lastReceiptError =
-            null;
-        } catch (error) {
-          if (
-            error.terminalReceipt
-          ) {
-            throw error;
-          }
-
-          lastReceiptError =
-            error;
-        }
-      }
-
-      message(
-        (
-          lastReceiptError
-            ? lastReceiptError
-                .message + " "
-            : ""
-        ) +
-        "Kayıt henüz doğrulanamadı. Form korundu. Aynı düğmeyle tekrar kontrol edin.",
-        true
-      );
-    } catch (error) {
-      if (
-        pending &&
-        error.terminalReceipt
-      ) {
-        pending = null;
-
-        save(
-          cacheKey("pending"),
-          null
-        );
-      }
-
-      message(
-        error.message +
-        (
-          pending
-            ? " Form korundu; aynı düğmeyle kaydı kontrol edin."
-            : " Kayıt onaylanmadı; alanlar silinmedi."
-        ),
-        true
-      );
+    } catch(error) {
+      message(error.message, true);
     } finally {
       busy = false;
       lockForm();
     }
   }
 
-  $("visitForm")
-    .addEventListener(
-      "submit",
-      event => {
-        event.preventDefault();
-        submit();
+  $("dupIgnoreBtn").addEventListener("click", () => {
+    forceSave = true;
+    $("dupWarning").classList.remove("visible");
+    submit();
+  });
+
+  $("dupCancelBtn").addEventListener("click", hideDup);
+
+  $("visitForm").addEventListener("submit", e => { e.preventDefault(); submit(); });
+  $("submitBtn").addEventListener("click", submit);
+
+  $("tarih").addEventListener("change", () => {
+    $("ziyaretNo").value = "";
+    lastNumber();
+  });
+
+  $("openSettingsBtn").addEventListener("click", () => {
+    $("scriptUrlInput").value = endpoint;
+    $("settingsModal").classList.remove("hidden");
+    $("settingsModal").classList.add("flex");
+  });
+
+  $("closeSettingsBtn").addEventListener("click", () => {
+    $("settingsModal").classList.add("hidden");
+    $("settingsModal").classList.remove("flex");
+  });
+
+  $("saveSettingsBtn").addEventListener("click", async () => {
+    if (busy) return;
+    const url = $("scriptUrlInput").value.trim();
+    $("saveSettingsBtn").disabled = true;
+    try {
+      const data = await api("ping", {}, url, 30000);
+      version(data);
+      endpoint = url;
+      try { localStorage.setItem("scriptUrl", url); } catch(_) {
+        storageNote.textContent = "Bağlantı yalnızca bu oturumda saklanabildi.";
       }
-    );
-
-  $("submitBtn")
-    .addEventListener(
-      "click",
-      submit
-    );
-
-  $("tarih")
-    .addEventListener(
-      "change",
-      () => {
-        $("ziyaretNo").value =
-          "";
-
-        lastNumber();
-      }
-    );
-
-  $("openSettingsBtn")
-    .addEventListener(
-      "click",
-      () => {
-        $("scriptUrlInput").value =
-          endpoint;
-
-        $("settingsModal")
-          .classList
-          .remove("hidden");
-
-        $("settingsModal")
-          .classList
-          .add("flex");
-      }
-    );
-
-  $("closeSettingsBtn")
-    .addEventListener(
-      "click",
-      () => {
-        $("settingsModal")
-          .classList
-          .add("hidden");
-
-        $("settingsModal")
-          .classList
-          .remove("flex");
-      }
-    );
-
-  $("saveSettingsBtn")
-    .addEventListener(
-      "click",
-      async () => {
-        if (busy) return;
-
-        const url =
-          $("scriptUrlInput")
-            .value
-            .trim();
-
-        $("saveSettingsBtn")
-          .disabled = true;
-
-        try {
-          const data =
-            await api(
-              "ping",
-              {},
-              url,
-              30000
-            );
-
-          version(data);
-
-          endpoint = url;
-
-          try {
-            localStorage.setItem(
-              "scriptUrl",
-              url
-            );
-          } catch (_) {
-            storageNote.textContent =
-              "Bağlantı yalnızca bu oturumda saklanabildi.";
-          }
-
-          loadCache();
-          restorePending();
-
-          $("closeSettingsBtn")
-            .click();
-
-          message(
-            "Bağlantı doğrulandı: " +
-            data.spreadsheet
-          );
-
-          if (!pending) {
-            $("ziyaretNo").value =
-              "";
-
-            await lastNumber();
-          }
-
-          await sync();
-        } catch (error) {
-          alert(error.message);
-
-          message(
-            error.message,
-            true
-          );
-        } finally {
-          busy = false;
-          lockForm();
-        }
-      }
-    );
-
-  function restorePending() {
-    if (pending) {
-      fields.forEach(id => {
-        if (id !== "tarih") {
-          $(id).value =
-            pending[id] || "";
-        }
-      });
-
-      $("tarih").value =
-        pending.tarih
-          .split(".")
-          .reverse()
-          .join("-");
-
-      message(
-        "Önceki kaydın sonucu belirsiz. Düğmeyle kontrol edin.",
-        true
-      );
+      loadCache();
+      lastSyncTime = 0;
+      $("closeSettingsBtn").click();
+      message("Bağlantı doğrulandı: "+data.spreadsheet);
+      $("ziyaretNo").value = "";
+      await lastNumber();
+      await sync();
+    } catch(error) {
+      alert(error.message);
+      message(error.message, true);
+    } finally {
+      busy = false;
+      lockForm();
     }
+  });
 
-    lockForm();
-  }
-
-  window.addEventListener(
-    "online",
-    () => {
-      if (!pending) {
-        lastNumber();
-      }
-
-      sync();
-    }
-  );
+  window.addEventListener("online", () => { lastNumber(); sync(); });
 
   loadCache();
-  restorePending();
-
-  if (!pending) {
-    lastNumber();
-  }
-
+  lastNumber();
   sync();
 })();
 </script>
