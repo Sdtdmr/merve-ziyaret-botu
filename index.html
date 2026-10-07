@@ -2,10 +2,16 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no">
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no"
+>
 <meta name="theme-color" content="#0d0f10">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+>
 <meta name="apple-mobile-web-app-title" content="Ziyaret">
 
 <title>Ziyaret Asistanı</title>
@@ -42,16 +48,13 @@
 }
 
 html {
-    width: 100%;
-    overflow-x: hidden;
     background: var(--bg);
     color-scheme: dark;
 }
 
 body {
-    width: 100%;
-    min-height: 100dvh;
     margin: 0;
+    min-height: 100dvh;
     overflow-x: hidden;
     padding-bottom:
         calc(28px + env(safe-area-inset-bottom));
@@ -64,6 +67,10 @@ body {
         var(--bg);
     color: var(--white);
     font-family: Manrope, sans-serif;
+}
+
+body.plan-open {
+    overflow: hidden;
 }
 
 button,
@@ -117,7 +124,6 @@ button {
 .brand {
     display: flex;
     align-items: center;
-    min-width: 0;
     gap: 11px;
 }
 
@@ -130,8 +136,7 @@ button {
     border:
         1px solid rgba(24,201,154,.55);
     border-radius: 50%;
-    background:
-        rgba(24,201,154,.07);
+    background: rgba(24,201,154,.07);
     color: var(--green);
     font-size: 13px;
     font-weight: 800;
@@ -149,6 +154,12 @@ button {
     font-size: 9px;
     font-weight: 600;
     letter-spacing: .14em;
+}
+
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .settings {
@@ -170,6 +181,14 @@ button {
         rgba(24,201,154,.5);
 }
 
+.plan-button {
+    color: var(--green);
+    border-color:
+        rgba(24,201,154,.34);
+    background:
+        rgba(24,201,154,.07);
+}
+
 .intro {
     padding: 27px 0 20px;
 }
@@ -185,14 +204,11 @@ button {
 .form-stack {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    min-width: 0;
     gap: 14px;
 }
 
 .card {
     width: 100%;
-    min-width: 0;
     padding: 19px 16px;
     border: 1px solid var(--line);
     border-radius: 20px;
@@ -271,9 +287,6 @@ button {
 .fields {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
     gap: 14px;
 }
 
@@ -283,7 +296,6 @@ button {
     flex-direction: column;
     width: 100%;
     min-width: 0;
-    max-width: 100%;
     gap: 7px;
 }
 
@@ -311,7 +323,6 @@ button {
     position: relative;
     width: 100%;
     min-width: 0;
-    max-width: 100%;
 }
 
 .input-icon {
@@ -327,11 +338,10 @@ button {
 
 .control {
     display: block;
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
     min-height: 52px;
-    margin: 0 !important;
     padding: 13px 14px !important;
     border:
         1px solid #303337 !important;
@@ -342,24 +352,19 @@ button {
     color:
         var(--white) !important;
     box-shadow: none !important;
-    box-sizing: border-box !important;
     transition:
         border-color .2s,
         box-shadow .2s;
 }
 
-.control.icon {
-    padding-left: 43px !important;
-}
-
 input[type="date"].control {
-    display: block !important;
+    display: block;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
     height: 52px !important;
     min-height: 52px !important;
-    margin: 0 !important;
+    margin: 0;
     padding:
         13px 13px 13px 43px !important;
     line-height: 24px !important;
@@ -380,12 +385,15 @@ input[type="date"]::-webkit-date-and-time-value {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
+    flex: 0 0 20px;
     width: 20px;
     height: 20px;
-    flex: 0 0 20px;
     margin: 0;
     padding: 0;
-    cursor: pointer;
+}
+
+.control.icon {
+    padding-left: 43px !important;
 }
 
 .control::placeholder {
@@ -403,64 +411,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 textarea.control {
     min-height: 98px;
     resize: none;
-}
-
-#sehirList,
-#hastaneList,
-#doktorList {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    z-index: 55;
-    max-height: 220px;
-    margin: 6px 0 0;
-    padding: 5px;
-    overflow-y: auto;
-    list-style: none;
-    border:
-        1px solid rgba(24,201,154,.3);
-    border-radius: 14px;
-    background: #191c1d;
-    box-shadow:
-        0 20px 45px rgba(0,0,0,.55);
-}
-
-#sehirList li,
-#hastaneList li,
-#doktorList li {
-    padding: 0 !important;
-    border: 0 !important;
-}
-
-.memory-choice {
-    display: block;
-    width: 100%;
-    padding: 13px;
-    border: 0;
-    border-radius: 9px;
-    background: transparent;
-    color: #eeeeee;
-    font: inherit;
-    font-size: 14px;
-    text-align: left;
-}
-
-.memory-choice:hover,
-.memory-choice:focus {
-    outline:
-        2px solid #18c99a;
-    outline-offset: -2px;
-    background: #23483d;
-}
-
-.control:disabled {
-    opacity: .7;
-}
-
-.card:focus-within {
-    position: relative;
-    z-index: 2;
 }
 
 .submit {
@@ -503,8 +453,7 @@ textarea.control {
             rgba(255,255,255,.42),
             transparent 55%
         );
-    transform:
-        translateX(-110%);
+    transform: translateX(-110%);
     animation:
         buttonShine 3.5s infinite;
 }
@@ -518,11 +467,6 @@ textarea.control {
     transform: scale(.985);
 }
 
-.submit:disabled {
-    opacity: .65;
-    cursor: wait;
-}
-
 .footer {
     margin: 19px 0 0;
     color: #55585c;
@@ -530,30 +474,6 @@ textarea.control {
     font-weight: 700;
     text-align: center;
     letter-spacing: .14em;
-}
-
-#syncStatus {
-    overflow-wrap: anywhere;
-}
-
-#toast {
-    position: fixed;
-    top:
-        calc(
-            16px +
-            env(safe-area-inset-top)
-        );
-    left: 50%;
-    z-index: 60;
-    width: max-content;
-    max-width:
-        calc(100vw - 32px);
-    padding: 12px 16px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 700;
-    white-space: normal;
-    transform: translateX(-50%);
 }
 
 #settingsModal {
@@ -572,8 +492,7 @@ textarea.control {
     width: 100%;
     max-width: 480px;
     padding:
-        22px
-        18px
+        22px 18px
         calc(
             22px +
             env(safe-area-inset-bottom)
@@ -581,18 +500,15 @@ textarea.control {
     border:
         1px solid rgba(24,201,154,.32);
     border-bottom: 0;
-    border-radius:
-        24px 24px 0 0;
+    border-radius: 24px 24px 0 0;
     background: #181a1b;
     color: white;
     box-shadow:
-        0 25px 70px
-        rgba(0,0,0,.65);
+        0 25px 70px rgba(0,0,0,.65);
 }
 
 #settingsCard h2 {
     margin: 0 0 8px;
-    color: white;
 }
 
 #settingsCard p {
@@ -602,8 +518,7 @@ textarea.control {
 
 .modal-actions {
     display: grid;
-    grid-template-columns:
-        1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin-top: 18px;
 }
@@ -616,8 +531,7 @@ textarea.control {
 }
 
 .cancel {
-    border:
-        1px solid var(--line);
+    border: 1px solid var(--line);
     background: #111314;
     color: #a9abad;
 }
@@ -628,50 +542,336 @@ textarea.control {
     color: #07140f;
 }
 
+#planModal {
+    position: fixed;
+    inset: 0;
+    z-index: 75;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 0 0,
+            rgba(12,112,82,.2),
+            transparent 28rem
+        ),
+        var(--bg);
+}
+
+.plan-shell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.plan-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: grid;
+    grid-template-columns:
+        42px 1fr 42px;
+    align-items: center;
+    gap: 10px;
+    padding:
+        calc(12px + env(safe-area-inset-top))
+        16px
+        12px;
+    border-bottom:
+        1px solid rgba(255,255,255,.06);
+    background:
+        rgba(13,15,16,.94);
+    backdrop-filter: blur(18px);
+}
+
+.plan-heading {
+    min-width: 0;
+    text-align: center;
+}
+
+.plan-heading h2 {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+.plan-heading p {
+    margin: 3px 0 0;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.plan-icon-button {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--card);
+    color: #d4d5d6;
+}
+
+.plan-icon-button:active {
+    transform: scale(.95);
+}
+
+.plan-icon-button:disabled {
+    opacity: .55;
+    cursor: wait;
+}
+
+.plan-icon-button.loading span {
+    animation:
+        planSpin .8s linear infinite;
+}
+
+.plan-content {
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding:
+        18px 14px
+        calc(
+            28px +
+            env(safe-area-inset-bottom)
+        );
+}
+
+.plan-status {
+    max-width: 1100px;
+    min-height: 20px;
+    margin: 0 auto 12px;
+    color: #a9c5ba;
+    font-size: 11px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.plan-status.error {
+    color: #ff9e9e;
+}
+
+.plan-grid {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+.plan-month {
+    min-width: 0;
+    padding: 15px 10px 11px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,27,29,.98),
+            rgba(20,22,24,.98)
+        );
+    box-shadow:
+        0 18px 42px rgba(0,0,0,.18);
+}
+
+.plan-month h3 {
+    margin: 0 0 12px;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-align: center;
+}
+
+.plan-weekdays,
+.plan-days {
+    display: grid;
+    grid-template-columns:
+        repeat(
+            7,
+            minmax(0,1fr)
+        );
+    gap: 4px;
+}
+
+.plan-weekdays {
+    margin-bottom: 5px;
+}
+
+.plan-weekdays span {
+    color: #777b7f;
+    font-size: 8px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.plan-day {
+    min-width: 0;
+    min-height: 53px;
+    padding: 6px 3px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    overflow: hidden;
+    border: 1px solid #2c3032;
+    border-radius: 9px;
+    background: #111315;
+    color: #cfd1d2;
+}
+
+.plan-day.empty {
+    visibility: hidden;
+}
+
+.plan-day-number {
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.plan-day-city {
+    width: 100%;
+    overflow: hidden;
+    font-size: 7px;
+    font-weight: 800;
+    line-height: 1.15;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+}
+
+.plan-day.ankara {
+    border-color:
+        rgba(24,201,154,.38);
+    background:
+        rgba(24,201,154,.1);
+    color: #bff6e6;
+}
+
+.plan-day.travel {
+    border-color:
+        rgba(112,145,174,.42);
+    background:
+        rgba(78,111,140,.16);
+    color: #d2e5f4;
+}
+
+.plan-day.weekend {
+    border-color:
+        rgba(171,102,117,.25);
+    background:
+        rgba(119,61,75,.14);
+    color: #a8848d;
+}
+
+.plan-day.holiday {
+    border-color:
+        rgba(224,82,82,.55);
+    background:
+        rgba(139,39,39,.24);
+    color: #ffc5c5;
+}
+
+.plan-day.unassigned {
+    color: #74777a;
+}
+
+.plan-day.today {
+    border-color: #e2c078;
+    box-shadow:
+        0 0 0 2px
+        rgba(226,192,120,.22);
+}
+
+.plan-legend {
+    max-width: 1100px;
+    margin: 15px auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 12px;
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.plan-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.plan-legend i {
+    width: 8px;
+    height: 8px;
+    display: block;
+    border-radius: 50%;
+}
+
+.legend-ankara {
+    background: #18c99a;
+}
+
+.legend-travel {
+    background: #7091ae;
+}
+
+.legend-weekend {
+    background: #a66b78;
+}
+
+.legend-holiday {
+    background: #e05252;
+}
+
+.legend-empty {
+    background: #55595c;
+}
+
 @keyframes cardEnter {
     from {
         opacity: 0;
-        transform:
-            translateY(14px);
+        transform: translateY(14px);
     }
 
     to {
         opacity: 1;
-        transform:
-            translateY(0);
+        transform: translateY(0);
     }
 }
 
 @keyframes buttonShine {
     0%,
     55% {
-        transform:
-            translateX(-110%);
+        transform: translateX(-110%);
     }
 
     85%,
     100% {
-        transform:
-            translateX(110%);
+        transform: translateX(110%);
     }
 }
 
-@media (max-width: 360px) {
-    .app {
-        padding-right: 12px;
-        padding-left: 12px;
+@keyframes planSpin {
+    to {
+        transform: rotate(360deg);
     }
+}
 
-    .topbar {
-        margin-right: -12px;
-        margin-left: -12px;
-        padding-right: 12px;
-        padding-left: 12px;
-    }
-
-    .card {
-        padding-right: 13px;
-        padding-left: 13px;
+@media (min-width: 900px) {
+    .plan-grid {
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0,1fr)
+            );
     }
 }
 
@@ -685,51 +885,58 @@ textarea.control {
 </head>
 
 <body>
+
 <div class="app">
 
 <header class="topbar">
     <div class="topbar-inner">
+
         <div class="brand">
             <div class="brand-mark">
                 SD
             </div>
 
             <div>
-                <h1>Ziyaret Asistanı</h1>
-                <p>KİŞİSEL ÇALIŞMA ALANI</p>
+                <h1>
+                    Ziyaret Asistanı
+                </h1>
+
+                <p>
+                    KİŞİSEL ÇALIŞMA ALANI
+                </p>
             </div>
         </div>
 
-        <button
-            id="openSettingsBtn"
-            class="settings"
-            type="button"
-            aria-label="Ayarlar"
-        >
-            <span class="material-symbols-outlined">
-                tune
-            </span>
-        </button>
+        <div class="top-actions">
+
+            <button
+                id="openPlanBtn"
+                class="settings plan-button"
+                type="button"
+                aria-label="3 aylık çalışma planı"
+            >
+                <span class="material-symbols-outlined">
+                    calendar_month
+                </span>
+            </button>
+
+            <button
+                id="openSettingsBtn"
+                class="settings"
+                type="button"
+                aria-label="Ayarlar"
+            >
+                <span class="material-symbols-outlined">
+                    tune
+                </span>
+            </button>
+
+        </div>
     </div>
 </header>
 
-<div
-    id="toast"
-    class="opacity-0 -translate-y-full flex items-center gap-2 bg-[#d7fff2] text-[#075b45]"
->
-    <span
-        class="material-symbols-outlined"
-        id="toastIcon"
-    >
-        check_circle
-    </span>
-
-    <span id="toastText">
-        Kaydedildi
-    </span>
-</div>
-
 <main>
+
     <section class="intro">
         <p class="kicker">
             YENİ ZİYARET
@@ -742,7 +949,9 @@ textarea.control {
     >
 
         <section class="card accent">
+
             <div class="card-head">
+
                 <div class="card-title">
                     <div class="card-icon">
                         <span class="material-symbols-outlined">
@@ -750,21 +959,27 @@ textarea.control {
                         </span>
                     </div>
 
-                    <h3>Ziyaret bilgileri</h3>
+                    <h3>
+                        Ziyaret bilgileri
+                    </h3>
                 </div>
 
                 <span class="step">
                     01
                 </span>
+
             </div>
 
             <div class="fields">
+
                 <div class="field">
+
                     <label for="tarih">
                         Tarih
                     </label>
 
                     <div class="input-wrap">
+
                         <span class="material-symbols-outlined input-icon">
                             calendar_month
                         </span>
@@ -774,10 +989,12 @@ textarea.control {
                             class="control icon"
                             type="date"
                         >
+
                     </div>
                 </div>
 
                 <div class="field">
+
                     <div class="label-row">
                         <label for="ziyaretNo">
                             Ziyaret No
@@ -789,6 +1006,7 @@ textarea.control {
                     </div>
 
                     <div class="input-wrap">
+
                         <span class="material-symbols-outlined input-icon">
                             tag
                         </span>
@@ -797,16 +1015,19 @@ textarea.control {
                             id="ziyaretNo"
                             class="control icon"
                             type="number"
-                            inputmode="numeric"
                             placeholder="..."
                         >
+
                     </div>
                 </div>
+
             </div>
         </section>
 
         <section class="card">
+
             <div class="card-head">
+
                 <div class="card-title">
                     <div class="card-icon">
                         <span class="material-symbols-outlined">
@@ -814,21 +1035,27 @@ textarea.control {
                         </span>
                     </div>
 
-                    <h3>Konum ve kurum</h3>
+                    <h3>
+                        Konum ve kurum
+                    </h3>
                 </div>
 
                 <span class="step">
                     02
                 </span>
+
             </div>
 
             <div class="fields">
+
                 <div class="field">
+
                     <label for="sehir">
                         Şehir
                     </label>
 
                     <div class="input-wrap">
+
                         <span class="material-symbols-outlined input-icon">
                             search
                         </span>
@@ -840,20 +1067,24 @@ textarea.control {
                             autocomplete="off"
                             placeholder="Şehir ara..."
                         >
+
                     </div>
 
                     <ul
                         id="sehirList"
-                        class="hidden"
+                        class="hidden flex-col"
                     ></ul>
+
                 </div>
 
                 <div class="field">
+
                     <label for="ilce">
                         İlçe
                     </label>
 
                     <div class="input-wrap">
+
                         <span class="material-symbols-outlined input-icon">
                             map
                         </span>
@@ -862,17 +1093,20 @@ textarea.control {
                             id="ilce"
                             class="control icon"
                             type="text"
-                            placeholder="İlçe adını yazın"
+                            placeholder="Otomatik dolar"
                         >
+
                     </div>
                 </div>
 
                 <div class="field">
+
                     <label for="hastane">
                         Hastane / Kurum Adı
                     </label>
 
                     <div class="input-wrap">
+
                         <span class="material-symbols-outlined input-icon">
                             domain
                         </span>
@@ -881,21 +1115,19 @@ textarea.control {
                             id="hastane"
                             class="control icon uppercase"
                             type="text"
-                            autocomplete="off"
                             placeholder="Kurum adını yazın"
                         >
-                    </div>
 
-                    <ul
-                        id="hastaneList"
-                        class="hidden"
-                    ></ul>
+                    </div>
                 </div>
+
             </div>
         </section>
 
         <section class="card">
+
             <div class="card-head">
+
                 <div class="card-title">
                     <div class="card-icon">
                         <span class="material-symbols-outlined">
@@ -903,21 +1135,27 @@ textarea.control {
                         </span>
                     </div>
 
-                    <h3>Görüşme</h3>
+                    <h3>
+                        Görüşme
+                    </h3>
                 </div>
 
                 <span class="step">
                     03
                 </span>
+
             </div>
 
             <div class="fields">
+
                 <div class="field">
+
                     <label for="doktor">
                         Doktor Adı
                     </label>
 
                     <div class="input-wrap">
+
                         <span class="material-symbols-outlined input-icon">
                             person
                         </span>
@@ -929,15 +1167,18 @@ textarea.control {
                             autocomplete="off"
                             placeholder="Doktor adını yazın"
                         >
+
                     </div>
 
                     <ul
                         id="doktorList"
-                        class="hidden"
+                        class="hidden flex-col"
                     ></ul>
+
                 </div>
 
                 <div class="field">
+
                     <label for="not">
                         Notlar
                     </label>
@@ -948,7 +1189,9 @@ textarea.control {
                         rows="3"
                         placeholder="Ziyaret detaylarını buraya girin..."
                     ></textarea>
+
                 </div>
+
             </div>
         </section>
 
@@ -990,11 +1233,13 @@ textarea.control {
                 ></path>
             </svg>
         </button>
+
     </form>
 
     <p class="footer">
         SEDAT DEMİR · ZİYARET YÖNETİMİ
     </p>
+
 </main>
 </div>
 
@@ -1003,6 +1248,7 @@ textarea.control {
     class="hidden flex-col"
 >
     <div id="settingsCard">
+
         <h2>
             <span
                 class="material-symbols-outlined"
@@ -1026,6 +1272,7 @@ textarea.control {
         >
 
         <div class="modal-actions">
+
             <button
                 type="button"
                 id="closeSettingsBtn"
@@ -1041,7 +1288,104 @@ textarea.control {
             >
                 Kaydet
             </button>
+
         </div>
+    </div>
+</div>
+
+<div
+    id="planModal"
+    class="hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="planTitle"
+>
+    <div class="plan-shell">
+
+        <header class="plan-topbar">
+
+            <button
+                type="button"
+                id="closePlanBtn"
+                class="plan-icon-button"
+                aria-label="Çalışma planını kapat"
+            >
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </button>
+
+            <div class="plan-heading">
+                <h2 id="planTitle">
+                    3 Aylık Çalışma Planı
+                </h2>
+
+                <p id="planSubtitle">
+                    ÇEYREK PROGRAMI
+                </p>
+            </div>
+
+            <button
+                type="button"
+                id="refreshPlanBtn"
+                class="plan-icon-button"
+                aria-label="Planı yenile"
+            >
+                <span class="material-symbols-outlined">
+                    refresh
+                </span>
+            </button>
+
+        </header>
+
+        <div
+            class="plan-content"
+            id="planContent"
+        >
+            <p
+                id="planStatus"
+                class="plan-status"
+                role="status"
+            >
+                Plan hazırlanıyor…
+            </p>
+
+            <div
+                id="planGrid"
+                class="plan-grid"
+            ></div>
+
+            <div
+                class="plan-legend"
+                aria-label="Plan renkleri"
+            >
+                <span>
+                    <i class="legend-ankara"></i>
+                    Ankara
+                </span>
+
+                <span>
+                    <i class="legend-travel"></i>
+                    Diğer şehir
+                </span>
+
+                <span>
+                    <i class="legend-weekend"></i>
+                    Hafta sonu
+                </span>
+
+                <span>
+                    <i class="legend-holiday"></i>
+                    Resmî tatil
+                </span>
+
+                <span>
+                    <i class="legend-empty"></i>
+                    Program yok
+                </span>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -1080,36 +1424,37 @@ textarea.control {
         "Isparta|İstanbul|İzmir|Kahramanmaraş|Karabük|Karaman|Kars|" +
         "Kastamonu|Kayseri|Kırıkkale|Kırklareli|Kırşehir|Kilis|" +
         "Kocaeli|Konya|Kütahya|Malatya|Manisa|Mardin|Mersin|Muğla|" +
-        "Muş|Nevşehir|Niğde|Ordu|Osmaniye|Rize|Sakarya|Samsun|" +
-        "Siirt|Sinop|Sivas|Şanlıurfa|Şırnak|Tekirdağ|Tokat|Trabzon|" +
-        "Tunceli|Uşak|Van|Yalova|Yozgat|Zonguldak"
+        "Muş|Nevşehir|Niğde|Ordu|Osmaniye|Rize|Sakarya|Samsun|Siirt|" +
+        "Sinop|Sivas|Şanlıurfa|Şırnak|Tekirdağ|Tokat|Trabzon|Tunceli|" +
+        "Uşak|Van|Yalova|Yozgat|Zonguldak"
     )
-    .split("|")
-    .sort(
-        (a, b) =>
+        .split("|")
+        .sort((a, b) =>
             a.localeCompare(b, "tr")
-    );
+        );
 
     const clean = value =>
         String(
-            value == null ? "" : value
+            value == null
+                ? ""
+                : value
         )
-        .trim()
-        .replace(/\s+/g, " ");
+            .trim()
+            .replace(/\s+/g, " ");
 
     const key = value =>
         clean(value)
-        .toLocaleLowerCase("tr-TR")
-        .replace(/ı/g, "i")
-        .normalize("NFD")
-        .replace(
-            /[\u0300-\u036f]/g,
-            ""
-        );
+            .toLocaleLowerCase("tr-TR")
+            .replace(/ı/g, "i")
+            .normalize("NFD")
+            .replace(
+                /[\u0300-\u036f]/g,
+                ""
+            );
 
     const upper = value =>
         clean(value)
-        .toLocaleUpperCase("tr-TR");
+            .toLocaleUpperCase("tr-TR");
 
     let busy = false;
     let pending = null;
@@ -1117,6 +1462,7 @@ textarea.control {
     let institutions = [];
     let institutionDoctors = {};
     let sequence = 0;
+    let planLoading = false;
 
     const ram = new Map();
 
@@ -1124,7 +1470,6 @@ textarea.control {
         document.createElement("p");
 
     status.id = "syncStatus";
-
     status.setAttribute(
         "role",
         "status"
@@ -1177,7 +1522,10 @@ textarea.control {
         }
     }
 
-    function save(name, value) {
+    function save(
+        name,
+        value
+    ) {
         ram.set(name, value);
 
         try {
@@ -1187,8 +1535,7 @@ textarea.control {
             );
         } catch (_) {
             storageNote.textContent =
-                "Cihaz depolaması kapalı veya dolu. " +
-                "Bu oturum çalışır ancak yerel bilgiler korunamayabilir.";
+                "Cihaz depolaması kapalı veya dolu. Bu oturum çalışır ancak yerel bilgiler korunamayabilir.";
         }
     }
 
@@ -1211,9 +1558,8 @@ textarea.control {
         const seen = new Set();
 
         return names
-            .filter(
-                value =>
-                    typeof value === "string"
+            .filter(value =>
+                typeof value === "string"
             )
             .map(upper)
             .filter(value => {
@@ -1228,14 +1574,11 @@ textarea.control {
                 }
 
                 seen.add(valueKey);
-
                 return true;
             });
     }
 
-    function normalizeInstitutionDoctors(
-        source
-    ) {
+    function normalizeInstitutionDoctors(source) {
         const normalized = {};
 
         if (
@@ -1269,8 +1612,7 @@ textarea.control {
                         ] || []
                     ),
                     ...names
-                ])
-                .slice(0, 100);
+                ]).slice(0, 100);
         }
 
         return normalized;
@@ -1287,7 +1629,7 @@ textarea.control {
             []
         );
 
-        const associationCache = read(
+        const pairs = read(
             cacheKey(
                 "institutionDoctors"
             ),
@@ -1303,12 +1645,14 @@ textarea.control {
             Array.isArray(
                 institutionCache
             )
-                ? unique(institutionCache)
+                ? unique(
+                    institutionCache
+                )
                 : [];
 
         institutionDoctors =
             normalizeInstitutionDoctors(
-                associationCache
+                pairs
             );
 
         pending = read(
@@ -1344,9 +1688,7 @@ textarea.control {
         );
     }
 
-    function mergeInstitutionDoctors(
-        remote
-    ) {
+    function mergeInstitutionDoctors(remote) {
         const incoming =
             normalizeInstitutionDoctors(
                 remote
@@ -1368,15 +1710,16 @@ textarea.control {
                         institutionKey
                     ] || []
                 )
-            ])
-            .slice(0, 100);
+            ]).slice(0, 100);
         }
     }
 
     function linkedDoctors() {
         return (
             institutionDoctors[
-                key($("hastane").value)
+                key(
+                    $("hastane").value
+                )
             ] || []
         );
     }
@@ -1385,20 +1728,14 @@ textarea.control {
         const linked =
             linkedDoctors();
 
-        // Alan boşsa yalnızca seçilen kurumun
-        // doktorları gösterilir.
-        if (
-            !clean($("doktor").value)
-        ) {
-            return linked;
-        }
-
-        // Yazmaya başlanırsa kurum doktorları
-        // öncelikli olmak üzere genel geçmiş de aranır.
-        return unique([
-            ...linked,
-            ...doctors
-        ]);
+        return clean(
+            $("doktor").value
+        )
+            ? unique([
+                ...linked,
+                ...doctors
+            ])
+            : linked;
     }
 
     function locationSave() {
@@ -1421,7 +1758,8 @@ textarea.control {
     );
 
     for (
-        const id of [
+        const id
+        of [
             "sehir",
             "ilce",
             "hastane"
@@ -1455,11 +1793,11 @@ textarea.control {
     $("ziyaretNo").min = "1";
     $("ziyaretNo").step = "1";
     $("ziyaretNo").readOnly = true;
-
     $("not").maxLength = 10000;
 
     for (
-        const id of [
+        const id
+        of [
             "sehir",
             "ilce",
             "hastane",
@@ -1497,9 +1835,75 @@ textarea.control {
     $("tarih").value =
         automaticDate;
 
-    $("toast")
-        .classList
-        .add("hidden");
+    const style =
+        document.createElement(
+            "style"
+        );
+
+    style.textContent = `
+        #hastaneList,
+        #doktorList,
+        #sehirList {
+            position:absolute;
+            top:100%;
+            left:0;
+            right:0;
+            z-index:55;
+            max-height:220px;
+            overflow:auto;
+            padding:5px;
+            margin:6px 0 0;
+            list-style:none;
+            background:#191c1d;
+            border:1px solid #337a66;
+            border-radius:14px;
+            box-shadow:0 15px 35px #0008;
+        }
+
+        #hastaneList li,
+        #doktorList li,
+        #sehirList li {
+            padding:0 !important;
+        }
+
+        .memory-choice {
+            display:block;
+            width:100%;
+            padding:13px;
+            text-align:left;
+            border:0;
+            border-radius:9px;
+            background:transparent;
+            color:#eee;
+            font:inherit;
+            font-size:14px;
+        }
+
+        .memory-choice:hover,
+        .memory-choice:focus {
+            background:#23483d;
+            outline:2px solid #18c99a;
+            outline-offset:-2px;
+        }
+
+        .control:disabled {
+            opacity:.7;
+        }
+
+        .card:focus-within {
+            position:relative;
+            z-index:2;
+        }
+
+        #submitBtn:disabled {
+            opacity:.65;
+            cursor:wait;
+        }
+    `;
+
+    document.head.appendChild(
+        style
+    );
 
     const dropdowns = [];
 
@@ -1515,7 +1919,9 @@ textarea.control {
 
         if (!list) {
             list =
-                document.createElement("ul");
+                document.createElement(
+                    "ul"
+                );
 
             list.id = listId;
 
@@ -1524,7 +1930,9 @@ textarea.control {
                 .appendChild(list);
         }
 
-        list.classList.add("hidden");
+        list.classList.add(
+            "hidden"
+        );
 
         input.autocomplete = "off";
 
@@ -1539,9 +1947,9 @@ textarea.control {
         );
 
         const close = () => {
-            list
-                .classList
-                .add("hidden");
+            list.classList.add(
+                "hidden"
+            );
 
             input.setAttribute(
                 "aria-expanded",
@@ -1569,20 +1977,20 @@ textarea.control {
                 return;
             }
 
-            const matches = source()
-                .filter(value => {
-                    if (id === "sehir") {
-                        return key(value)
-                            .includes(query);
-                    }
-
-                    return key(value)
-                        .startsWith(query);
-                })
-                .slice(0, 30);
+            const matches =
+                source()
+                    .filter(value =>
+                        id === "sehir"
+                            ? key(value)
+                                .includes(query)
+                            : key(value)
+                                .startsWith(query)
+                    )
+                    .slice(0, 30);
 
             for (
-                const value of matches
+                const value
+                of matches
             ) {
                 const li =
                     document.createElement(
@@ -1595,10 +2003,8 @@ textarea.control {
                     );
 
                 button.type = "button";
-
                 button.className =
                     "memory-choice";
-
                 button.textContent =
                     value;
 
@@ -1615,50 +2021,9 @@ textarea.control {
                             value;
 
                         selected(value);
-
                         close();
                         input.focus();
-                    }
-                );
-
-                button.addEventListener(
-                    "keydown",
-                    event => {
-                        if (
-                            event.key ===
-                            "ArrowDown"
-                        ) {
-                            event
-                                .preventDefault();
-
-                            li
-                                .nextElementSibling
-                                ?.firstElementChild
-                                .focus();
-                        }
-
-                        if (
-                            event.key ===
-                            "ArrowUp"
-                        ) {
-                            event
-                                .preventDefault();
-
-                            (
-                                li
-                                    .previousElementSibling
-                                    ?.firstElementChild ||
-                                input
-                            ).focus();
-                        }
-
-                        if (
-                            event.key ===
-                            "Escape"
-                        ) {
-                            input.focus();
-                            close();
-                        }
+                        close();
                     }
                 );
 
@@ -1674,7 +2039,7 @@ textarea.control {
             input.setAttribute(
                 "aria-expanded",
                 String(
-                    Boolean(matches.length)
+                    !!matches.length
                 )
             );
         }
@@ -1695,9 +2060,8 @@ textarea.control {
                 if (
                     event.key ===
                         "ArrowDown" &&
-                    !list.classList.contains(
-                        "hidden"
-                    )
+                    !list.classList
+                        .contains("hidden")
                 ) {
                     event.preventDefault();
 
@@ -1721,7 +2085,8 @@ textarea.control {
             "pointerdown",
             event => {
                 if (
-                    event.target !== input &&
+                    event.target !==
+                        input &&
                     !list.contains(
                         event.target
                     )
@@ -1730,27 +2095,6 @@ textarea.control {
                 }
             }
         );
-
-        input
-            .closest(".field")
-            .addEventListener(
-                "focusout",
-                () => {
-                    setTimeout(() => {
-                        if (
-                            document
-                                .activeElement !==
-                                input &&
-                            !list.contains(
-                                document
-                                    .activeElement
-                            )
-                        ) {
-                            close();
-                        }
-                    }, 180);
-                }
-            );
 
         dropdowns.push({
             input,
@@ -1764,7 +2108,10 @@ textarea.control {
         "sehirList",
         () => cities,
         0,
-        () => {
+        value => {
+            $("ilce").value =
+                value;
+
             locationSave();
         }
     );
@@ -1785,16 +2132,13 @@ textarea.control {
         "hastaneList",
         () => institutions,
         2,
-        () => {
-            locationSave();
-        }
+        locationSave
     );
 
     function lockForm() {
         fields.forEach(id => {
             $(id).disabled =
-                busy ||
-                Boolean(pending);
+                busy || !!pending;
         });
 
         $("submitBtn").disabled =
@@ -1824,7 +2168,10 @@ textarea.control {
                 busy
             );
 
-        if (busy || pending) {
+        if (
+            busy ||
+            pending
+        ) {
             dropdowns.forEach(
                 dropdown =>
                     dropdown.close()
@@ -1839,9 +2186,8 @@ textarea.control {
         timeoutMs = 30000
     ) {
         if (
-            !/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(
-                url
-            )
+            !/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/
+                .test(url)
         ) {
             throw new Error(
                 "Ayarlar'a geçerli Apps Script /exec bağlantısını girin."
@@ -1862,10 +2208,9 @@ textarea.control {
                     Object.assign(
                         {
                             action,
-                            t:
-                                String(
-                                    Date.now()
-                                )
+                            t: String(
+                                Date.now()
+                            )
                         },
                         params
                     )
@@ -1877,7 +2222,8 @@ textarea.control {
                     {
                         signal:
                             controller.signal,
-                        redirect: "follow"
+                        redirect:
+                            "follow"
                     }
                 );
 
@@ -1908,9 +2254,7 @@ textarea.control {
 
                 error.terminalReceipt =
                     action ===
-                        "getReceipt" &&
-                    data?.result ===
-                        "error";
+                    "getReceipt";
 
                 throw error;
             }
@@ -1944,7 +2288,7 @@ textarea.control {
     function version(data) {
         if (
             data.version !==
-            "visit-memory-5"
+            "visit-memory-6"
         ) {
             throw new Error(
                 "Apps Script eski sürümde. Yeni ziyaret kodunu dağıtıp tekrar deneyin."
@@ -1994,6 +2338,513 @@ textarea.control {
         );
     }
 
+    function currentQuarter() {
+        const parts =
+            localToday()
+                .split("-");
+
+        const year =
+            Number(parts[0]);
+
+        const month =
+            Number(parts[1]);
+
+        return {
+            year,
+            quarter:
+                Math.floor(
+                    (month - 1) / 3
+                ) + 1
+        };
+    }
+
+    function planCacheKey(
+        year,
+        quarter
+    ) {
+        return (
+            "visitPlan:" +
+            endpoint +
+            ":" +
+            year +
+            ":" +
+            quarter
+        );
+    }
+
+    function setPlanStatus(
+        text,
+        error = false
+    ) {
+        $("planStatus")
+            .textContent = text;
+
+        $("planStatus")
+            .classList
+            .toggle(
+                "error",
+                error
+            );
+    }
+
+    function renderPlan(
+        data,
+        cached = false
+    ) {
+        if (
+            !data ||
+            !Array.isArray(
+                data.months
+            ) ||
+            data.months.length !== 3
+        ) {
+            throw new Error(
+                "Çalışma planı yanıtı geçersiz."
+            );
+        }
+
+        const weekdays = [
+            "Pzt",
+            "Sal",
+            "Çar",
+            "Per",
+            "Cum",
+            "Cmt",
+            "Paz"
+        ];
+
+        const allowedKinds =
+            new Set([
+                "ankara",
+                "travel",
+                "weekend",
+                "holiday",
+                "unassigned"
+            ]);
+
+        const today =
+            localToday();
+
+        const grid =
+            $("planGrid");
+
+        grid.replaceChildren();
+
+        $("planTitle").textContent =
+            data.title ||
+            (
+                data.quarter +
+                ". Çeyrek " +
+                data.year
+            );
+
+        $("planSubtitle").textContent =
+            "3 AYLIK ÇALIŞMA PLANI";
+
+        data.months.forEach(
+            month => {
+                const card =
+                    document.createElement(
+                        "section"
+                    );
+
+                card.className =
+                    "plan-month";
+
+                const heading =
+                    document.createElement(
+                        "h3"
+                    );
+
+                heading.textContent =
+                    upper(month.name) +
+                    " " +
+                    data.year;
+
+                card.appendChild(
+                    heading
+                );
+
+                const weekdayRow =
+                    document.createElement(
+                        "div"
+                    );
+
+                weekdayRow.className =
+                    "plan-weekdays";
+
+                weekdays.forEach(
+                    label => {
+                        const item =
+                            document
+                                .createElement(
+                                    "span"
+                                );
+
+                        item.textContent =
+                            label;
+
+                        weekdayRow
+                            .appendChild(
+                                item
+                            );
+                    }
+                );
+
+                card.appendChild(
+                    weekdayRow
+                );
+
+                const daysGrid =
+                    document.createElement(
+                        "div"
+                    );
+
+                daysGrid.className =
+                    "plan-days";
+
+                const firstDay =
+                    Array.isArray(
+                        month.days
+                    ) &&
+                    month.days.length
+                        ? month.days[0]
+                        : null;
+
+                if (!firstDay) {
+                    throw new Error(
+                        "Ay verisi eksik."
+                    );
+                }
+
+                const leading =
+                    (
+                        Number(
+                            firstDay.weekday
+                        ) + 6
+                    ) % 7;
+
+                for (
+                    let index = 0;
+                    index < leading;
+                    index++
+                ) {
+                    const empty =
+                        document
+                            .createElement(
+                                "div"
+                            );
+
+                    empty.className =
+                        "plan-day empty";
+
+                    empty.setAttribute(
+                        "aria-hidden",
+                        "true"
+                    );
+
+                    daysGrid
+                        .appendChild(
+                            empty
+                        );
+                }
+
+                month.days.forEach(
+                    day => {
+                        const kind =
+                            allowedKinds
+                                .has(
+                                    day.kind
+                                )
+                                ? day.kind
+                                : "unassigned";
+
+                        const cell =
+                            document
+                                .createElement(
+                                    "div"
+                                );
+
+                        cell.className =
+                            "plan-day " +
+                            kind +
+                            (
+                                day.date ===
+                                today
+                                    ? " today"
+                                    : ""
+                            );
+
+                        const city =
+                            clean(
+                                day.city
+                            ) ||
+                            (
+                                kind ===
+                                "unassigned"
+                                    ? "Program yok"
+                                    : ""
+                            );
+
+                        cell.title =
+                            day.day +
+                            " " +
+                            month.name +
+                            " " +
+                            data.year +
+                            (
+                                city
+                                    ? " · " +
+                                      city
+                                    : ""
+                            );
+
+                        const number =
+                            document
+                                .createElement(
+                                    "span"
+                                );
+
+                        number.className =
+                            "plan-day-number";
+
+                        number.textContent =
+                            day.day;
+
+                        cell.appendChild(
+                            number
+                        );
+
+                        if (city) {
+                            const cityLabel =
+                                document
+                                    .createElement(
+                                        "span"
+                                    );
+
+                            cityLabel
+                                .className =
+                                "plan-day-city";
+
+                            cityLabel
+                                .textContent =
+                                city;
+
+                            cell.appendChild(
+                                cityLabel
+                            );
+                        }
+
+                        daysGrid
+                            .appendChild(
+                                cell
+                            );
+                    }
+                );
+
+                card.appendChild(
+                    daysGrid
+                );
+
+                grid.appendChild(
+                    card
+                );
+            }
+        );
+
+        const note = cached
+            ? "Cihazda kayıtlı plan gösteriliyor."
+            : "Google Sheet planı güncel.";
+
+        setPlanStatus(
+            note +
+            " · " +
+            (
+                data.spreadsheet ||
+                "Çalışma planı"
+            )
+        );
+    }
+
+    async function loadPlan(
+        force = false
+    ) {
+        const period =
+            currentQuarter();
+
+        const storageKey =
+            planCacheKey(
+                period.year,
+                period.quarter
+            );
+
+        const cached =
+            read(
+                storageKey,
+                null
+            );
+
+        let hasCache =
+            !!(
+                cached &&
+                cached.data &&
+                Array.isArray(
+                    cached.data.months
+                )
+            );
+
+        if (hasCache) {
+            try {
+                renderPlan(
+                    cached.data,
+                    true
+                );
+            } catch (_) {
+                hasCache = false;
+
+                save(
+                    storageKey,
+                    null
+                );
+            }
+        }
+
+        if (!endpoint) {
+            setPlanStatus(
+                "Önce Ayarlar bölümünden Apps Script bağlantısını ekleyin.",
+                true
+            );
+
+            return;
+        }
+
+        if (planLoading) {
+            return;
+        }
+
+        if (
+            !force &&
+            hasCache &&
+            Date.now() -
+                Number(
+                    cached.savedAt || 0
+                ) <
+                12 * 60 * 60 * 1000
+        ) {
+            return;
+        }
+
+        planLoading = true;
+
+        $("refreshPlanBtn")
+            .disabled = true;
+
+        $("refreshPlanBtn")
+            .classList
+            .add("loading");
+
+        if (!hasCache) {
+            setPlanStatus(
+                "3 aylık çalışma planı yükleniyor…"
+            );
+        }
+
+        try {
+            const data =
+                await api(
+                    "getQuarterPlan",
+                    {
+                        year:
+                            period.year,
+                        quarter:
+                            period.quarter
+                    },
+                    endpoint,
+                    20000
+                );
+
+            version(data);
+
+            if (
+                data.year !==
+                    period.year ||
+                data.quarter !==
+                    period.quarter
+            ) {
+                throw new Error(
+                    "Yanlış çeyrek planı döndü."
+                );
+            }
+
+            renderPlan(
+                data,
+                false
+            );
+
+            save(
+                storageKey,
+                {
+                    savedAt:
+                        Date.now(),
+                    data
+                }
+            );
+        } catch (error) {
+            if (hasCache) {
+                setPlanStatus(
+                    "Plan yenilenemedi. Cihazdaki son plan gösteriliyor: " +
+                    error.message,
+                    true
+                );
+            } else {
+                setPlanStatus(
+                    error.message,
+                    true
+                );
+            }
+        } finally {
+            planLoading = false;
+
+            $("refreshPlanBtn")
+                .disabled = false;
+
+            $("refreshPlanBtn")
+                .classList
+                .remove("loading");
+        }
+    }
+
+    function openPlan() {
+        $("planModal")
+            .classList
+            .remove("hidden");
+
+        document.body
+            .classList
+            .add("plan-open");
+
+        $("planContent")
+            .scrollTop = 0;
+
+        $("closePlanBtn")
+            .focus();
+
+        loadPlan(false);
+    }
+
+    function closePlan() {
+        $("planModal")
+            .classList
+            .add("hidden");
+
+        document.body
+            .classList
+            .remove("plan-open");
+
+        $("openPlanBtn")
+            .focus();
+    }
+
     async function lastNumber() {
         if (
             !endpoint ||
@@ -2005,27 +2856,26 @@ textarea.control {
         }
 
         const seq = ++sequence;
-
-        const selectedDate =
+        const date =
             $("tarih").value;
-
         const url = endpoint;
 
         try {
-            const data = await api(
-                "getLastZiyaretNo",
-                {
-                    tarih:
-                        formattedDate()
-                }
-            );
+            const data =
+                await api(
+                    "getLastZiyaretNo",
+                    {
+                        tarih:
+                            formattedDate()
+                    }
+                );
 
             version(data);
 
             if (
                 seq === sequence &&
                 url === endpoint &&
-                selectedDate ===
+                date ===
                     $("tarih").value &&
                 !busy &&
                 !pending
@@ -2033,9 +2883,11 @@ textarea.control {
                 $("ziyaretNo").value =
                     Number(
                         data.nextNo ||
-                        Number(
-                            data.lastNo
-                        ) + 1
+                        (
+                            Number(
+                                data.lastNo
+                            ) + 1
+                        )
                     );
 
                 message(
@@ -2093,9 +2945,10 @@ textarea.control {
         const url = endpoint;
 
         try {
-            const data = await api(
-                "getHistory"
-            );
+            const data =
+                await api(
+                    "getHistory"
+                );
 
             version(data);
 
@@ -2110,10 +2963,9 @@ textarea.control {
                 !Array.isArray(
                     data.institutions
                 ) ||
-                !data
-                    .institutionDoctors ||
-                typeof data
-                    .institutionDoctors !==
+                !data.institutionDoctors ||
+                typeof
+                    data.institutionDoctors !==
                     "object"
             ) {
                 throw new Error(
@@ -2141,15 +2993,17 @@ textarea.control {
                 dropdown => {
                     if (
                         dropdown.input ===
-                        document
-                            .activeElement
+                        document.activeElement
                     ) {
                         dropdown.render();
                     }
                 }
             );
 
-            if (!busy && !pending) {
+            if (
+                !busy &&
+                !pending
+            ) {
                 message(
                     doctors.length +
                     " doktor · " +
@@ -2208,8 +3062,7 @@ textarea.control {
                     institutionKey
                 ] || []
             )
-        ])
-        .slice(0, 100);
+        ]).slice(0, 100);
 
         saveCache();
         locationSave();
@@ -2227,9 +3080,11 @@ textarea.control {
         $("ziyaretNo").value =
             Number(
                 data.nextNo ||
-                Number(
-                    data.ziyaretNo
-                ) + 1
+                (
+                    Number(
+                        data.ziyaretNo
+                    ) + 1
+                )
             );
 
         message(
@@ -2269,14 +3124,13 @@ textarea.control {
                     : ""
             );
 
-        const approved =
-            window.confirm(
+        if (
+            !window.confirm(
                 "Bu doktor bugün daha önce kaydedilmiş:\n\n" +
                 detail +
                 "\n\nYine de yeni ziyaret kaydedilsin mi?"
-            );
-
-        if (!approved) {
+            )
+        ) {
             pending = null;
 
             save(
@@ -2314,10 +3168,12 @@ textarea.control {
         const controller =
             new AbortController();
 
-        const timer = setTimeout(
-            () => controller.abort(),
-            12000
-        );
+        const timer =
+            setTimeout(
+                () =>
+                    controller.abort(),
+                12000
+            );
 
         fetch(
             endpoint,
@@ -2336,10 +3192,10 @@ textarea.control {
                     controller.signal
             }
         )
-        .catch(() => {})
-        .finally(
-            () => clearTimeout(timer)
-        );
+            .catch(() => {})
+            .finally(() =>
+                clearTimeout(timer)
+            );
 
         const waits = [
             350,
@@ -2354,9 +3210,13 @@ textarea.control {
             1600
         ];
 
-        let lastReceiptError = null;
+        let lastReceiptError =
+            null;
 
-        for (const wait of waits) {
+        for (
+            const wait
+            of waits
+        ) {
             await new Promise(
                 resolve =>
                     setTimeout(
@@ -2378,10 +3238,12 @@ textarea.control {
                     return result;
                 }
 
-                lastReceiptError = null;
+                lastReceiptError =
+                    null;
             } catch (error) {
                 if (
-                    error.terminalReceipt
+                    error
+                        .terminalReceipt
                 ) {
                     throw error;
                 }
@@ -2395,7 +3257,8 @@ textarea.control {
             (
                 lastReceiptError
                     ? lastReceiptError
-                          .message + " "
+                        .message +
+                      " "
                     : ""
             ) +
             "Kayıt henüz doğrulanamadı."
@@ -2408,10 +3271,14 @@ textarea.control {
         if (!pending) {
             for (
                 const id
-                of Object.keys(required)
+                of Object.keys(
+                    required
+                )
             ) {
                 if (
-                    !clean($(id).value)
+                    !clean(
+                        $(id).value
+                    )
                 ) {
                     message(
                         required[id] +
@@ -2420,7 +3287,6 @@ textarea.control {
                     );
 
                     $(id).focus();
-
                     return;
                 }
             }
@@ -2443,7 +3309,6 @@ textarea.control {
                 );
 
                 await lastNumber();
-
                 return;
             }
         }
@@ -2457,43 +3322,35 @@ textarea.control {
                 pending = {
                     requestId:
                         makeId(),
-
                     tarih:
                         formattedDate(),
-
                     ziyaretNo:
                         $("ziyaretNo")
                             .value,
-
                     sehir:
                         clean(
                             $("sehir")
                                 .value
                         ),
-
                     ilce:
                         clean(
                             $("ilce")
                                 .value
                         ),
-
                     hastane:
                         upper(
                             $("hastane")
                                 .value
                         ),
-
                     doktor:
                         upper(
                             $("doktor")
                                 .value
                         ),
-
                     not:
                         $("not")
                             .value
                             .trim(),
-
                     allowDuplicate:
                         false
                 };
@@ -2596,26 +3453,29 @@ textarea.control {
         }
     }
 
-    $("visitForm").addEventListener(
-        "submit",
-        event => {
-            event.preventDefault();
-            submit();
-        }
-    );
+    $("visitForm")
+        .addEventListener(
+            "submit",
+            event => {
+                event.preventDefault();
+                submit();
+            }
+        );
 
-    $("tarih").addEventListener(
-        "change",
-        () => {
-            dateWasManuallyChanged =
-                $("tarih").value !==
-                automaticDate;
+    $("tarih")
+        .addEventListener(
+            "change",
+            () => {
+                dateWasManuallyChanged =
+                    $("tarih").value !==
+                    automaticDate;
 
-            $("ziyaretNo").value = "";
+                $("ziyaretNo").value =
+                    "";
 
-            lastNumber();
-        }
-    );
+                lastNumber();
+            }
+        );
 
     document.addEventListener(
         "visibilitychange",
@@ -2631,12 +3491,46 @@ textarea.control {
         refreshDateAfterResume
     );
 
+    $("openPlanBtn")
+        .addEventListener(
+            "click",
+            openPlan
+        );
+
+    $("closePlanBtn")
+        .addEventListener(
+            "click",
+            closePlan
+        );
+
+    $("refreshPlanBtn")
+        .addEventListener(
+            "click",
+            () => loadPlan(true)
+        );
+
+    document.addEventListener(
+        "keydown",
+        event => {
+            if (
+                event.key ===
+                    "Escape" &&
+                !$("planModal")
+                    .classList
+                    .contains("hidden")
+            ) {
+                closePlan();
+            }
+        }
+    );
+
     $("openSettingsBtn")
         .addEventListener(
             "click",
             () => {
                 $("scriptUrlInput")
-                    .value = endpoint;
+                    .value =
+                    endpoint;
 
                 $("settingsModal")
                     .classList
@@ -2685,7 +3579,6 @@ textarea.control {
                         );
 
                     version(data);
-
                     endpoint = url;
 
                     try {
@@ -2714,7 +3607,9 @@ textarea.control {
                     await lastNumber();
                     await sync();
                 } catch (error) {
-                    alert(error.message);
+                    alert(
+                        error.message
+                    );
 
                     message(
                         error.message,
@@ -2729,9 +3624,12 @@ textarea.control {
     function restorePending() {
         if (pending) {
             fields.forEach(id => {
-                if (id !== "tarih") {
+                if (
+                    id !== "tarih"
+                ) {
                     $(id).value =
-                        pending[id] || "";
+                        pending[id] ||
+                        "";
                 }
             });
 
@@ -2774,5 +3672,6 @@ textarea.control {
     );
 })();
 </script>
+
 </body>
 </html>
