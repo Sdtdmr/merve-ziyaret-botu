@@ -7,12 +7,22 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Ziyaret">
+
 <title>Ziyaret Asistanı</title>
 
 <link rel="manifest" href="manifest.json">
+
 <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    rel="stylesheet"
+>
 
 <style>
 :root {
@@ -33,22 +43,27 @@
 
 html {
     width: 100%;
+    overflow-x: hidden;
     background: var(--bg);
     color-scheme: dark;
-    overflow-x: hidden;
 }
 
 body {
     width: 100%;
-    margin: 0;
     min-height: 100dvh;
+    margin: 0;
     overflow-x: hidden;
+    padding-bottom:
+        calc(28px + env(safe-area-inset-bottom));
     background:
-        radial-gradient(circle at 0 0, rgba(12,112,82,.18), transparent 25rem),
+        radial-gradient(
+            circle at 0 0,
+            rgba(12,112,82,.18),
+            transparent 25rem
+        ),
         var(--bg);
     color: var(--white);
     font-family: Manrope, sans-serif;
-    padding-bottom: calc(28px + env(safe-area-inset-bottom));
 }
 
 button,
@@ -74,7 +89,6 @@ button {
     max-width: 480px;
     margin: 0 auto;
     padding: 0 16px;
-    overflow: hidden;
 }
 
 .topbar {
@@ -86,8 +100,9 @@ button {
         calc(12px + env(safe-area-inset-top))
         16px
         12px;
+    border-bottom:
+        1px solid rgba(255,255,255,.05);
     background: rgba(13,15,16,.9);
-    border-bottom: 1px solid rgba(255,255,255,.05);
     backdrop-filter: blur(18px);
 }
 
@@ -102,8 +117,8 @@ button {
 .brand {
     display: flex;
     align-items: center;
-    gap: 11px;
     min-width: 0;
+    gap: 11px;
 }
 
 .brand-mark {
@@ -112,9 +127,11 @@ button {
     display: grid;
     place-items: center;
     flex-shrink: 0;
-    border: 1px solid rgba(24,201,154,.55);
+    border:
+        1px solid rgba(24,201,154,.55);
     border-radius: 50%;
-    background: rgba(24,201,154,.07);
+    background:
+        rgba(24,201,154,.07);
     color: var(--green);
     font-size: 13px;
     font-weight: 800;
@@ -149,7 +166,8 @@ button {
 .settings:active {
     transform: scale(.94);
     color: var(--green);
-    border-color: rgba(24,201,154,.5);
+    border-color:
+        rgba(24,201,154,.5);
 }
 
 .intro {
@@ -176,7 +194,6 @@ button {
     width: 100%;
     min-width: 0;
     padding: 19px 16px;
-    overflow: visible;
     border: 1px solid var(--line);
     border-radius: 20px;
     background:
@@ -185,8 +202,10 @@ button {
             rgba(25,27,29,.98),
             rgba(20,22,24,.98)
         );
-    box-shadow: 0 18px 42px rgba(0,0,0,.17);
-    animation: cardEnter .45s both;
+    box-shadow:
+        0 18px 42px rgba(0,0,0,.17);
+    animation:
+        cardEnter .45s both;
 }
 
 .card:nth-child(2) {
@@ -198,7 +217,8 @@ button {
 }
 
 .card.accent {
-    border-color: rgba(24,201,154,.5);
+    border-color:
+        rgba(24,201,154,.5);
 }
 
 .card-head {
@@ -220,9 +240,11 @@ button {
     display: grid;
     place-items: center;
     flex-shrink: 0;
-    border: 1px solid rgba(24,201,154,.28);
+    border:
+        1px solid rgba(24,201,154,.28);
     border-radius: 12px;
-    background: rgba(24,201,154,.07);
+    background:
+        rgba(24,201,154,.07);
     color: var(--green);
 }
 
@@ -237,7 +259,8 @@ button {
 
 .step {
     padding: 5px 8px;
-    border: 1px solid rgba(24,201,154,.24);
+    border:
+        1px solid rgba(24,201,154,.24);
     border-radius: 999px;
     color: var(--green);
     font-size: 9px;
@@ -310,14 +333,19 @@ button {
     min-height: 52px;
     margin: 0 !important;
     padding: 13px 14px !important;
-    border: 1px solid #303337 !important;
+    border:
+        1px solid #303337 !important;
     border-radius: 14px !important;
     outline: none !important;
-    background: var(--field) !important;
-    color: var(--white) !important;
+    background:
+        var(--field) !important;
+    color:
+        var(--white) !important;
     box-shadow: none !important;
     box-sizing: border-box !important;
-    transition: border-color .2s, box-shadow .2s;
+    transition:
+        border-color .2s,
+        box-shadow .2s;
 }
 
 .control.icon {
@@ -332,7 +360,8 @@ input[type="date"].control {
     height: 52px !important;
     min-height: 52px !important;
     margin: 0 !important;
-    padding: 13px 13px 13px 43px !important;
+    padding:
+        13px 13px 13px 43px !important;
     line-height: 24px !important;
     box-sizing: border-box !important;
     -webkit-appearance: none;
@@ -364,8 +393,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .control:focus {
-    border-color: var(--green) !important;
-    box-shadow: 0 0 0 4px rgba(24,201,154,.08) !important;
+    border-color:
+        var(--green) !important;
+    box-shadow:
+        0 0 0 4px
+        rgba(24,201,154,.08) !important;
 }
 
 textarea.control {
@@ -386,10 +418,12 @@ textarea.control {
     padding: 5px;
     overflow-y: auto;
     list-style: none;
-    border: 1px solid rgba(24,201,154,.3);
+    border:
+        1px solid rgba(24,201,154,.3);
     border-radius: 14px;
     background: #191c1d;
-    box-shadow: 0 20px 45px rgba(0,0,0,.55);
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.55);
 }
 
 #sehirList li,
@@ -414,9 +448,19 @@ textarea.control {
 
 .memory-choice:hover,
 .memory-choice:focus {
-    outline: 2px solid #18c99a;
+    outline:
+        2px solid #18c99a;
     outline-offset: -2px;
     background: #23483d;
+}
+
+.control:disabled {
+    opacity: .7;
+}
+
+.card:focus-within {
+    position: relative;
+    z-index: 2;
 }
 
 .submit {
@@ -434,11 +478,18 @@ textarea.control {
     overflow: hidden;
     border: 0;
     border-radius: 16px;
-    background: linear-gradient(110deg,#1ad09d,#10b986);
+    background:
+        linear-gradient(
+            110deg,
+            #1ad09d,
+            #10b986
+        );
     color: #061510;
     font-size: 14px;
     font-weight: 800;
-    box-shadow: 0 14px 32px rgba(11,185,132,.2);
+    box-shadow:
+        0 14px 32px
+        rgba(11,185,132,.2);
 }
 
 .submit::after {
@@ -452,8 +503,10 @@ textarea.control {
             rgba(255,255,255,.42),
             transparent 55%
         );
-    transform: translateX(-110%);
-    animation: buttonShine 3.5s infinite;
+    transform:
+        translateX(-110%);
+    animation:
+        buttonShine 3.5s infinite;
 }
 
 .submit > * {
@@ -468,15 +521,6 @@ textarea.control {
 .submit:disabled {
     opacity: .65;
     cursor: wait;
-}
-
-.control:disabled {
-    opacity: .7;
-}
-
-.card:focus-within {
-    position: relative;
-    z-index: 2;
 }
 
 .footer {
@@ -494,11 +538,16 @@ textarea.control {
 
 #toast {
     position: fixed;
-    top: calc(16px + env(safe-area-inset-top));
+    top:
+        calc(
+            16px +
+            env(safe-area-inset-top)
+        );
     left: 50%;
     z-index: 60;
     width: max-content;
-    max-width: calc(100vw - 32px);
+    max-width:
+        calc(100vw - 32px);
     padding: 12px 16px;
     border-radius: 999px;
     font-size: 12px;
@@ -514,20 +563,31 @@ textarea.control {
     align-items: flex-end;
     justify-content: center;
     padding: 0;
-    background: rgba(2,4,5,.78);
+    background:
+        rgba(2,4,5,.78);
     backdrop-filter: blur(8px);
 }
 
 #settingsCard {
     width: 100%;
     max-width: 480px;
-    padding: 22px 18px calc(22px + env(safe-area-inset-bottom));
-    border: 1px solid rgba(24,201,154,.32);
+    padding:
+        22px
+        18px
+        calc(
+            22px +
+            env(safe-area-inset-bottom)
+        );
+    border:
+        1px solid rgba(24,201,154,.32);
     border-bottom: 0;
-    border-radius: 24px 24px 0 0;
+    border-radius:
+        24px 24px 0 0;
     background: #181a1b;
     color: white;
-    box-shadow: 0 25px 70px rgba(0,0,0,.65);
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.65);
 }
 
 #settingsCard h2 {
@@ -542,7 +602,8 @@ textarea.control {
 
 .modal-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+        1fr 1fr;
     gap: 10px;
     margin-top: 18px;
 }
@@ -555,7 +616,8 @@ textarea.control {
 }
 
 .cancel {
-    border: 1px solid var(--line);
+    border:
+        1px solid var(--line);
     background: #111314;
     color: #a9abad;
 }
@@ -569,24 +631,28 @@ textarea.control {
 @keyframes cardEnter {
     from {
         opacity: 0;
-        transform: translateY(14px);
+        transform:
+            translateY(14px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform:
+            translateY(0);
     }
 }
 
 @keyframes buttonShine {
     0%,
     55% {
-        transform: translateX(-110%);
+        transform:
+            translateX(-110%);
     }
 
     85%,
     100% {
-        transform: translateX(110%);
+        transform:
+            translateX(110%);
     }
 }
 
@@ -624,7 +690,9 @@ textarea.control {
 <header class="topbar">
     <div class="topbar-inner">
         <div class="brand">
-            <div class="brand-mark">SD</div>
+            <div class="brand-mark">
+                SD
+            </div>
 
             <div>
                 <h1>Ziyaret Asistanı</h1>
@@ -638,7 +706,9 @@ textarea.control {
             type="button"
             aria-label="Ayarlar"
         >
-            <span class="material-symbols-outlined">tune</span>
+            <span class="material-symbols-outlined">
+                tune
+            </span>
         </button>
     </div>
 </header>
@@ -647,19 +717,29 @@ textarea.control {
     id="toast"
     class="opacity-0 -translate-y-full flex items-center gap-2 bg-[#d7fff2] text-[#075b45]"
 >
-    <span class="material-symbols-outlined" id="toastIcon">
+    <span
+        class="material-symbols-outlined"
+        id="toastIcon"
+    >
         check_circle
     </span>
 
-    <span id="toastText">Kaydedildi</span>
+    <span id="toastText">
+        Kaydedildi
+    </span>
 </div>
 
 <main>
     <section class="intro">
-        <p class="kicker">YENİ ZİYARET</p>
+        <p class="kicker">
+            YENİ ZİYARET
+        </p>
     </section>
 
-    <form id="visitForm" class="form-stack">
+    <form
+        id="visitForm"
+        class="form-stack"
+    >
 
         <section class="card accent">
             <div class="card-head">
@@ -673,12 +753,16 @@ textarea.control {
                     <h3>Ziyaret bilgileri</h3>
                 </div>
 
-                <span class="step">01</span>
+                <span class="step">
+                    01
+                </span>
             </div>
 
             <div class="fields">
                 <div class="field">
-                    <label for="tarih">Tarih</label>
+                    <label for="tarih">
+                        Tarih
+                    </label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -695,8 +779,13 @@ textarea.control {
 
                 <div class="field">
                     <div class="label-row">
-                        <label for="ziyaretNo">Ziyaret No</label>
-                        <span class="auto">OTOMATİK</span>
+                        <label for="ziyaretNo">
+                            Ziyaret No
+                        </label>
+
+                        <span class="auto">
+                            OTOMATİK
+                        </span>
                     </div>
 
                     <div class="input-wrap">
@@ -728,12 +817,16 @@ textarea.control {
                     <h3>Konum ve kurum</h3>
                 </div>
 
-                <span class="step">02</span>
+                <span class="step">
+                    02
+                </span>
             </div>
 
             <div class="fields">
                 <div class="field">
-                    <label for="sehir">Şehir</label>
+                    <label for="sehir">
+                        Şehir
+                    </label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -749,11 +842,16 @@ textarea.control {
                         >
                     </div>
 
-                    <ul id="sehirList" class="hidden"></ul>
+                    <ul
+                        id="sehirList"
+                        class="hidden"
+                    ></ul>
                 </div>
 
                 <div class="field">
-                    <label for="ilce">İlçe</label>
+                    <label for="ilce">
+                        İlçe
+                    </label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -770,7 +868,9 @@ textarea.control {
                 </div>
 
                 <div class="field">
-                    <label for="hastane">Hastane / Kurum Adı</label>
+                    <label for="hastane">
+                        Hastane / Kurum Adı
+                    </label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -786,7 +886,10 @@ textarea.control {
                         >
                     </div>
 
-                    <ul id="hastaneList" class="hidden"></ul>
+                    <ul
+                        id="hastaneList"
+                        class="hidden"
+                    ></ul>
                 </div>
             </div>
         </section>
@@ -803,12 +906,16 @@ textarea.control {
                     <h3>Görüşme</h3>
                 </div>
 
-                <span class="step">03</span>
+                <span class="step">
+                    03
+                </span>
             </div>
 
             <div class="fields">
                 <div class="field">
-                    <label for="doktor">Doktor Adı</label>
+                    <label for="doktor">
+                        Doktor Adı
+                    </label>
 
                     <div class="input-wrap">
                         <span class="material-symbols-outlined input-icon">
@@ -824,11 +931,16 @@ textarea.control {
                         >
                     </div>
 
-                    <ul id="doktorList" class="hidden"></ul>
+                    <ul
+                        id="doktorList"
+                        class="hidden"
+                    ></ul>
                 </div>
 
                 <div class="field">
-                    <label for="not">Notlar</label>
+                    <label for="not">
+                        Notlar
+                    </label>
 
                     <textarea
                         id="not"
@@ -852,7 +964,9 @@ textarea.control {
                 add_circle
             </span>
 
-            <span id="btnText">Ziyareti Kaydet</span>
+            <span id="btnText">
+                Ziyareti Kaydet
+            </span>
 
             <svg
                 id="btnSpinner"
@@ -935,7 +1049,8 @@ textarea.control {
 (() => {
     "use strict";
 
-    const $ = id => document.getElementById(id);
+    const $ = id =>
+        document.getElementById(id);
 
     const fields = [
         "tarih",
@@ -965,61 +1080,92 @@ textarea.control {
         "Isparta|İstanbul|İzmir|Kahramanmaraş|Karabük|Karaman|Kars|" +
         "Kastamonu|Kayseri|Kırıkkale|Kırklareli|Kırşehir|Kilis|" +
         "Kocaeli|Konya|Kütahya|Malatya|Manisa|Mardin|Mersin|Muğla|" +
-        "Muş|Nevşehir|Niğde|Ordu|Osmaniye|Rize|Sakarya|Samsun|Siirt|" +
-        "Sinop|Sivas|Şanlıurfa|Şırnak|Tekirdağ|Tokat|Trabzon|Tunceli|" +
-        "Uşak|Van|Yalova|Yozgat|Zonguldak"
+        "Muş|Nevşehir|Niğde|Ordu|Osmaniye|Rize|Sakarya|Samsun|" +
+        "Siirt|Sinop|Sivas|Şanlıurfa|Şırnak|Tekirdağ|Tokat|Trabzon|" +
+        "Tunceli|Uşak|Van|Yalova|Yozgat|Zonguldak"
     )
     .split("|")
-    .sort((a, b) => a.localeCompare(b, "tr"));
+    .sort(
+        (a, b) =>
+            a.localeCompare(b, "tr")
+    );
 
     const clean = value =>
-        String(value == null ? "" : value)
-            .trim()
-            .replace(/\s+/g, " ");
+        String(
+            value == null ? "" : value
+        )
+        .trim()
+        .replace(/\s+/g, " ");
 
     const key = value =>
         clean(value)
-            .toLocaleLowerCase("tr-TR")
-            .replace(/ı/g, "i")
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
+        .toLocaleLowerCase("tr-TR")
+        .replace(/ı/g, "i")
+        .normalize("NFD")
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        );
 
     const upper = value =>
-        clean(value).toLocaleUpperCase("tr-TR");
+        clean(value)
+        .toLocaleUpperCase("tr-TR");
 
     let busy = false;
     let pending = null;
     let doctors = [];
     let institutions = [];
+    let institutionDoctors = {};
     let sequence = 0;
 
     const ram = new Map();
 
-    const status = document.createElement("p");
+    const status =
+        document.createElement("p");
+
     status.id = "syncStatus";
-    status.setAttribute("role", "status");
+
+    status.setAttribute(
+        "role",
+        "status"
+    );
+
     status.style.cssText =
-        "font-size:12px;line-height:1.6;margin:10px 0;" +
-        "color:#a9c5ba;overflow-wrap:anywhere";
+        "font-size:12px;" +
+        "line-height:1.6;" +
+        "margin:10px 0;" +
+        "color:#a9c5ba;" +
+        "overflow-wrap:anywhere";
 
     $("visitForm").before(status);
 
-    const storageNote = document.createElement("p");
+    const storageNote =
+        document.createElement("p");
+
     storageNote.style.cssText =
-        "font-size:12px;color:#f4be7c";
+        "font-size:12px;" +
+        "color:#f4be7c";
 
     status.after(storageNote);
 
-    function message(text, error = false) {
+    function message(
+        text,
+        error = false
+    ) {
         status.textContent = text;
+
         status.style.color = error
             ? "#ff9e9e"
             : "#a9c5ba";
     }
 
-    function read(name, fallback) {
+    function read(
+        name,
+        fallback
+    ) {
         try {
-            const raw = localStorage.getItem(name);
+            const raw =
+                localStorage.getItem(name);
 
             return raw === null
                 ? fallback
@@ -1050,26 +1196,84 @@ textarea.control {
 
     try {
         endpoint =
-            localStorage.getItem("scriptUrl") || "";
+            localStorage.getItem(
+                "scriptUrl"
+            ) || "";
     } catch (_) {}
 
     const cacheKey = suffix =>
-        "visit4:" + endpoint + ":" + suffix;
+        "visit4:" +
+        endpoint +
+        ":" +
+        suffix;
 
     function unique(names) {
         const seen = new Set();
 
         return names
-            .filter(value => typeof value === "string")
+            .filter(
+                value =>
+                    typeof value === "string"
+            )
             .map(upper)
             .filter(value => {
-                if (!value || seen.has(key(value))) {
+                const valueKey =
+                    key(value);
+
+                if (
+                    !value ||
+                    seen.has(valueKey)
+                ) {
                     return false;
                 }
 
-                seen.add(key(value));
+                seen.add(valueKey);
+
                 return true;
             });
+    }
+
+    function normalizeInstitutionDoctors(
+        source
+    ) {
+        const normalized = {};
+
+        if (
+            !source ||
+            typeof source !== "object" ||
+            Array.isArray(source)
+        ) {
+            return normalized;
+        }
+
+        for (
+            const [institution, names]
+            of Object.entries(source)
+        ) {
+            if (!Array.isArray(names)) {
+                continue;
+            }
+
+            const institutionKey =
+                key(institution);
+
+            if (!institutionKey) {
+                continue;
+            }
+
+            normalized[institutionKey] =
+                unique([
+                    ...(
+                        normalized[
+                            institutionKey
+                        ] || []
+                    ),
+                    ...names
+                ])
+                .slice(0, 100);
+        }
+
+        return normalized;
     }
 
     function loadCache() {
@@ -1083,13 +1287,29 @@ textarea.control {
             []
         );
 
-        doctors = Array.isArray(doctorCache)
-            ? unique(doctorCache)
-            : [];
+        const associationCache = read(
+            cacheKey(
+                "institutionDoctors"
+            ),
+            {}
+        );
 
-        institutions = Array.isArray(institutionCache)
-            ? unique(institutionCache)
-            : [];
+        doctors =
+            Array.isArray(doctorCache)
+                ? unique(doctorCache)
+                : [];
+
+        institutions =
+            Array.isArray(
+                institutionCache
+            )
+                ? unique(institutionCache)
+                : [];
+
+        institutionDoctors =
+            normalizeInstitutionDoctors(
+                associationCache
+            );
 
         pending = read(
             cacheKey("pending"),
@@ -1115,15 +1335,82 @@ textarea.control {
             cacheKey("institutions"),
             institutions.slice(0, 1000)
         );
+
+        save(
+            cacheKey(
+                "institutionDoctors"
+            ),
+            institutionDoctors
+        );
+    }
+
+    function mergeInstitutionDoctors(
+        remote
+    ) {
+        const incoming =
+            normalizeInstitutionDoctors(
+                remote
+            );
+
+        for (
+            const [
+                institutionKey,
+                names
+            ]
+            of Object.entries(incoming)
+        ) {
+            institutionDoctors[
+                institutionKey
+            ] = unique([
+                ...names,
+                ...(
+                    institutionDoctors[
+                        institutionKey
+                    ] || []
+                )
+            ])
+            .slice(0, 100);
+        }
+    }
+
+    function linkedDoctors() {
+        return (
+            institutionDoctors[
+                key($("hastane").value)
+            ] || []
+        );
+    }
+
+    function doctorSource() {
+        const linked =
+            linkedDoctors();
+
+        // Alan boşsa yalnızca seçilen kurumun
+        // doktorları gösterilir.
+        if (
+            !clean($("doktor").value)
+        ) {
+            return linked;
+        }
+
+        // Yazmaya başlanırsa kurum doktorları
+        // öncelikli olmak üzere genel geçmiş de aranır.
+        return unique([
+            ...linked,
+            ...doctors
+        ]);
     }
 
     function locationSave() {
         save(
             "visitAssistantLastLocation",
             {
-                sehir: $("sehir").value,
-                ilce: $("ilce").value,
-                hastane: $("hastane").value
+                sehir:
+                    $("sehir").value,
+                ilce:
+                    $("ilce").value,
+                hastane:
+                    $("hastane").value
             }
         );
     }
@@ -1134,11 +1421,16 @@ textarea.control {
     );
 
     for (
-        const id of ["sehir", "ilce", "hastane"]
+        const id of [
+            "sehir",
+            "ilce",
+            "hastane"
+        ]
     ) {
         $(id).value =
             location &&
-            typeof location[id] === "string"
+            typeof location[id] ===
+                "string"
                 ? location[id]
                 : "";
 
@@ -1153,7 +1445,10 @@ textarea.control {
         );
     }
 
-    for (const id of Object.keys(required)) {
+    for (
+        const id
+        of Object.keys(required)
+    ) {
         $(id).required = true;
     }
 
@@ -1183,17 +1478,28 @@ textarea.control {
         return (
             today.getFullYear() +
             "-" +
-            String(today.getMonth() + 1).padStart(2, "0") +
+            String(
+                today.getMonth() + 1
+            ).padStart(2, "0") +
             "-" +
-            String(today.getDate()).padStart(2, "0")
+            String(
+                today.getDate()
+            ).padStart(2, "0")
         );
     }
 
-    let automaticDate = localToday();
-    let dateWasManuallyChanged = false;
+    let automaticDate =
+        localToday();
 
-    $("tarih").value = automaticDate;
-    $("toast").classList.add("hidden");
+    let dateWasManuallyChanged =
+        false;
+
+    $("tarih").value =
+        automaticDate;
+
+    $("toast")
+        .classList
+        .add("hidden");
 
     const dropdowns = [];
 
@@ -1208,12 +1514,18 @@ textarea.control {
         let list = $(listId);
 
         if (!list) {
-            list = document.createElement("ul");
+            list =
+                document.createElement("ul");
+
             list.id = listId;
-            input.closest(".field").appendChild(list);
+
+            input
+                .closest(".field")
+                .appendChild(list);
         }
 
         list.classList.add("hidden");
+
         input.autocomplete = "off";
 
         input.setAttribute(
@@ -1227,7 +1539,9 @@ textarea.control {
         );
 
         const close = () => {
-            list.classList.add("hidden");
+            list
+                .classList
+                .add("hidden");
 
             input.setAttribute(
                 "aria-expanded",
@@ -1238,12 +1552,18 @@ textarea.control {
         function render() {
             list.replaceChildren();
 
-            const query = key(input.value);
+            const query =
+                key(input.value);
+
+            const minimum =
+                typeof min === "function"
+                    ? min()
+                    : min;
 
             if (
                 busy ||
                 pending ||
-                query.length < min
+                query.length < minimum
             ) {
                 close();
                 return;
@@ -1252,34 +1572,50 @@ textarea.control {
             const matches = source()
                 .filter(value => {
                     if (id === "sehir") {
-                        return key(value).includes(query);
+                        return key(value)
+                            .includes(query);
                     }
 
-                    return key(value).startsWith(query);
+                    return key(value)
+                        .startsWith(query);
                 })
                 .slice(0, 30);
 
-            for (const value of matches) {
+            for (
+                const value of matches
+            ) {
                 const li =
-                    document.createElement("li");
+                    document.createElement(
+                        "li"
+                    );
 
                 const button =
-                    document.createElement("button");
+                    document.createElement(
+                        "button"
+                    );
 
                 button.type = "button";
-                button.className = "memory-choice";
-                button.textContent = value;
+
+                button.className =
+                    "memory-choice";
+
+                button.textContent =
+                    value;
 
                 button.addEventListener(
                     "mousedown",
-                    event => event.preventDefault()
+                    event =>
+                        event.preventDefault()
                 );
 
                 button.addEventListener(
                     "click",
                     () => {
-                        input.value = value;
+                        input.value =
+                            value;
+
                         selected(value);
+
                         close();
                         input.focus();
                     }
@@ -1288,25 +1624,38 @@ textarea.control {
                 button.addEventListener(
                     "keydown",
                     event => {
-                        if (event.key === "ArrowDown") {
-                            event.preventDefault();
+                        if (
+                            event.key ===
+                            "ArrowDown"
+                        ) {
+                            event
+                                .preventDefault();
 
-                            li.nextElementSibling
+                            li
+                                .nextElementSibling
                                 ?.firstElementChild
                                 .focus();
                         }
 
-                        if (event.key === "ArrowUp") {
-                            event.preventDefault();
+                        if (
+                            event.key ===
+                            "ArrowUp"
+                        ) {
+                            event
+                                .preventDefault();
 
                             (
-                                li.previousElementSibling
+                                li
+                                    .previousElementSibling
                                     ?.firstElementChild ||
                                 input
                             ).focus();
                         }
 
-                        if (event.key === "Escape") {
+                        if (
+                            event.key ===
+                            "Escape"
+                        ) {
                             input.focus();
                             close();
                         }
@@ -1324,28 +1673,45 @@ textarea.control {
 
             input.setAttribute(
                 "aria-expanded",
-                String(Boolean(matches.length))
+                String(
+                    Boolean(matches.length)
+                )
             );
         }
 
-        input.addEventListener("input", render);
-        input.addEventListener("focus", render);
+        input.addEventListener(
+            "input",
+            render
+        );
+
+        input.addEventListener(
+            "focus",
+            render
+        );
 
         input.addEventListener(
             "keydown",
             event => {
                 if (
-                    event.key === "ArrowDown" &&
-                    !list.classList.contains("hidden")
+                    event.key ===
+                        "ArrowDown" &&
+                    !list.classList.contains(
+                        "hidden"
+                    )
                 ) {
                     event.preventDefault();
 
                     list
-                        .querySelector("button")
+                        .querySelector(
+                            "button"
+                        )
                         ?.focus();
                 }
 
-                if (event.key === "Escape") {
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
                     close();
                 }
             }
@@ -1356,7 +1722,9 @@ textarea.control {
             event => {
                 if (
                     event.target !== input &&
-                    !list.contains(event.target)
+                    !list.contains(
+                        event.target
+                    )
                 ) {
                     close();
                 }
@@ -1370,9 +1738,12 @@ textarea.control {
                 () => {
                     setTimeout(() => {
                         if (
-                            document.activeElement !== input &&
+                            document
+                                .activeElement !==
+                                input &&
                             !list.contains(
-                                document.activeElement
+                                document
+                                    .activeElement
                             )
                         ) {
                             close();
@@ -1401,8 +1772,11 @@ textarea.control {
     autocomplete(
         "doktor",
         "doktorList",
-        () => doctors,
-        2,
+        doctorSource,
+        () =>
+            linkedDoctors().length
+                ? 0
+                : 2,
         () => {}
     );
 
@@ -1419,31 +1793,41 @@ textarea.control {
     function lockForm() {
         fields.forEach(id => {
             $(id).disabled =
-                busy || Boolean(pending);
+                busy ||
+                Boolean(pending);
         });
 
-        $("submitBtn").disabled = busy;
-        $("saveSettingsBtn").disabled = busy;
+        $("submitBtn").disabled =
+            busy;
 
-        $("btnText").textContent = busy
-            ? "Kontrol ediliyor…"
-            : pending
-                ? "Kaydı kontrol et / yeniden dene"
-                : "Ziyareti Kaydet";
+        $("saveSettingsBtn").disabled =
+            busy;
 
-        $("btnSpinner").classList.toggle(
-            "hidden",
-            !busy
-        );
-
-        $("btnIcon").classList.toggle(
-            "hidden",
+        $("btnText").textContent =
             busy
-        );
+                ? "Kontrol ediliyor…"
+                : pending
+                    ? "Kaydı kontrol et / yeniden dene"
+                    : "Ziyareti Kaydet";
+
+        $("btnSpinner")
+            .classList
+            .toggle(
+                "hidden",
+                !busy
+            );
+
+        $("btnIcon")
+            .classList
+            .toggle(
+                "hidden",
+                busy
+            );
 
         if (busy || pending) {
             dropdowns.forEach(
-                dropdown => dropdown.close()
+                dropdown =>
+                    dropdown.close()
             );
         }
     }
@@ -1455,14 +1839,17 @@ textarea.control {
         timeoutMs = 30000
     ) {
         if (
-            !/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(url)
+            !/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(
+                url
+            )
         ) {
             throw new Error(
                 "Ayarlar'a geçerli Apps Script /exec bağlantısını girin."
             );
         }
 
-        const controller = new AbortController();
+        const controller =
+            new AbortController();
 
         const timer = setTimeout(
             () => controller.abort(),
@@ -1470,33 +1857,41 @@ textarea.control {
         );
 
         try {
-            const query = new URLSearchParams(
-                Object.assign(
+            const query =
+                new URLSearchParams(
+                    Object.assign(
+                        {
+                            action,
+                            t:
+                                String(
+                                    Date.now()
+                                )
+                        },
+                        params
+                    )
+                );
+
+            const response =
+                await fetch(
+                    url + "?" + query,
                     {
-                        action,
-                        t: String(Date.now())
-                    },
-                    params
-                )
-            );
+                        signal:
+                            controller.signal,
+                        redirect: "follow"
+                    }
+                );
 
-            const response = await fetch(
-                url + "?" + query,
-                {
-                    signal: controller.signal,
-                    redirect: "follow"
-                }
-            );
+            const raw =
+                await response.text();
 
-            const raw = await response.text();
             let data;
 
             try {
-                data = JSON.parse(raw);
+                data =
+                    JSON.parse(raw);
             } catch (_) {
                 throw new Error(
-                    "Sunucu JSON döndürmedi. " +
-                    "/exec adresini, yeni dağıtımı ve erişim izinlerini kontrol edin."
+                    "Sunucu JSON döndürmedi. /exec adresini, yeni dağıtımı ve erişim izinlerini kontrol edin."
                 );
             }
 
@@ -1505,27 +1900,36 @@ textarea.control {
                 !data ||
                 data.result === "error"
             ) {
-                const error = new Error(
-                    data?.error ||
-                    "Sunucu hatası."
-                );
+                const error =
+                    new Error(
+                        data?.error ||
+                        "Sunucu hatası."
+                    );
 
                 error.terminalReceipt =
-                    action === "getReceipt" &&
-                    data?.result === "error";
+                    action ===
+                        "getReceipt" &&
+                    data?.result ===
+                        "error";
 
                 throw error;
             }
 
             return data;
         } catch (error) {
-            if (error.name === "AbortError") {
+            if (
+                error.name ===
+                "AbortError"
+            ) {
                 throw new Error(
                     "Sunucu zaman aşımı. Bağlantıyı kontrol edin."
                 );
             }
 
-            if (error instanceof TypeError) {
+            if (
+                error instanceof
+                TypeError
+            ) {
                 throw new Error(
                     "Sunucuya erişilemiyor. İnternet, Apps Script adresi veya erişim izni sorunu."
                 );
@@ -1538,7 +1942,10 @@ textarea.control {
     }
 
     function version(data) {
-        if (data.version !== "visit-memory-4") {
+        if (
+            data.version !==
+            "visit-memory-5"
+        ) {
             throw new Error(
                 "Apps Script eski sürümde. Yeni ziyaret kodunu dağıtıp tekrar deneyin."
             );
@@ -1548,9 +1955,12 @@ textarea.control {
     function makeId() {
         if (
             window.crypto &&
-            typeof window.crypto.randomUUID === "function"
+            typeof window.crypto
+                .randomUUID ===
+                "function"
         ) {
-            return window.crypto.randomUUID();
+            return window.crypto
+                .randomUUID();
         }
 
         return (
@@ -1565,10 +1975,14 @@ textarea.control {
 
     function formattedDate() {
         const parts =
-            $("tarih").value.split("-");
+            $("tarih")
+                .value
+                .split("-");
 
         if (parts.length !== 3) {
-            throw new Error("Tarih seçin.");
+            throw new Error(
+                "Tarih seçin."
+            );
         }
 
         return (
@@ -1591,14 +2005,18 @@ textarea.control {
         }
 
         const seq = ++sequence;
-        const selectedDate = $("tarih").value;
+
+        const selectedDate =
+            $("tarih").value;
+
         const url = endpoint;
 
         try {
             const data = await api(
                 "getLastZiyaretNo",
                 {
-                    tarih: formattedDate()
+                    tarih:
+                        formattedDate()
                 }
             );
 
@@ -1607,14 +2025,18 @@ textarea.control {
             if (
                 seq === sequence &&
                 url === endpoint &&
-                selectedDate === $("tarih").value &&
+                selectedDate ===
+                    $("tarih").value &&
                 !busy &&
                 !pending
             ) {
-                $("ziyaretNo").value = Number(
-                    data.nextNo ||
-                    Number(data.lastNo) + 1
-                );
+                $("ziyaretNo").value =
+                    Number(
+                        data.nextNo ||
+                        Number(
+                            data.lastNo
+                        ) + 1
+                    );
 
                 message(
                     "Ziyaret no hazır: " +
@@ -1622,7 +2044,10 @@ textarea.control {
                 );
             }
         } catch (error) {
-            message(error.message, true);
+            message(
+                error.message,
+                true
+            );
         }
     }
 
@@ -1635,12 +2060,22 @@ textarea.control {
             return;
         }
 
-        const currentToday = localToday();
+        const currentToday =
+            localToday();
 
-        if (currentToday !== automaticDate) {
-            automaticDate = currentToday;
-            $("tarih").value = currentToday;
-            $("ziyaretNo").value = "";
+        if (
+            currentToday !==
+            automaticDate
+        ) {
+            automaticDate =
+                currentToday;
+
+            $("tarih").value =
+                currentToday;
+
+            $("ziyaretNo").value =
+                "";
+
             lastNumber();
         }
     }
@@ -1669,8 +2104,17 @@ textarea.control {
             }
 
             if (
-                !Array.isArray(data.doctors) ||
-                !Array.isArray(data.institutions)
+                !Array.isArray(
+                    data.doctors
+                ) ||
+                !Array.isArray(
+                    data.institutions
+                ) ||
+                !data
+                    .institutionDoctors ||
+                typeof data
+                    .institutionDoctors !==
+                    "object"
             ) {
                 throw new Error(
                     "Geçersiz geçmiş yanıtı."
@@ -1687,23 +2131,30 @@ textarea.control {
                 ...institutions
             ]);
 
+            mergeInstitutionDoctors(
+                data.institutionDoctors
+            );
+
             saveCache();
 
-            dropdowns.forEach(dropdown => {
-                if (
-                    dropdown.input ===
-                    document.activeElement
-                ) {
-                    dropdown.render();
+            dropdowns.forEach(
+                dropdown => {
+                    if (
+                        dropdown.input ===
+                        document
+                            .activeElement
+                    ) {
+                        dropdown.render();
+                    }
                 }
-            });
+            );
 
             if (!busy && !pending) {
                 message(
                     doctors.length +
                     " doktor · " +
                     institutions.length +
-                    " kurum yüklendi."
+                    " kurum eşleşmesi yüklendi."
                 );
             }
         } catch (error) {
@@ -1726,7 +2177,9 @@ textarea.control {
         if (
             data.result !== "success" ||
             !data.sheet ||
-            !Number.isInteger(data.row)
+            !Number.isInteger(
+                data.row
+            )
         ) {
             throw new Error(
                 "Geçersiz kayıt doğrulaması."
@@ -1743,6 +2196,21 @@ textarea.control {
             ...institutions
         ]);
 
+        const institutionKey =
+            key(pending.hastane);
+
+        institutionDoctors[
+            institutionKey
+        ] = unique([
+            pending.doktor,
+            ...(
+                institutionDoctors[
+                    institutionKey
+                ] || []
+            )
+        ])
+        .slice(0, 100);
+
         saveCache();
         locationSave();
 
@@ -1756,10 +2224,13 @@ textarea.control {
         $("doktor").value = "";
         $("not").value = "";
 
-        $("ziyaretNo").value = Number(
-            data.nextNo ||
-            Number(data.ziyaretNo) + 1
-        );
+        $("ziyaretNo").value =
+            Number(
+                data.nextNo ||
+                Number(
+                    data.ziyaretNo
+                ) + 1
+            );
 
         message(
             "Doğrulandı: " +
@@ -1775,7 +2246,8 @@ textarea.control {
         return api(
             "getReceipt",
             {
-                requestId: pending.requestId
+                requestId:
+                    pending.requestId
             },
             endpoint,
             8000
@@ -1786,20 +2258,23 @@ textarea.control {
         const detail =
             (
                 data.ziyaretNo
-                    ? data.ziyaretNo + ". ziyaret"
+                    ? data.ziyaretNo +
+                      ". ziyaret"
                     : "Daha önceki ziyaret"
             ) +
             (
                 data.institution
-                    ? " · " + data.institution
+                    ? " · " +
+                      data.institution
                     : ""
             );
 
-        const approved = window.confirm(
-            "Bu doktor bugün daha önce kaydedilmiş:\n\n" +
-            detail +
-            "\n\nYine de yeni ziyaret kaydedilsin mi?"
-        );
+        const approved =
+            window.confirm(
+                "Bu doktor bugün daha önce kaydedilmiş:\n\n" +
+                detail +
+                "\n\nYine de yeni ziyaret kaydedilsin mi?"
+            );
 
         if (!approved) {
             pending = null;
@@ -1817,8 +2292,11 @@ textarea.control {
             return false;
         }
 
-        pending.requestId = makeId();
-        pending.allowDuplicate = true;
+        pending.requestId =
+            makeId();
+
+        pending.allowDuplicate =
+            true;
 
         save(
             cacheKey("pending"),
@@ -1833,7 +2311,8 @@ textarea.control {
             "Google Sheets'e gönderiliyor…"
         );
 
-        const controller = new AbortController();
+        const controller =
+            new AbortController();
 
         const timer = setTimeout(
             () => controller.abort(),
@@ -1849,12 +2328,18 @@ textarea.control {
                     "Content-Type":
                         "text/plain;charset=utf-8"
                 },
-                body: JSON.stringify(pending),
-                signal: controller.signal
+                body:
+                    JSON.stringify(
+                        pending
+                    ),
+                signal:
+                    controller.signal
             }
         )
         .catch(() => {})
-        .finally(() => clearTimeout(timer));
+        .finally(
+            () => clearTimeout(timer)
+        );
 
         const waits = [
             350,
@@ -1872,34 +2357,45 @@ textarea.control {
         let lastReceiptError = null;
 
         for (const wait of waits) {
-            await new Promise(resolve =>
-                setTimeout(resolve, wait)
+            await new Promise(
+                resolve =>
+                    setTimeout(
+                        resolve,
+                        wait
+                    )
             );
 
             try {
-                const result = await receipt();
+                const result =
+                    await receipt();
 
                 if (
-                    result.result === "success" ||
-                    result.result === "duplicate"
+                    result.result ===
+                        "success" ||
+                    result.result ===
+                        "duplicate"
                 ) {
                     return result;
                 }
 
                 lastReceiptError = null;
             } catch (error) {
-                if (error.terminalReceipt) {
+                if (
+                    error.terminalReceipt
+                ) {
                     throw error;
                 }
 
-                lastReceiptError = error;
+                lastReceiptError =
+                    error;
             }
         }
 
         throw new Error(
             (
                 lastReceiptError
-                    ? lastReceiptError.message + " "
+                    ? lastReceiptError
+                          .message + " "
                     : ""
             ) +
             "Kayıt henüz doğrulanamadı."
@@ -1907,15 +2403,16 @@ textarea.control {
     }
 
     async function submit() {
-        if (busy) {
-            return;
-        }
+        if (busy) return;
 
         if (!pending) {
             for (
-                const id of Object.keys(required)
+                const id
+                of Object.keys(required)
             ) {
-                if (!clean($(id).value)) {
+                if (
+                    !clean($(id).value)
+                ) {
                     message(
                         required[id] +
                         " zorunludur.",
@@ -1923,12 +2420,14 @@ textarea.control {
                     );
 
                     $(id).focus();
+
                     return;
                 }
             }
 
             if (
-                !$("visitForm").reportValidity()
+                !$("visitForm")
+                    .reportValidity()
             ) {
                 return;
             }
@@ -1944,6 +2443,7 @@ textarea.control {
                 );
 
                 await lastNumber();
+
                 return;
             }
         }
@@ -1955,21 +2455,47 @@ textarea.control {
         try {
             if (!pending) {
                 pending = {
-                    requestId: makeId(),
-                    tarih: formattedDate(),
+                    requestId:
+                        makeId(),
+
+                    tarih:
+                        formattedDate(),
+
                     ziyaretNo:
-                        $("ziyaretNo").value,
+                        $("ziyaretNo")
+                            .value,
+
                     sehir:
-                        clean($("sehir").value),
+                        clean(
+                            $("sehir")
+                                .value
+                        ),
+
                     ilce:
-                        clean($("ilce").value),
+                        clean(
+                            $("ilce")
+                                .value
+                        ),
+
                     hastane:
-                        upper($("hastane").value),
+                        upper(
+                            $("hastane")
+                                .value
+                        ),
+
                     doktor:
-                        upper($("doktor").value),
+                        upper(
+                            $("doktor")
+                                .value
+                        ),
+
                     not:
-                        $("not").value.trim(),
-                    allowDuplicate: false
+                        $("not")
+                            .value
+                            .trim(),
+
+                    allowDuplicate:
+                        false
                 };
 
                 save(
@@ -1995,13 +2521,18 @@ textarea.control {
 
                     if (
                         previous.result ===
-                        "duplicate" &&
-                        !approveDuplicate(previous)
+                            "duplicate" &&
+                        !approveDuplicate(
+                            previous
+                        )
                     ) {
                         return;
                     }
                 } catch (error) {
-                    if (error.terminalReceipt) {
+                    if (
+                        error
+                            .terminalReceipt
+                    ) {
                         throw error;
                     }
                 }
@@ -2011,10 +2542,13 @@ textarea.control {
                 await sendAndWait();
 
             if (
-                result.result === "duplicate"
+                result.result ===
+                "duplicate"
             ) {
                 if (
-                    !approveDuplicate(result)
+                    !approveDuplicate(
+                        result
+                    )
                 ) {
                     return;
                 }
@@ -2024,7 +2558,8 @@ textarea.control {
             }
 
             if (
-                result.result === "success"
+                result.result ===
+                "success"
             ) {
                 finish(result);
                 return;
@@ -2073,9 +2608,11 @@ textarea.control {
         "change",
         () => {
             dateWasManuallyChanged =
-                $("tarih").value !== automaticDate;
+                $("tarih").value !==
+                automaticDate;
 
             $("ziyaretNo").value = "";
+
             lastNumber();
         }
     );
@@ -2094,89 +2631,100 @@ textarea.control {
         refreshDateAfterResume
     );
 
-    $("openSettingsBtn").addEventListener(
-        "click",
-        () => {
-            $("scriptUrlInput").value =
-                endpoint;
-
-            $("settingsModal")
-                .classList
-                .remove("hidden");
-
-            $("settingsModal")
-                .classList
-                .add("flex");
-        }
-    );
-
-    $("closeSettingsBtn").addEventListener(
-        "click",
-        () => {
-            $("settingsModal")
-                .classList
-                .add("hidden");
-
-            $("settingsModal")
-                .classList
-                .remove("flex");
-        }
-    );
-
-    $("saveSettingsBtn").addEventListener(
-        "click",
-        async () => {
-            if (busy) {
-                return;
-            }
-
-            const url =
+    $("openSettingsBtn")
+        .addEventListener(
+            "click",
+            () => {
                 $("scriptUrlInput")
-                    .value
-                    .trim();
+                    .value = endpoint;
 
-            $("saveSettingsBtn").disabled = true;
+                $("settingsModal")
+                    .classList
+                    .remove("hidden");
 
-            try {
-                const data = await api(
-                    "ping",
-                    {},
-                    url
-                );
+                $("settingsModal")
+                    .classList
+                    .add("flex");
+            }
+        );
 
-                version(data);
-                endpoint = url;
+    $("closeSettingsBtn")
+        .addEventListener(
+            "click",
+            () => {
+                $("settingsModal")
+                    .classList
+                    .add("hidden");
+
+                $("settingsModal")
+                    .classList
+                    .remove("flex");
+            }
+        );
+
+    $("saveSettingsBtn")
+        .addEventListener(
+            "click",
+            async () => {
+                if (busy) return;
+
+                const url =
+                    $("scriptUrlInput")
+                        .value
+                        .trim();
+
+                $("saveSettingsBtn")
+                    .disabled = true;
 
                 try {
-                    localStorage.setItem(
-                        "scriptUrl",
-                        url
+                    const data =
+                        await api(
+                            "ping",
+                            {},
+                            url
+                        );
+
+                    version(data);
+
+                    endpoint = url;
+
+                    try {
+                        localStorage
+                            .setItem(
+                                "scriptUrl",
+                                url
+                            );
+                    } catch (_) {
+                        storageNote
+                            .textContent =
+                            "Bağlantı yalnızca bu oturumda saklanabildi.";
+                    }
+
+                    loadCache();
+                    restorePending();
+
+                    $("closeSettingsBtn")
+                        .click();
+
+                    message(
+                        "Bağlantı doğrulandı: " +
+                        data.spreadsheet
                     );
-                } catch (_) {
-                    storageNote.textContent =
-                        "Bağlantı yalnızca bu oturumda saklanabildi.";
+
+                    await lastNumber();
+                    await sync();
+                } catch (error) {
+                    alert(error.message);
+
+                    message(
+                        error.message,
+                        true
+                    );
+                } finally {
+                    lockForm();
                 }
-
-                loadCache();
-                restorePending();
-
-                $("closeSettingsBtn").click();
-
-                message(
-                    "Bağlantı doğrulandı: " +
-                    data.spreadsheet
-                );
-
-                await lastNumber();
-                await sync();
-            } catch (error) {
-                alert(error.message);
-                message(error.message, true);
-            } finally {
-                lockForm();
             }
-        }
-    );
+        );
 
     function restorePending() {
         if (pending) {
